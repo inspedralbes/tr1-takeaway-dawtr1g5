@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->string('artist');
             $table->integer('year');
             $table->string('genre');
-            $table->binary('photo');
-            $table->enum('type', ['cd', 'vinyl']);
+            $table->binary('photo')->nullable();
+            $table->enum('type', ['cd', 'vinyl'])->nullable();
             $table->timestamps();
         });
     }
