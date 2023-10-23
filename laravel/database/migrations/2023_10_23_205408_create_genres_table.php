@@ -10,14 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('genres', function (Blueprint $table) {
             $table->id();
-            $table->string('cd_name');
-            $table->string('artist');
-            $table->integer('year');
-            $table->string('genre');
-            $table->binary('photo')->nullable();
-            $table->enum('type', ['cd', 'vinyl'])->nullable();
+            $table->string('genre_name');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('genres');
     }
 };
