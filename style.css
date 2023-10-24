@@ -36,7 +36,7 @@ button:active {
   grid-gap: 20px;
 }
 
-.grid-container logo {
+.grid-container img {
   max-width: 100%;
 }
 
@@ -49,6 +49,26 @@ button:active {
   font-size: 15px;
   width: max-content;
   margin: auto;
+}
+
+.logo{
+  width: 400px;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+.carousel-image.active {
+  display: block;
 }
 
 .logo {
