@@ -4,46 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+      
     <link rel="stylesheet" href="style.css" />
   </head>
   
   <body>
     <section class="section">
-      <div class="container-general">
-        <div id="app">
-          <div v-if="mostrar('portada')">
-            <div class="grid-container">
-                <img class="logo" src="/img/presidis.png" alt="Trulli" />
-                <h1 class="portada">OFERTES DIARIES!!!</h1>
-  
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <div class="carousel-container">
-                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34744-large_default/diego-el-cigala-vinilo-obras-maestras-vinilo-dorado.jpg" alt="Image 1" />
-                  <img class="carousel-image" src="https://www.lacasadeldisco.es/664-large_default/camaron-de-la-isla-cd-el-legado-de-camaron.jpg" alt="Image 2" style="display: none;" />
-                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34094-large_default/post-malone-cd-austin.jpg" alt="Image 3" style="display: none;" />
-                </div>              
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-              
-                <button @click="cambiarDiv('tienda')">CATALEG</button>
-              </div>
-          </div>
-          <div v-if="mostrar('tienda')">
-            <h1>tienda</h1>
-            <div class="buscador">
-              <input type="text" v-model="search" placeholder="search..." />
-            </div>
-            <ul>
-              <li v-for="(disc, index) in filteredProducts" :key="index">
-                <div class="titul-artista" @click="cambiarDiv('compra')">
-                  {{ disc.nombre}} || {{ disc.artista }}
+        <div class="container-general">
+            <div id="app">
+                <div v-if="mostrar('portada')">
+                    <div class="grid-container">
+                        <img class="logo" src="/img/presidis.png" alt="Trulli" />
+                        <h1 class="portada">OFERTES DIARIES!!!</h1>
+
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <div class="carousel-container">
+                            <img class="carousel-image"
+                                src="https://www.lacasadeldisco.es/34744-large_default/diego-el-cigala-vinilo-obras-maestras-vinilo-dorado.jpg"
+                                alt="Image 1" />
+                            <img class="carousel-image"
+                                src="https://www.lacasadeldisco.es/664-large_default/camaron-de-la-isla-cd-el-legado-de-camaron.jpg"
+                                alt="Image 2" style="display: none;" />
+                            <img class="carousel-image"
+                                src="https://www.lacasadeldisco.es/34094-large_default/post-malone-cd-austin.jpg"
+                                alt="Image 3" style="display: none;" />
+                        </div>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                        <button @click="cambiarDiv('tienda')">CATALEG</button>
+                    </div>
                 </div>
-              </li>
-            </ul>
-          </div>
+                <div v-if="mostrar('tienda')">
+                    <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                    <div class="buscador">
+                        <input type="text" v-model="search" placeholder="search..." />
+                    </div>
+
+                    <hr>
+
+                    <img src="" height="200" width="200">
+                    <p>Obras Maestras || El Cigala</p>
+                    <li v-for="(disc, index) in filteredProducts" :key="index">
+                        <div class="titul-artista" @click="cambiarDiv('compra')">
+                            {{ disc.nombre}} || {{ disc.artista }}
+                        </div>
+                    </li>
+                </div>
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                        
                         <div v-if="mostrar('compra')">
                             <div class="compra">
                                 <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
@@ -55,51 +65,52 @@
                     </div>
                 </div>
 
-          <div v-if="mostrar('checkout')">
-            <h1>tienda</h1>
-          </div>
+                <div v-if="mostrar('checkout')">
+                    <h1>tienda</h1>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
     <script>
         let slideIndex = 1;
         function autoSlides() {
-          plusSlides(1);
+            plusSlides(1);
         }
         let slideInterval = setInterval(autoSlides, 5000);
-  
+
         function resetInterval() {
-          clearInterval(slideInterval);
-          slideInterval = setInterval(autoSlides, 5000);
+            clearInterval(slideInterval);
+            slideInterval = setInterval(autoSlides, 5000);
         }
         function plusSlides(n) {
-          showSlides((slideIndex += n));
+            showSlides((slideIndex += n));
         }
-  
+
         function currentSlide(n) {
-          showSlides((slideIndex = n));
+            showSlides((slideIndex = n));
         }
-  
+
         function showSlides(n) {
-          let i;
-          const slides = document.querySelectorAll(".carousel-image");
-  
-          if (n > slides.length) {
-            slideIndex = 1;
-          }
-          if (n < 1) {
-            slideIndex = slides.length;
-          }
-  
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-  
-          slides[slideIndex - 1].style.display = "block";
-  
-          resetInterval();
+            let i;
+            const slides = document.querySelectorAll(".carousel-image");
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+            resetInterval();
         }
-      </script>
+    </script>
     <script src="project.js" type="module"></script>
-  </body>
+</body>
+
 </html>
