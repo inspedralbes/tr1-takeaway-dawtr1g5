@@ -149,24 +149,25 @@ body {
 .producte {
   display: flex;
   margin-top: 10px;
-  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  height: 200px;
+  width: 400px;
 }
 
-.t-titol, .t-data {
-  display: block;
+.producte img {
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
 }
 
 .t-titol {
-  margin-top: 0px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; /* Opcional: agrega puntos suspensivos si el texto es muy largo y se desborda */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Evita que el texto se desborde */
+  flex: 1;
+  margin-right: 10px;
 }
 
 .t-data {
+  display: block; /* Coloca el elemento en una línea separada (debajo) */
   margin-top: 5px; /* Espacio entre t-titol y t-data */
 }
-
 
 /*PAGINA DE COMPRA*/
 
