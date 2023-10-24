@@ -29,6 +29,17 @@
                             <div class="titul-artista" @click="cambiarDiv('compra')">
                                 {{ disc.nombre}} || {{ disc.artista }}
                             </div>
+                            <div class="any">
+                                {{ disc.año }}
+                            </div>
+                            <div class="precio-product">
+                                
+                            </div>
+                            <div class="addToCart-fav">
+                                <div class="button-addToCart">
+                                    <button @click="cambiarDiv('carrito')">ADD TO CART</button>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -47,6 +58,12 @@
 
             </div>
         </div>
+        <footer>
+            
+            <div class="container-nav">
+
+            </div>
+        </footer>
     </section>
     <script src="project.js" type="module"></script>
 </body>
