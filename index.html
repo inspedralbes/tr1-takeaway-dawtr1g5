@@ -10,45 +10,37 @@
 
 <body>
     <section class="section">
-        <div class="container-general">
-            <div id="app">
-                <div v-if="mostrar('portada')">
-                    <div class="grid-container">
-                        <img class="logo" src="/img/presidis.png" alt="Trulli" />
-                        <h1 class="portada">OFERTES DIARIES!!!</h1>
-
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <div class="carousel-container">
-                            <img class="carousel-image"
-                                src="https://www.lacasadeldisco.es/34744-large_default/diego-el-cigala-vinilo-obras-maestras-vinilo-dorado.jpg"
-                                alt="Image 1" />
-                            <img class="carousel-image"
-                                src="https://www.lacasadeldisco.es/664-large_default/camaron-de-la-isla-cd-el-legado-de-camaron.jpg"
-                                alt="Image 2" style="display: none;" />
-                            <img class="carousel-image"
-                                src="https://www.lacasadeldisco.es/34094-large_default/post-malone-cd-austin.jpg"
-                                alt="Image 3" style="display: none;" />
-                        </div>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                        <button @click="cambiarDiv('tienda')">CATALEG</button>
-                    </div>
+      <div class="container-general">
+        <div id="app">
+          <div v-if="mostrar('portada')">
+            <div class="grid-container">
+                <img class="logo" src="/img/presidis.png" alt="Trulli" />
+                <h1 class="portada">OFERTES DIARIES!!!</h1>
+  
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <div class="carousel-container">
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34744-large_default/diego-el-cigala-vinilo-obras-maestras-vinilo-dorado.jpg" alt="Image 1" />
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/664-large_default/camaron-de-la-isla-cd-el-legado-de-camaron.jpg" alt="Image 2" style="display: none;" />
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34094-large_default/post-malone-cd-austin.jpg" alt="Image 3" style="display: none;" />
+                </div>              
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              
+                <button @click="cambiarDiv('tienda')">CATALEG</button>
+              </div>
+          </div>
+          <div v-if="mostrar('tienda')">
+            <h1>tienda</h1>
+            <div class="buscador">
+              <input type="text" v-model="search" placeholder="search..." />
+            </div>
+            <ul>
+              <li v-for="(disc, index) in filteredProducts" :key="index">
+                <div class="titul-artista" @click="cambiarDiv('compra')">
+                  {{ disc.nombre}} || {{ disc.artista }}
                 </div>
-                <div v-if="mostrar('tienda')">
-                    <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
-                    <div class="buscador">
-                        <input type="text" v-model="search" placeholder="search..." />
-                    </div>
-
-                    <hr>
-
-                    <img src="" height="200" width="200">
-                    <li v-for="(disc, index) in filteredProducts" :key="index">
-                        <div class="titul-artista" @click="cambiarDiv('compra')">
-                            {{ disc.nombre}} || {{ disc.artista }}
-                        </div>
-                    </li>
-                </div>
+              </li>
+            </ul>
+          </div>
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
@@ -64,11 +56,11 @@
                     </div>
                 </div>
 
-                <div v-if="mostrar('checkout')">
-                    <h1>tienda</h1>
-                </div>
-            </div>
+          <div v-if="mostrar('checkout')">
+            <h1>tienda</h1>
+          </div>
         </div>
+      </div>
     </section>
     <script>
         let slideIndex = 1;
