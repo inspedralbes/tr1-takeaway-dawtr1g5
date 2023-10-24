@@ -15,4 +15,37 @@ class productsController extends Controller
         $products = products::with(['genres_id', 'type'])->get();
         return response()->json($products);
     }
+
+    public function index_all()
+    {
+        $products = products::all();
+        $genres = genres::all();
+        $type = type::all();
+
+        return view('products.index', ['products' => $products, 'genres' => $genres, 'type' => $type]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'artist' => 'required',
+        ]);
+
+        $product = new products;
+        $product->name = $request->name;
+        $product->artist = $request->artist;
+        $product->year = $request->year;
+        $product->price = $request->price;
+        $product->genre_id = $request->genre;
+        $product->type = $request->type;
+        $product->image = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName());
+            $product->image = $imagePath;
+        }
+
+        $product->save();
+        return redirect()->route('products')->with('success', 'Producte registrat correctament!');
+    }
 }
