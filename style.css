@@ -36,7 +36,7 @@ button:active {
   grid-gap: 20px;
 }
 
-.grid-container img {
+.grid-container logo {
   max-width: 100%;
 }
 
@@ -51,8 +51,4 @@ button:active {
   margin: auto;
 }
 
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+
