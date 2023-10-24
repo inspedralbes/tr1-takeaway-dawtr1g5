@@ -4,17 +4,17 @@ import { getProductes } from '/copManager.js';
 createApp({
     data() {
         return {
-           productes: [],
-           divActual: 'portada',
-           search: ''
-           
+            productes: [],
+            divActual: 'portada',
+            search: ''
+
         };
     },
     computed: {
-        filteredProducts(){
+        filteredProducts() {
 
             return this.productes.productes.filter((disc) =>
-                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) || 
+                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) ||
                 disc.artista.toLowerCase().includes(this.search.toLowerCase()) ||
                 disc.genero.toLowerCase().includes(this.search.toLowerCase())
             );
@@ -29,8 +29,11 @@ createApp({
             this.divActual = div;
         }
     },
-    async created() {
+    created() {
         // Cargar los datos de las bambas
-        this.productes = await getProductes();
+        getProductes().then(data => {
+            this.productes = data;
+            console.log(this.productes)
+        })
     },
 }).mount('#app');
