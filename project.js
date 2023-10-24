@@ -6,7 +6,8 @@ createApp({
         return {
            productes: [],
            message: 'ver bambas',
-           divActual: 'portada'
+           divActual: 'portada',
+           search: ''
            
         };
     },
