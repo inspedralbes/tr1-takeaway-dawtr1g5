@@ -50,3 +50,9 @@ button:active {
   width: max-content;
   margin: auto;
 }
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
