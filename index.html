@@ -8,13 +8,15 @@
   </head>
   
   <body>
+    <header>
+      <a href="index.html"><img class="logo" src="/img/presidis.png" alt="Trulli" /></a>
+    </header>
     <section class="section">
       <div class="container-general">
         <div id="app">
           <div v-if="mostrar('portada')">
             <div class="grid-container">
-                <img class="logo" src="/img/presidis.png" alt="Trulli" />
-                <h1 class="portada">OFERTES DIARIES!!!</h1>
+                  <h1 class="portada">OFERTES DIARIES!!!</h1>
   
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="carousel-container"> 
@@ -24,7 +26,8 @@
                 </div>              
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
               
-                <button @click="cambiarDiv('tienda')">CATALEG</button>
+                <button  @click="cambiarDiv('tienda')">CATALEG</button>
+                <br>
               </div>
           </div>
           <div v-if="mostrar('tienda')">
@@ -64,7 +67,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-item">
-                    <img class="icon" src="/img/maps.jpg" alt="maps">
+                    <img class="icon" src="/img/maps.png" alt="maps">
                     <span>Carrer Alcala Nº342, 02602 - Madrid</span>
                 </div>
                 <div class="footer-item">
