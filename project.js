@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes } from '/copManager.js';
+import { getProductes } from './copManager.js';
 
 createApp({
     data() {
@@ -7,18 +7,14 @@ createApp({
            productes: [],
            divActual: 'portada',
            search: ''
-           
         };
     },
-    computed: {
-        filteredProducts(){
-            return this.productes.filter((disc) =>
-                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) || 
-                disc.artista.toLowerCase().includes(this.search.toLowerCase())
-            );
-        },
+    async created () {
+        getProductes().then(data=>{
+            this.productes=data;
+        });
     },
-
+   
     methods: {
         mostrar(div) {
             return this.divActual == div;
@@ -26,9 +22,5 @@ createApp({
         cambiarDiv(div) {
             this.divActual = div;
         }
-    },
-    async created() {
-        // Cargar los datos de las bambas
-        this.productes = await getProductes();
-    },
+    }
 }).mount('#app');

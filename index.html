@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
     <section class="section">
         <div class="container-general">
             <div id="app">
@@ -24,9 +25,20 @@
                         <input type="text" v-model="search" placeholder="search...">
                     </div>
                     <ul>
-                        <li v-for="(disc, index) in filteredProducts" :key="index">
+                        <li v-for="(disc, index) in productes" :key="index">
                             <div class="titul-artista" @click="cambiarDiv('compra')">
-                                {{ disc.nombre}} || {{ disc.artista }}
+                                {{ disc.name}} || {{ disc.artist }}
+                            </div>
+                            <div class="any">
+                                {{ disc.year }}
+                            </div>
+                            <div class="precio-product">
+                                {{ disc.price }}
+                            </div>
+                            <div class="addToCart-fav">
+                                <div class="button-addToCart">
+                                    <button @click="cambiarDiv('carrito')">ADD TO CART</button>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -34,8 +46,7 @@
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
-                        
+                        <img src="/img/presidis.png" @click="cambiarDiv('portada')">
                     </div>
                 </div>
 
@@ -47,7 +58,14 @@
 
             </div>
         </div>
+        <footer>
+            
+            <div class="container-nav">
+
+            </div>
+        </footer>
     </section>
     <script src="project.js" type="module"></script>
-  </body>
+</body>
+
 </html>
