@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+      
     <link rel="stylesheet" href="style.css" />
   </head>
   
@@ -16,7 +17,8 @@
         <div id="app">
           <div v-if="mostrar('portada')">
             <div class="grid-container">
-                  <h1 class="portada">OFERTES DIARIES!!!</h1>
+                <img class="logo" src="/img/presidis.png" alt="Trulli" />
+                <h1 class="portada">OFERTES DIARIES!!!</h1>
   
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="carousel-container"> 
@@ -26,8 +28,7 @@
                 </div>              
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
               
-                <button  @click="cambiarDiv('tienda')">CATALEG</button>
-                <br>
+                <button @click="cambiarDiv('tienda')">CATALEG</button>
               </div>
           </div>
           <div v-if="mostrar('tienda')">
@@ -46,7 +47,7 @@
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                        
                         <div v-if="mostrar('compra')">
                             <div class="compra">
                                 <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
@@ -67,7 +68,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-item">
-                    <img class="icon" src="/img/maps.png" alt="maps">
+                    <img class="icon" src="/img/maps.jpg" alt="maps">
                     <span>Carrer Alcala Nº342, 02602 - Madrid</span>
                 </div>
                 <div class="footer-item">
@@ -93,42 +94,43 @@
     <script>
         let slideIndex = 1;
         function autoSlides() {
-          plusSlides(1);
+            plusSlides(1);
         }
         let slideInterval = setInterval(autoSlides, 5000);
-  
+
         function resetInterval() {
-          clearInterval(slideInterval);
-          slideInterval = setInterval(autoSlides, 5000);
+            clearInterval(slideInterval);
+            slideInterval = setInterval(autoSlides, 5000);
         }
         function plusSlides(n) {
-          showSlides((slideIndex += n));
+            showSlides((slideIndex += n));
         }
-  
+
         function currentSlide(n) {
-          showSlides((slideIndex = n));
+            showSlides((slideIndex = n));
         }
-  
+
         function showSlides(n) {
-          let i;
-          const slides = document.querySelectorAll(".carousel-image");
-  
-          if (n > slides.length) {
-            slideIndex = 1;
-          }
-          if (n < 1) {
-            slideIndex = slides.length;
-          }
-  
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-  
-          slides[slideIndex - 1].style.display = "block";
-  
-          resetInterval();
+            let i;
+            const slides = document.querySelectorAll(".carousel-image");
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+            resetInterval();
         }
-      </script>
+    </script>
     <script src="project.js" type="module"></script>
-  </body>
+</body>
+
 </html>
