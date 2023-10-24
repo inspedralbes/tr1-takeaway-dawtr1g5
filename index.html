@@ -44,7 +44,14 @@
                 <div v-if="mostrar('compra')">
                     <div class="compra">
                         <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
-                        
+                        <div v-if="mostrar('compra')">
+                            <div class="compra">
+                                <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                                <img class="img-productes" src="" width="200" height="200">
+                                <span class="d-producte">2023</span>
+                                <h2 class="titol">Obras Maestras || El Cigala</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
