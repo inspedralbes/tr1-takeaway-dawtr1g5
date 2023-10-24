@@ -13,12 +13,12 @@ class products extends Model
     // protected $table = 'products';
     // protected $fillable = ['cd_name', 'artist', 'year', 'genre'];
 
-    public function genres_id()
+    public function genre_id()
     {
         return $this->hasOne(genres::class, 'id');
     }
 
-    public function type()
+    public function type_id()
     {
         return $this->hasOne(type::class, 'id');
     }
