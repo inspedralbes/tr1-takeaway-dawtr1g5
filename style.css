@@ -50,3 +50,9 @@ button:active {
 .grid-container button {
   font-size: 15px;
 }
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
