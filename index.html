@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+      let slideIndex = 1;
+
+// Función para avanzar automáticamente las imágenes
+function autoSlides() {
+  plusSlides(1);
+}
+
+// Inicia la función de avance automático
+let slideInterval = setInterval(autoSlides, 5000); // Cambia de imagen cada 5 segundos (5000 ms)
+
+// Restablece el intervalo de avance automático si el usuario hace clic en una flecha
+function resetInterval() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(autoSlides, 5000);
+}
+
+// Resto del código JavaScript para avanzar o retroceder las imágenes
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function showSlides(n) {
+  let i;
+  const slides = document.querySelectorAll(".carousel-image");
+
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+
+  resetInterval(); // Restablece el intervalo cada vez que cambias manualmente una imagen
+}
+
+    </script>
   </head>
 
   <body>
@@ -42,11 +89,14 @@
                     </div>
                 </div>
 
-          <div v-if="mostrar('checkout')">
-            <h1>tienda</h1>
-          </div>
+                <div v-if="mostrar('checkout')">
+                    <h1>tienda</h1>
+                </div>
+
+
+
+            </div>
         </div>
-      </div>
     </section>
     <script src="project.js" type="module"></script>
   </body>
