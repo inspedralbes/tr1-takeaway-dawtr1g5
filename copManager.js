@@ -1,5 +1,5 @@
-export async function getProductes(){
-    const response = await fetch('localhost:8000/api/index');
+export async function getBambas(){
+    const response = await fetch('productes.json');
     const data = await response.json();
     return data;
 }
