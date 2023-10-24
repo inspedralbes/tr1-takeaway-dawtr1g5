@@ -42,8 +42,13 @@
 
                     <hr>
 
-                    <img src="" height="200" width="200">
-                    <p>Obras Maestras || El Cigala</p>
+                    <div class="producte">
+                        <img src="" height="200" width="200">
+                        <p class="t-titol">Obras Maestras || El Cigala</p>
+                        <p class="t-data">2023</p>
+                    </div>
+
+
                     <li v-for="(disc, index) in filteredProducts" :key="index">
                         <div class="titul-artista" @click="cambiarDiv('compra')">
                             {{ disc.nombre}} || {{ disc.artista }}
