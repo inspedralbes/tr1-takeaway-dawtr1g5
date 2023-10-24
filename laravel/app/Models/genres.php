@@ -10,9 +10,6 @@ class genres extends Model
 {
     use HasFactory;
 
-    public function product()
-    {
-        return $this->belongsTo(products::class, 'id');
-    }
+
 
 }
