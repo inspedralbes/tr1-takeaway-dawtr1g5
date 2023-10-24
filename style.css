@@ -31,4 +31,20 @@ button {
     color: white;
   }
 
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .grid-container img{
+    max-width: 100%;
+  }
+
+  .grid-container button, .grid-container h1 {
+    font-size: 20px;
+  }
+
   
