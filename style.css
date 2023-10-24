@@ -25,7 +25,7 @@ button {
     transform: translateY(-1px);
   }
 
-  h1{
+  .portada{
     background-color: black;
     text-align: center;
     color: white;
