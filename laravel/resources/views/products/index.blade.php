@@ -37,8 +37,8 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="type" class="form-label">Tipus del producte</label>
-            <select name="type" class="form-select">
+            <label for="type_id" class="form-label">Tipus del producte</label>
+            <select name="type_id" class="form-select">
                 @foreach($type as $tipus)
                 <option value="{{$tipus->id}}">{{$tipus->type}}</option>
                 @endforeach

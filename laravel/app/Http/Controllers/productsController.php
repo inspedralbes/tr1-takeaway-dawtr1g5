@@ -52,10 +52,10 @@ class productsController extends Controller
         $product->year = $request->year;
         $product->price = $request->price;
         $product->genre_id = $request->genre;
-        $product->type = $request->type;
+        $product->type_id = $request->type_id;
         $product->image = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName());
+            $imagePath = $request->file('image')->storeAs('/img', $request->file('image')->getClientOriginalName());
             $product->image = $imagePath;
         }
 
