@@ -14,6 +14,9 @@
                 </div>
                 <div v-if="mostrar('tienda')">
                     <h1>tienda</h1>
+                    <div class="buscador">
+                        <input type="text" v-model="search" placeholder="search...">
+                    </div>
                     <ul>
                         <li v-for="(disc, index) in productes" :key="index">
                             <div class="titul-artista">
