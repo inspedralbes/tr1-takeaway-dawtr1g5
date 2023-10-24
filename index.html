@@ -7,50 +7,42 @@
     <link rel="stylesheet" href="style.css" />
     <script>
       let slideIndex = 1;
+      function autoSlides() {
+        plusSlides(1);
+      }
+      let slideInterval = setInterval(autoSlides, 5000);
 
-// Función para avanzar automáticamente las imágenes
-function autoSlides() {
-  plusSlides(1);
-}
+      function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(autoSlides, 5000);
+      }
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
 
-// Inicia la función de avance automático
-let slideInterval = setInterval(autoSlides, 5000); // Cambia de imagen cada 5 segundos (5000 ms)
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
 
-// Restablece el intervalo de avance automático si el usuario hace clic en una flecha
-function resetInterval() {
-  clearInterval(slideInterval);
-  slideInterval = setInterval(autoSlides, 5000);
-}
+      function showSlides(n) {
+        let i;
+        const slides = document.querySelectorAll(".carousel-image");
 
-// Resto del código JavaScript para avanzar o retroceder las imágenes
-function plusSlides(n) {
-  showSlides((slideIndex += n));
-}
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
 
-function currentSlide(n) {
-  showSlides((slideIndex = n));
-}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
 
-function showSlides(n) {
-  let i;
-  const slides = document.querySelectorAll(".carousel-image");
+        slides[slideIndex - 1].style.display = "block";
 
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
-
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex - 1].style.display = "block";
-
-  resetInterval(); // Restablece el intervalo cada vez que cambias manualmente una imagen
-}
-
+        resetInterval();
+      }
     </script>
   </head>
 
@@ -60,11 +52,19 @@ function showSlides(n) {
         <div id="app">
           <div v-if="mostrar('portada')">
             <div class="grid-container">
-              <img class="logo" src="/img/presidis.png" alt="Trulli" />
-              <h1 class="portada">OFERTES DIARIES!!!</h1>
-              <button @click="cambiarDiv('tienda')">CATALEG</button>
-            </div>
-
+                <img class="logo" src="/img/presidis.png" alt="Trulli" />
+                <h1 class="portada">OFERTES DIARIES!!!</h1>
+  
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <div class="carousel-container">
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34744-large_default/diego-el-cigala-vinilo-obras-maestras-vinilo-dorado.jpg" alt="Image 1" />
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/664-large_default/camaron-de-la-isla-cd-el-legado-de-camaron.jpg" alt="Image 2" style="display: none;" />
+                  <img class="carousel-image" src="https://www.lacasadeldisco.es/34094-large_default/post-malone-cd-austin.jpg" alt="Image 3" style="display: none;" />
+                </div>              
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              
+                <button @click="cambiarDiv('tienda')">CATALEG</button>
+              </div>
           </div>
           <div v-if="mostrar('tienda')">
             <h1>tienda</h1>
@@ -80,21 +80,21 @@ function showSlides(n) {
             </ul>
           </div>
 
-                <div v-if="mostrar('compra')">
-                    <div class="compra">
-                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
-                        
-                    </div>
-                </div>
-
-                <div v-if="mostrar('checkout')">
-                    <h1>tienda</h1>
-                </div>
-
-
-
+          <div v-if="mostrar('compra')">
+            <div class="compra">
+              <img
+                class="logo"
+                src="/img/presidis.png"
+                @click="cambiarDiv('portada')"
+              />
             </div>
+          </div>
+
+          <div v-if="mostrar('checkout')">
+            <h1>tienda</h1>
+          </div>
         </div>
+      </div>
     </section>
     <script src="project.js" type="module"></script>
   </body>
