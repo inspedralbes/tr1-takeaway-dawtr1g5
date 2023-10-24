@@ -67,6 +67,13 @@ button:active {
   width: 400px;
 }
 
+body {
+  background-image: url('ruta-de-tu-imagen.jpg');
+  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Fija la imagen en el fondo */
+}
+
 .prev,
 .next {
   cursor: pointer;
