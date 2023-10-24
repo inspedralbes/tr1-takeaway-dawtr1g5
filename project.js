@@ -5,7 +5,6 @@ createApp({
     data() {
         return {
            productes: [],
-           message: 'ver bambas',
            divActual: 'portada',
            search: ''
            
@@ -13,9 +12,11 @@ createApp({
     },
     computed: {
         filteredProducts(){
-            return this.productes.filter((disc) =>
+
+            return this.productes.productes.filter((disc) =>
                 disc.nombre.toLowerCase().includes(this.search.toLowerCase()) || 
-                disc.artista.toLowerCase().includes(this.search.toLowerCase())
+                disc.artista.toLowerCase().includes(this.search.toLowerCase()) ||
+                disc.genero.toLowerCase().includes(this.search.toLowerCase())
             );
         },
     },
