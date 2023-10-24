@@ -1,212 +1,214 @@
-[
-    {
-        "nombre": "Starboy",
-        "artista": "The Weeknd",
-        "año": 2016,
-        "genero": "Pop",
-        "imagen_url": "https://m.media-amazon.com/images/I/814htMhuuML._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "DAMN.",
-        "artista": "Kendrick Lamar",
-        "año": 2017,
-        "genero": "Hip Hop",
-        "imagen_url": "https://m.media-amazon.com/images/I/71tdaojeUkL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Hollywood's Bleeding",
-        "artista": "Post Malone",
-        "año": 2019,
-        "genero": "Pop",
-        "imagen_url": "https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02"
-    },
-    {
-        "nombre": "My Beautiful Dark Twisted Fantasy",
-        "artista": "Kanye West",
-        "año": 2010,
-        "genero": "Hip Hop",
-        "imagen_url": "https://static.qobuz.com/images/covers/47/74/0060252747447_600.jpg"
-    },
-    {
-        "nombre": "Evolve",
-        "artista": "Imagine Dragons",
-        "año": 2017,
-        "genero": "Pop Rock",
-        "imagen_url": "https://m.media-amazon.com/images/I/61yVysJ1jcL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Future Nostalgia",
-        "artista": "Dua Lipa",
-        "año": 2020,
-        "genero": "Pop",
-        "imagen_url": "https://m.media-amazon.com/images/I/71VQFsqlPJL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "UTOPIA",
-        "artista": "Travis Scott",
-        "año": 2023,
-        "genero": "Hip Hop",
-        "imagen_url": "https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
-    },
-    {
-        "nombre": "El Fary Grandes exitos",
-        "artista": "El Fary",
-        "año": 1988,
-        "genero": "Rumba",
-        "imagen_url": "https://m.media-amazon.com/images/I/31Blve+LMvL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Goodbye & Good Riddance",
-        "artista": "Juice WRLD",
-        "año": 2018,
-        "genero": "Hip-Hop",
-        "imagen_url": "https://media.pitchfork.com/photos/5b0ed02ed8c21c49d0ae4de9/1:1/w_800,h_800,c_limit/Goodbye%20&%20Good%20Riddance.jpg"
-    },
-    {
-        "nombre": "Trench",
-        "artista": "Twenty One Pilots",
-        "año": 2018,
-        "genero": "Pop",
-        "imagen_url": "https://m.media-amazon.com/images/I/81znz4j2UTL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Favourite Worst Nightmare",
-        "artista": "Artic Monkeys",
-        "año": 2007,
-        "genero": "Hip-Hop",
-        "imagen_url": "https://m.media-amazon.com/images/I/51HLHvEdr4L._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Stories",
-        "artista": "Avicii",
-        "año": 2015,
-        "genero": "Electrónica",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/c/c7/Avicii-Stories-2015-1200x1200.png"
-    },
-    {
-        "nombre": "Changes",
-        "artista": "Justin Bieber",
-        "año": 2020,
-        "genero": "Pop",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/1/16/Justin_Bieber_-_Changes.png"
-    },
-    {
-        "nombre": "Luv is Rage 2",
-        "artista": "Lil Uzi Vert",
-        "año": 2017,
-        "genero": "Hip Hop",
-        "imagen_url": "https://m.media-amazon.com/images/I/81TNEeBI11L._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Random Access Memories",
-        "artista": "Daft Punk",
-        "año": 2013,
-        "genero": "Electrónica",
-        "imagen_url": "https://cdns-images.dzcdn.net/images/cover/311bba0fc112d15f72c8b5a65f0456c1/500x500.jpg"
-    },
-    {
-        "nombre": "Flower Boy",
-        "artista": "Tyler, the Creator",
-        "año": 2019,
-        "genero": "Hip Hop",
-        "imagen_url": "https://m.media-amazon.com/images/I/71Ls2qvxPjL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "i am > i was",
-        "artista": "21 Savage",
-        "año": 2018,
-        "genero": "Hip Hop",
-        "imagen_url": "https://townsquare.media/site/812/files/2018/12/21-savage-2.jpg"
-    },
-    {
-        "nombre": "Life after death",
-        "artista": "The Notorius B.I.G",
-        "año": 1997,
-        "genero": "Hip Hop",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/1/1c/NotoriousB.I.G.LifeAfterDeath.jpg"
-    },
-    {
-        "nombre": "Scary Monsters and Nice Spirites",
-        "artista": "Skrillex",
-        "año": 2010,
-        "genero": "Electrónica",
-        "imagen_url": "https://m.media-amazon.com/images/I/815aiIN6wmL._UF1000,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "The Fame",
-        "artista": "Lady Gaga",
-        "año": 2008,
-        "genero": "Pop",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/d/dd/Lady_Gaga_%E2%80%93_The_Fame_album_cover.png"
-    },
-    {
-        "nombre": "All Eyez on Me",
-        "artista": "2Pac",
-        "año": 1996,
-        "genero": "Hip Hop",
-        "imagen_url": "https://m.media-amazon.com/images/I/81+hlw7I9BL._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Cuéntame",
-        "artista": "Rosario Flores",
-        "año": 2009,
-        "genero": "Pop",
-        "imagen_url": "https://m.media-amazon.com/images/I/81FkWACnS+L._UF894,1000_QL80_.jpg"
-    },
-    {
-        "nombre": "Paradise Again",
-        "artista": "Swedish House Mafia",
-        "año": 2022,
-        "genero": "Electrónica",
-        "imagen_url": "https://shop.rukahore.sk/upload/swedish-house-mafia/Swedish_House_Mafia_Paradise_Again.png"
-    },
-    {
-        "nombre": "Diego el Cigala, Obras Maestras",
-        "artista": "Diego el Cigala",
-        "año": 2023,
-        "genero": "Flamenco",
-        "imagen_url": "https://www.lahiguera.net/musicalia/artistas/diego_el_cigala/disco/13013/diego_el_cigala_obras_maestras-portada.jpg"
-    },
-    {
-        "nombre": "Clarity",
-        "artista": "Zedd",
-        "año": 2012,
-        "genero": "Electrónica",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/3/32/Zedd_-_Clarity_%28album%29.png"
-    },
-    {
-        "nombre": "Man on the Moon: The end of Day",
-        "artista": "Kid Kudi",
-        "año": 2009,
-        "genero": "Hip Hop",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/pt/2/26/ManonTheMoonTheEndofDay.jpg"
-    },
-    {
-        "nombre": "Blonde",
-        "artista": "Frank Ocean",
-        "año": 2016,
-        "genero": "R&B",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg"
-    },
-    {
-        "nombre": "Estopa",
-        "artista": "Estopa",
-        "año": 1999,
-        "genero": "Pop",
-        "imagen_url": "https://cdn-p.smehost.net/sites/a3c9c5557eb6401b8e297cd112827890/wp-content/uploads/2015/07/27170732/Car%C3%A1tula_Frontal-estopa.jpg"
-    },
-    {
-        "nombre": "Not All Heroes Wear Capes",
-        "artista": "Metro Boomin",
-        "año": 2018,
-        "genero": "Hip Hop",
-        "imagen_url": "https://upload.wikimedia.org/wikipedia/en/2/28/Metro_Boomin_%E2%80%93_Not_All_Heroes_Wear_Capes.png"
-    },
-    {
-        "nombre": "Fall Out Boy",
-        "artista": "American Beauty / American Psycho ",
-        "año": 2015,
-        "genero": "Indie",
-        "imagen_url": "https://m.media-amazon.com/images/I/71oyOrndXmL._UF894,1000_QL80_.jpg"
-    }
-]
+{
+    "productes": [
+        {
+            "nombre": "Starboy",
+            "artista": "The Weeknd",
+            "año": 2016,
+            "genero": "Pop",
+            "imagen_url": "https://m.media-amazon.com/images/I/814htMhuuML._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "DAMN.",
+            "artista": "Kendrick Lamar",
+            "año": 2017,
+            "genero": "Hip Hop",
+            "imagen_url": "https://m.media-amazon.com/images/I/71tdaojeUkL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Hollywood's Bleeding",
+            "artista": "Post Malone",
+            "año": 2019,
+            "genero": "Pop",
+            "imagen_url": "https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02"
+        },
+        {
+            "nombre": "My Beautiful Dark Twisted Fantasy",
+            "artista": "Kanye West",
+            "año": 2010,
+            "genero": "Hip Hop",
+            "imagen_url": "https://static.qobuz.com/images/covers/47/74/0060252747447_600.jpg"
+        },
+        {
+            "nombre": "Evolve",
+            "artista": "Imagine Dragons",
+            "año": 2017,
+            "genero": "Pop Rock",
+            "imagen_url": "https://m.media-amazon.com/images/I/61yVysJ1jcL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Future Nostalgia",
+            "artista": "Dua Lipa",
+            "año": 2020,
+            "genero": "Pop",
+            "imagen_url": "https://m.media-amazon.com/images/I/71VQFsqlPJL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "UTOPIA",
+            "artista": "Travis Scott",
+            "año": 2023,
+            "genero": "Hip Hop",
+            "imagen_url": "https://www.laut.de/Travis-Scott/Alben/Utopia-121583/travis-scott-utopia-228909.jpg?e1bef5"
+        },
+        {
+            "nombre": "El Fary Grandes exitos",
+            "artista": "El Fary",
+            "año": 1988,
+            "genero": "Rumba",
+            "imagen_url": "https://m.media-amazon.com/images/I/31Blve+LMvL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Goodbye & Good Riddance",
+            "artista": "Juice WRLD",
+            "año": 2018,
+            "genero": "Hip-Hop",
+            "imagen_url": "https://media.pitchfork.com/photos/5b0ed02ed8c21c49d0ae4de9/1:1/w_800,h_800,c_limit/Goodbye%20&%20Good%20Riddance.jpg"
+        },
+        {
+            "nombre": "Trench",
+            "artista": "Twenty One Pilots",
+            "año": 2018,
+            "genero": "Pop",
+            "imagen_url": "https://m.media-amazon.com/images/I/81znz4j2UTL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Favourite Worst Nightmare",
+            "artista": "Artic Monkeys",
+            "año": 2007,
+            "genero": "Hip-Hop",
+            "imagen_url": "https://m.media-amazon.com/images/I/51HLHvEdr4L._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Stories",
+            "artista": "Avicii",
+            "año": 2015,
+            "genero": "Electrónica",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/c/c7/Avicii-Stories-2015-1200x1200.png"
+        },
+        {
+            "nombre": "Changes",
+            "artista": "Justin Bieber",
+            "año": 2020,
+            "genero": "Pop",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/1/16/Justin_Bieber_-_Changes.png"
+        },
+        {
+            "nombre": "Luv is Rage 2",
+            "artista": "Lil Uzi Vert",
+            "año": 2017,
+            "genero": "Hip Hop",
+            "imagen_url": "https://m.media-amazon.com/images/I/81TNEeBI11L._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Random Access Memories",
+            "artista": "Daft Punk",
+            "año": 2013,
+            "genero": "Electrónica",
+            "imagen_url": "https://cdns-images.dzcdn.net/images/cover/311bba0fc112d15f72c8b5a65f0456c1/500x500.jpg"
+        },
+        {
+            "nombre": "Flower Boy",
+            "artista": "Tyler, the Creator",
+            "año": 2019,
+            "genero": "Hip Hop",
+            "imagen_url": "https://m.media-amazon.com/images/I/71Ls2qvxPjL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "i am > i was",
+            "artista": "21 Savage",
+            "año": 2018,
+            "genero": "Hip Hop",
+            "imagen_url": "https://townsquare.media/site/812/files/2018/12/21-savage-2.jpg"
+        },
+        {
+            "nombre": "Life after death",
+            "artista": "The Notorius B.I.G",
+            "año": 1997,
+            "genero": "Hip Hop",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/1/1c/NotoriousB.I.G.LifeAfterDeath.jpg"
+        },
+        {
+            "nombre": "Scary Monsters and Nice Spirites",
+            "artista": "Skrillex",
+            "año": 2010,
+            "genero": "Electrónica",
+            "imagen_url": "https://m.media-amazon.com/images/I/815aiIN6wmL._UF1000,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "The Fame",
+            "artista": "Lady Gaga",
+            "año": 2008,
+            "genero": "Pop",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/d/dd/Lady_Gaga_%E2%80%93_The_Fame_album_cover.png"
+        },
+        {
+            "nombre": "All Eyez on Me",
+            "artista": "2Pac",
+            "año": 1996,
+            "genero": "Hip Hop",
+            "imagen_url": "https://m.media-amazon.com/images/I/81+hlw7I9BL._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Cuéntame",
+            "artista": "Rosario Flores",
+            "año": 2009,
+            "genero": "Pop",
+            "imagen_url": "https://m.media-amazon.com/images/I/81FkWACnS+L._UF894,1000_QL80_.jpg"
+        },
+        {
+            "nombre": "Paradise Again",
+            "artista": "Swedish House Mafia",
+            "año": 2022,
+            "genero": "Electrónica",
+            "imagen_url": "https://shop.rukahore.sk/upload/swedish-house-mafia/Swedish_House_Mafia_Paradise_Again.png"
+        },
+        {
+            "nombre": "Diego el Cigala, Obras Maestras",
+            "artista": "Diego el Cigala",
+            "año": 2023,
+            "genero": "Flamenco",
+            "imagen_url": "https://www.lahiguera.net/musicalia/artistas/diego_el_cigala/disco/13013/diego_el_cigala_obras_maestras-portada.jpg"
+        },
+        {
+            "nombre": "Clarity",
+            "artista": "Zedd",
+            "año": 2012,
+            "genero": "Electrónica",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/3/32/Zedd_-_Clarity_%28album%29.png"
+        },
+        {
+            "nombre": "Man on the Moon: The end of Day",
+            "artista": "Kid Kudi",
+            "año": 2009,
+            "genero": "Hip Hop",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/pt/2/26/ManonTheMoonTheEndofDay.jpg"
+        },
+        {
+            "nombre": "Blonde",
+            "artista": "Frank Ocean",
+            "año": 2016,
+            "genero": "R&B",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg"
+        },
+        {
+            "nombre": "Estopa",
+            "artista": "Estopa",
+            "año": 1999,
+            "genero": "Pop",
+            "imagen_url": "https://cdn-p.smehost.net/sites/a3c9c5557eb6401b8e297cd112827890/wp-content/uploads/2015/07/27170732/Car%C3%A1tula_Frontal-estopa.jpg"
+        },
+        {
+            "nombre": "Not All Heroes Wear Capes",
+            "artista": "Metro Boomin",
+            "año": 2018,
+            "genero": "Hip Hop",
+            "imagen_url": "https://upload.wikimedia.org/wikipedia/en/2/28/Metro_Boomin_%E2%80%93_Not_All_Heroes_Wear_Capes.png"
+        },
+        {
+            "nombre": "Fall Out Boy",
+            "artista": "American Beauty / American Psycho ",
+            "año": 2015,
+            "genero": "Indie",
+            "imagen_url": "https://m.media-amazon.com/images/I/71oyOrndXmL._UF894,1000_QL80_.jpg"
+        }
+    ]
+}
