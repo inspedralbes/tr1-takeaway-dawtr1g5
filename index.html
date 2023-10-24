@@ -15,10 +15,9 @@
                 <div v-if="mostrar('portada')">
                     <div class="grid-container">
                         <img src="/img/presidis.png" alt="Trulli" />
-                        <button @click="cambiarDiv('tenda')">CATALEG</button>
+                        <button @click="cambiarDiv('tienda')"> {{ message }}</button>
                         <h1 class="portada">OFERTES DIARIES!!!</h1>
                       </div>
-                    <button @click="cambiarDiv('tienda')"> {{ message }}</button>
                 </div>
                 <div v-if="mostrar('tienda')">
                     <h1>tienda</h1>
