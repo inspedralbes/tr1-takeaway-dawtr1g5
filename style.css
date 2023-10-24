@@ -103,15 +103,6 @@ body {
   display: block;
 }
 
-.compra {
-  display: grid;
-}
-
-.compra>* {
-  margin: auto;
-  margin-top: 10px;
-}
-
 .footer{
   color: wheat;
 }
@@ -148,4 +139,15 @@ body {
 
 .footer p {
   margin: 0; 
+}
+
+/*PAGINA DE COMPRA*/
+
+.compra {
+  display: grid;
+}
+
+.compra>* {
+  margin: auto;
+  margin-top: 10px;
 }
