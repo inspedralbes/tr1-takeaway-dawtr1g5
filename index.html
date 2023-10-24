@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="landing.css">
 </head>
 <body>
     <section class="section">
         <div class="container-general">
             <div id="app">
                 <div v-if="mostrar('portada')">
+                    <div class="grid-container">
+                        <img src="/img/presidis.png" alt="Trulli" />
+                        <button @click="cambiarDiv('tenda')">CATALEG</button>
+                        <h1>OFERTES DIARIES!!!</h1>
+                      </div>
                     <button @click="cambiarDiv('tienda')"> {{ message }}</button>
                 </div>
                 <div v-if="mostrar('tienda')">
