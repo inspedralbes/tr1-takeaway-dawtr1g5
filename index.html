@@ -80,15 +80,12 @@
             </ul>
           </div>
 
-          <div v-if="mostrar('compra')">
-            <div class="compra">
-              <img
-                class="logo"
-                src="/img/presidis.png"
-                @click="cambiarDiv('portada')"
-              />
-            </div>
-          </div>
+                <div v-if="mostrar('compra')">
+                    <div class="compra">
+                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                        
+                    </div>
+                </div>
 
           <div v-if="mostrar('checkout')">
             <h1>tienda</h1>

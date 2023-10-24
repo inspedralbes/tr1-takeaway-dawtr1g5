@@ -94,3 +94,16 @@ button:active {
 
 
 
+
+.carousel-image.active {
+  display: block;
+}
+
+.compra {
+  display: grid;
+}
+
+.compra>* {
+  margin: auto;
+  margin-top: 10px;
+}
