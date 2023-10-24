@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
       
     <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
+  </head>
+  
+  <body>
     <section class="section">
         <div class="container-general">
             <div id="app">
@@ -31,6 +30,7 @@
                                 alt="Image 3" style="display: none;" />
                         </div>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
                         <button @click="cambiarDiv('tienda')">CATALEG</button>
                     </div>
                 </div>
@@ -39,13 +39,18 @@
                     <div class="buscador">
                         <input type="text" v-model="search" placeholder="search..." />
                     </div>
+
+                    <hr>
+
+                    <img src="" height="200" width="200">
+                    <p>Obras Maestras || El Cigala</p>
                     <li v-for="(disc, index) in filteredProducts" :key="index">
                         <div class="titul-artista" @click="cambiarDiv('compra')">
-                            {{ disc.nombre}} || {{ disc.artista }} - {{disc.año}}
+                            {{ disc.nombre}} || {{ disc.artista }}
                         </div>
                     </li>
-                    <hr>
                 </div>
+
                 <div v-if="mostrar('compra')">
                     <div class="compra">
                         
@@ -59,9 +64,53 @@
                         </div>
                     </div>
                 </div>
+
+                <div v-if="mostrar('checkout')">
+                    <h1>tienda</h1>
+                </div>
             </div>
         </div>
     </section>
+    <script>
+        let slideIndex = 1;
+        function autoSlides() {
+            plusSlides(1);
+        }
+        let slideInterval = setInterval(autoSlides, 5000);
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(autoSlides, 5000);
+        }
+        function plusSlides(n) {
+            showSlides((slideIndex += n));
+        }
+
+        function currentSlide(n) {
+            showSlides((slideIndex = n));
+        }
+
+        function showSlides(n) {
+            let i;
+            const slides = document.querySelectorAll(".carousel-image");
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+            resetInterval();
+        }
+    </script>
     <script src="project.js" type="module"></script>
 </body>
+
 </html>

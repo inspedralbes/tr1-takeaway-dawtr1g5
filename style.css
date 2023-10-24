@@ -1,3 +1,8 @@
+.logo{
+  height: 150px;
+  width: 250px;
+}
+
 button {
   padding: 1.3em 3em;
   font-size: 12px;
@@ -63,17 +68,6 @@ button:active {
   height: 300px;
 }
 
-hr {
-  border: 1px solid black;
-}
-
-body {
-  background-image: url('ruta-de-tu-imagen.jpg');
-  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-attachment: fixed; /* Fija la imagen en el fondo */
-}
-
 .prev,
 .next {
   cursor: pointer;
@@ -103,46 +97,6 @@ body {
   display: block;
 }
 
-.footer{
-  color: wheat;
-}
-
-.maps{
-  width: 20px;
-  height: 20px;
-}
-
-.footer {
-  background-color: #007bff;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center; 
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-}
-
-.maps {
-  max-width: 20px; 
-  margin-right: 10px; 
-}
-
-
-.footer p {
-  margin: 0; 
-}
-
-/*PAGINA DE COMPRA*/
-
 .compra {
   display: grid;
 }
@@ -150,4 +104,16 @@ body {
 .compra>* {
   margin: auto;
   margin-top: 10px;
+}
+/*FOOTER*/
+footer{
+  background-color: #000;
+  color: #fff;
+  margin-top: auto;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin: 0; 
 }
