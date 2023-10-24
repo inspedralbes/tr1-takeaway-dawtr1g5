@@ -51,8 +51,8 @@ button:active {
   margin: auto;
 }
 
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
+.img-producte {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
