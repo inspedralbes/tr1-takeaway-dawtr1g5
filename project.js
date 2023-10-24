@@ -5,9 +5,8 @@ createApp({
     data() {
         return {
            productes: [],
-           message: 'ver productes',
-           divActual: 'portada',
-           search: ''
+           message: 'ver bambas',
+           divActual: 'portada'
            
         };
     },
