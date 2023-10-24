@@ -70,9 +70,3 @@ button:active {
 .carousel-image.active {
   display: block;
 }
-
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
