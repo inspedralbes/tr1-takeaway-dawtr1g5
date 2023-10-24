@@ -27,7 +27,6 @@ button:active {
 
 .portada {
   background-color: black;
-  text-align: center;
   color: white;
 }
 
@@ -35,8 +34,6 @@ button:active {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
-  text-align: center;
-  align-items: center;
 }
 
 .grid-container img {
@@ -45,8 +42,31 @@ button:active {
 
 .grid-container h1 {
   font-size: 30px;
+  text-align: center;
 }
 
 .grid-container button {
   font-size: 15px;
+  width: max-content;
+  margin: auto;
+}
+
+.logo{
+  width: 400px;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+.carousel-image.active {
+  display: block;
 }
