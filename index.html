@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 
 <body>
     <section class="section">
@@ -32,10 +33,10 @@
                                 alt="Image 3" style="display: none;" />
                         </div>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
                         <button @click="cambiarDiv('tienda')">CATALEG</button>
                     </div>
                 </div>
+
                 <div v-if="mostrar('tienda')">
                     <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                     <div class="buscador">
@@ -44,79 +45,44 @@
 
                     <hr>
 
-                    <div class="producte">
-                        <img src="" height="200" width="200">
-                        <p class="t-titol">Obras Maestras || El Cigala</p>
-                        <p class="t-data">2023</p>
-                    </div>
-
-
                     <li v-for="(disc, index) in filteredProducts" :key="index">
                         <div class="titul-artista" @click="cambiarDiv('compra')">
-                            {{ disc.nombre}} || {{ disc.artista }}
+                            {{ disc.nombre}} || {{ disc.artista }} - {{disc.año}}
                         </div>
                     </li>
                 </div>
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-
                         <div v-if="mostrar('compra')">
+                            <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                             <div class="compra">
-                                <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                                 <img class="img-productes" src="" width="200" height="200">
                                 <span class="d-producte">2023</span>
                                 <h2 class="titol">Obras Maestras || El Cigala</h2>
+                                <div class="compra-cantitat">
+                                    <img class="img-carrito" src="/img/cart.jpg">
+                                    <input type="button" value="-">
+                                    <input type="text" id="cantitat" name="id1" value="0">
+                                    <input type="button" value="+">
+                                </div>
+
+                                <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus
+                                    accusamus velit exercitationem omnis veritatis aliquam, quidem soluta autem, in
+                                    repudiandae ipsam sint fuga numquam modi debitis! Dolore iure tempora sapiente.</p>
+                                <div class="compra-footer">
+                                    <img src="" width="50" height="50">
+                                    <img src="" width="50" height="50">
+                                    <img src="" width="50" height="50">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div v-if="mostrar('checkout')">
-                    <h1>tienda</h1>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        let slideIndex = 1;
-        function autoSlides() {
-            plusSlides(1);
-        }
-        let slideInterval = setInterval(autoSlides, 5000);
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(autoSlides, 5000);
-        }
-        function plusSlides(n) {
-            showSlides((slideIndex += n));
-        }
-
-        function currentSlide(n) {
-            showSlides((slideIndex = n));
-        }
-
-        function showSlides(n) {
-            let i;
-            const slides = document.querySelectorAll(".carousel-image");
-
-            if (n > slides.length) {
-                slideIndex = 1;
-            }
-            if (n < 1) {
-                slideIndex = slides.length;
-            }
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-
-            slides[slideIndex - 1].style.display = "block";
-
-            resetInterval();
-        }
-    </script>
     <script src="project.js" type="module"></script>
 </body>
 

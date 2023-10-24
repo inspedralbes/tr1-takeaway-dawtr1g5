@@ -1,4 +1,4 @@
-.logo{
+.logo {
   height: 150px;
   width: 250px;
 }
@@ -28,6 +28,10 @@ button:hover {
 
 button:active {
   transform: translateY(-1px);
+}
+
+li {
+  list-style: none;
 }
 
 .portada {
@@ -74,9 +78,12 @@ hr {
 
 body {
   background-image: url('ruta-de-tu-imagen.jpg');
-  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-attachment: fixed; /* Fija la imagen en el fondo */
+  background-size: cover;
+  /* Ajusta la imagen para cubrir todo el fondo */
+  background-repeat: no-repeat;
+  /* Evita que la imagen se repita */
+  background-attachment: fixed;
+  /* Fija la imagen en el fondo */
 }
 
 .prev,
@@ -108,11 +115,11 @@ body {
   display: block;
 }
 
-.footer{
+.footer {
   color: wheat;
 }
 
-.maps{
+.maps {
   width: 20px;
   height: 20px;
 }
@@ -121,7 +128,7 @@ body {
   background-color: #007bff;
   color: #fff;
   padding: 20px 0;
-  text-align: center; 
+  text-align: center;
 }
 
 .container {
@@ -131,33 +138,56 @@ body {
 }
 
 .footer-content {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .maps {
-  max-width: 20px; 
-  margin-right: 10px; 
+  max-width: 20px;
+  margin-right: 10px;
 }
 
 
 .footer p {
-  margin: 0; 
+  margin: 0;
 }
 
 /*PAGINA DE COMPRA*/
 
 .compra {
   display: grid;
+  height: 100vw;
 }
 
 .compra>* {
   margin: auto;
   margin-top: 10px;
 }
+
+.img-carrito {
+  display: flex;
+  height: 100px;
+  width: 100px;
+}
+
+.compra-cantitat {
+  display: inline;
+  display: flex;
+}
+
+.compra-cantitat input {
+  height: 20px;
+  display: flex;
+}
+
+.compra-footer img {
+  display: inline-block;
+  margin-left: 5px;
+}
+
 /*FOOTER*/
-footer{
+footer {
   background-color: #000;
   color: #fff;
   margin-top: auto;
@@ -166,5 +196,5 @@ footer{
 .icon {
   width: 20px;
   height: 20px;
-  margin: 0; 
+  margin: 0;
 }
