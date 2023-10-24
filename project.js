@@ -5,11 +5,21 @@ createApp({
     data() {
         return {
            productes: [],
-           message: 'ver bambas',
-           divActual: 'portada'
+           message: 'ver productes',
+           divActual: 'portada',
+           search: ''
            
         };
     },
+    computed: {
+        filteredProducts(){
+            return this.productes.filter((disc) =>
+                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) || 
+                disc.artista.toLowerCase().includes(this.search.toLowerCase())
+            );
+        },
+    },
+
     methods: {
         mostrar(div) {
             return this.divActual == div;

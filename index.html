@@ -26,7 +26,7 @@
                         <input type="text" v-model="search" placeholder="search...">
                     </div>
                     <ul>
-                        <li v-for="(disc, index) in productes" :key="index">
+                        <li v-for="(disc, index) in filteredProducts" :key="index">
                             <div class="titul-artista" @click="cambiarDiv('compra')">
                                 {{ disc.nombre}} || {{ disc.artista }}
                             </div>
