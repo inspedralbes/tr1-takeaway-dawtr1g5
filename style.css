@@ -63,7 +63,9 @@ button:active {
   height: 300px;
 }
 
-
+hr {
+  border: 1px solid black;
+}
 
 body {
   background-image: url('ruta-de-tu-imagen.jpg');
