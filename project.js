@@ -5,7 +5,7 @@ createApp({
     data() {
         return {
            productes: [],
-           message: 'ver bambas',
+           message: 'CATALEG',
            divActual: 'portada'
            
         };
