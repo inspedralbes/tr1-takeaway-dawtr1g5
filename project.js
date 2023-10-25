@@ -29,25 +29,23 @@ createApp({
         cambiarDiv(div) {
             this.divActual = div;
         },
-        agregarAlCarro(id){
-
-            
-            //const productAddtoCart = this.productes.find
-        //    console.log(this.productes[id]);
-
-           this.productesAddToCart.push([...this.productesAddToCart, {...this.productes[id]}]);
-
-        //    this.productesAddToCart.push(4);
+        agregarAlCarro(id) {
+            this.productesAddToCart = ([...this.productesAddToCart, { ...this.productes[id] }]);
             console.log(this.productesAddToCart);
-            
-           
+        },
+        addCountMovie(index) {
+            this.productes[index].count++;
+        },
+        substractCountMovie(index) {
+            if (this.productes[index].count > 0) {
+                this.productes[index].count--;
+            }
+
         }
     },
     created() {
-        // Cargar los datos de las bambas
         getProductes().then(data => {
             this.productes = data;
-            // console.log(this.productes)
         })
     },
 }).mount('#app');
