@@ -18,33 +18,29 @@
         </div>
 -->
 
-        <div v-if="mostrar('compra')">
-            <div class="compra">
-                <div v-if="mostrar('compra')">
-                    <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
-                    <div class="compra">
-                        <img :src="'http://localhost:5501/laravel/public/' + actual.image" alt="" width="200" height="200">
-                        <span class="d-producte">{{ actual.año }}</span>
-                        <h2 class="titol">{{ actual.name }} || {{ actual.artista }}</h2>
-                        <div class="compra-cantitat">
-                            <img class="img-carrito" src="/img/cart.jpg">
-                            <input type="button" value="-">
-                            <input type="text" id="cantitat" name="id1" value="0">
-                            <input type="button" value="+">
-                        </div>
-
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus
-                            accusamus velit exercitationem omnis veritatis aliquam, quidem soluta autem, in
-                            repudiandae ipsam sint fuga numquam modi debitis! Dolore iure tempora sapiente.</p>
-                        <div class="compra-footer">
-                            <img src="" width="50" height="50">
-                            <img src="" width="50" height="50">
-                            <img src="" width="50" height="50">
-                        </div>
+    <div v-if="mostrar('compra')" class="container-compra">
+        <div class="compra">
+            <div v-if="mostrar('compra')">
+                <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                <div class="compra">
+                    <img :src="'http://localhost:5501/laravel/public/' + actual.image" alt="" width="200" height="200">
+                    <span class="d-producte">2023</span>
+                    <h2 class="titol">Obras Maestras || El Cigala</h2>
+                    <div class="compra-cantitat">
+                        <img class="img-carrito" src="/img/cart.jpg">
+                        <input type="button" value="-">
+                        <input type="text" id="cantitat" name="id1" value="0">
+                        <input type="button" value="+">
                     </div>
+
+                    <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus
+                        accusamus velit exercitationem omnis veritatis aliquam, quidem soluta autem, in
+                        repudiandae ipsam sint fuga numquam modi debitis! Dolore iure tempora sapiente.</p>
+                    <img class="img-cart" src="/img/shopping-cart.png" width="50" height="50">
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="project.js" type="module"></script>
 </body>
