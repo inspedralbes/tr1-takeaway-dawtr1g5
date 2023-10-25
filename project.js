@@ -30,10 +30,14 @@ createApp({
             this.divActual = div;
         },
         agregarAlCarro(id){
+
+            
             //const productAddtoCart = this.productes.find
         //    console.log(this.productes[id]);
 
-           this.productesAddToCart = [...this.productesAddToCart, {...this.productes[id]}];
+           this.productesAddToCart.push([...this.productesAddToCart, {...this.productes[id]}]);
+
+        //    this.productesAddToCart.push(4);
             console.log(this.productesAddToCart);
             
            

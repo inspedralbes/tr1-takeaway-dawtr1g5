@@ -81,3 +81,33 @@
     width: 35px;
     height: 15px;
   }
+
+  /* HEADER */
+
+.header{
+  display: inline-flex;
+}
+
+.search-container {
+  position: relative;
+  padding: 15px;
+  width: 300px; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Estilos para el campo de entrada de búsqueda */
+.search-input {
+  width: 240px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px; /* Borde redondeado */
+}
+
+/* Estilos para el ícono de búsqueda */
+.search-icon {
+  position: absolute;
+  top: 40%;
+  width: 30px;
+  margin-left: 10px;
+  right: 18%;
+  transform: translateY(-50%);
+}
