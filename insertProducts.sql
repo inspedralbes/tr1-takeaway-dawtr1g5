@@ -342,8 +342,8 @@ VALUES (
         2
     ), (
         30,
-        'Fall Out Boy',
         'American Beauty / American Psycho',
+        'Fall Out Boy',
         '2015',
         11.99,
         0x696d672f416d65726963616e2e6a7067,
