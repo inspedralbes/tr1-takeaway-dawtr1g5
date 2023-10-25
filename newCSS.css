@@ -1,0 +1,87 @@
+:root {
+    --background: rgb(0, 0, 0);
+}
+
+/* PRODUCTS STARTS */
+.products-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.product__image {
+    grid-area: image;
+    width: 150px;
+    position: relative;
+    /* height: auto; */
+}
+
+.products {
+    /* margin: auto; */
+    /* text-align: center; */
+}
+
+.product__addtocart {
+    width: 50%;
+}
+
+.product__addtocart-button {
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    justify-content: center;
+}
+
+.product__adtocart-input__number {
+    width: 100%;
+}
+
+.product__addtocart-icon {
+    width: 125px;
+    height: 75px;
+}
+
+.product__price {
+    /* position: absolute; */
+}
+
+/* PRODUCTS ENDS */
+
+/* HEADER STARTS */
+.header {
+    display: inline-flex;
+    position: sticky;
+    top: 0;
+    background-color: var(--background);
+    z-index: 1;
+}
+
+.header__logo {
+    filter: invert();
+}
+
+.search-container {
+    position: relative;
+    padding: 15px;
+    width: 300px;
+}
+
+.search-input {
+    width: 240px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    background-color: var(--background);
+    color: white;
+}
+
+.search-icon {
+    position: absolute;
+    top: 40%;
+    width: 30px;
+    margin-left: 10px;
+    right: 18%;
+    transform: translateY(-50%);
+    filter: invert();
+}
+
+/* HEADER ENDS */
