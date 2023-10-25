@@ -6,8 +6,8 @@ createApp({
         return {
             productes: [],
             divActual: 'portada',
-            search: ''
-
+            search: '',
+            selectedProduct: null
         };
     },
     computed: {
@@ -27,10 +27,13 @@ createApp({
         },
         cambiarDiv(div) {
             this.divActual = div;
+        },
+        showProductDetails(product) {
+            this.selectedProduct = product;
+            this.cambiarDiv('compra');
         }
     },
     created() {
-        // Cargar los datos de las bambas
         getProductes().then(data => {
             this.productes = data;
             console.log(this.productes)

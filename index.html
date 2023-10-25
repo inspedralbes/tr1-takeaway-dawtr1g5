@@ -46,20 +46,27 @@
                     <hr>
 
                     <li v-for="(disc, index) in filteredProducts" :key="index">
-                        <div class="titul-artista" @click="cambiarDiv('compra')">
-                            {{ disc.nombre}} || {{ disc.artista }} - {{disc.año}}
+                        <!-- Aquí corregimos el evento @click y utilizamos showProductDetails -->
+                        <div class="titul-artista" @click="showProductDetails(disc)">
+                            {{ disc.nombre }} || {{ disc.artista }} - {{ disc.año }}
                         </div>
                     </li>
                 </div>
 
+                
                 <div v-if="mostrar('compra')">
                     <div class="compra">
                         <div v-if="mostrar('compra')">
                             <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                             <div class="compra">
                                 <img class="img-productes" src="" width="200" height="200">
+                                <div v-if="selectedProduct">
+                                    <h2>{{ selectedProduct.name }}</h2>
+                                    <p>{{ selectedProduct.description }}</p>
+                                    <p>Precio: {{ selectedProduct.price }}</p>
+                                </div>
                                 <span class="d-producte">2023</span>
-                                <h2 class="titol">Obras Maestras || El Cigala</h2>
+                                <h2 class="titol">{{ disc.name }}</h2>
                                 <div class="compra-cantitat">
                                     <img class="img-carrito" src="/img/cart.jpg">
                                     <input type="button" value="-">
@@ -78,9 +85,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
+
         </div>
     </section>
     <script src="project.js" type="module"></script>

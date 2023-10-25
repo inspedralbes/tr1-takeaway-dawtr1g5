@@ -157,7 +157,7 @@ body {
 
 .compra {
   display: grid;
-  height: 100vw;
+  max-height: 100vw;
 }
 
 .compra>* {
