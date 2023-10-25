@@ -1,12 +1,13 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes } from '/copManager.js';
+import { getProductes } from './copManager.js';
 
 createApp({
     data() {
         return {
             productes: [],
-            divActual: 'portada',
-            search: ''
+            divActual: 'tienda',
+            search: '',
+            productesAddToCart: []
 
         };
     },
@@ -27,6 +28,19 @@ createApp({
         },
         cambiarDiv(div) {
             this.divActual = div;
+        },
+        agregarAlCarro(id) {
+
+
+            //const productAddtoCart = this.productes.find
+            //    console.log(this.productes[id]);
+
+            this.productesAddToCart.push([...this.productesAddToCart, { ...this.productes[id] }]);
+
+            //    this.productesAddToCart.push(4);
+            console.log(this.productesAddToCart);
+
+
         }
     },
     created() {
