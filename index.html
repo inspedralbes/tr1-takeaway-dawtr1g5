@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-     
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -19,7 +19,6 @@
                     <div class="grid-container">
                         <img class="logo" src="/img/presidis.png" alt="Trulli" />
                         <h1 class="portada">OFERTES DIARIES!!!</h1>
-
 
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <div class="carousel-container">
@@ -37,34 +36,54 @@
                         <button @click="cambiarDiv('tienda')">CATALEG</button>
                     </div>
                 </div>
+
                 <div v-if="mostrar('tienda')">
                     <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                     <div class="buscador">
                         <input type="text" v-model="search" placeholder="search..." />
                     </div>
+
+                    <hr>
+
                     <li v-for="(disc, index) in filteredProducts" :key="index">
                         <div class="titul-artista" @click="cambiarDiv('compra')">
                             {{ disc.nombre}} || {{ disc.artista }} - {{disc.año}}
                         </div>
                     </li>
-                    <hr>
                 </div>
+
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-                       
                         <div v-if="mostrar('compra')">
+                            <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                             <div class="compra">
-                                <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                                 <img class="img-productes" src="" width="200" height="200">
                                 <span class="d-producte">2023</span>
                                 <h2 class="titol">Obras Maestras || El Cigala</h2>
+                                <div class="compra-cantitat">
+                                    <img class="img-carrito" src="/img/cart.jpg">
+                                    <input type="button" value="-">
+                                    <input type="text" id="cantitat" name="id1" value="0">
+                                    <input type="button" value="+">
+                                </div>
+
+                                <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus
+                                    accusamus velit exercitationem omnis veritatis aliquam, quidem soluta autem, in
+                                    repudiandae ipsam sint fuga numquam modi debitis! Dolore iure tempora sapiente.</p>
+                                <div class="compra-footer">
+                                    <img src="" width="50" height="50">
+                                    <img src="" width="50" height="50">
+                                    <img src="" width="50" height="50">
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
     <script src="project.js" type="module"></script>
 </body>
+
 </html>
