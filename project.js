@@ -30,7 +30,16 @@ createApp({
             this.divActual = div;
         },
         agregarAlCarro(id) {
-            this.productesAddToCart = ([...this.productesAddToCart, { ...this.productes[id] }]);
+            if (this.productes[id].count >= 1) {
+                let elementosRepetidos = this.repeatedProduct(id);
+                if (elementosRepetidos.length === 0) {
+                    this.productesAddToCart = ([...this.productesAddToCart, { ...this.productes[id] }]);
+                } else {
+                    let index = this.findByIndex(this.productesAddToCart, id);
+                    this.productesAddToCart[index].count += this.productes[id].count;
+                }
+                this.productes[id].count = 0;
+            }
             console.log(this.productesAddToCart);
         },
         addCountMovie(index) {
@@ -41,6 +50,12 @@ createApp({
                 this.productes[index].count--;
             }
 
+        },
+        findByIndex(array, id) {
+            return array.findIndex(product => product.id === this.productes[id].id);
+        },
+        repeatedProduct(id) {
+            return this.productesAddToCart.filter(product => product.id === this.productes[id].id)
         }
     },
     created() {
