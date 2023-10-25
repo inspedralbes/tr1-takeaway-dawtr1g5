@@ -6,7 +6,8 @@ createApp({
         return {
             productes: [],
             divActual: 'portada',
-            search: ''
+            search: '',
+            productesAddToCart: []
 
         };
     },
@@ -27,13 +28,21 @@ createApp({
         },
         cambiarDiv(div) {
             this.divActual = div;
+        },
+        agregarAlCarro(id){
+            //const productAddtoCart = this.productes.find
+        //    console.log(this.productes[id]);
+
+           this.productesAddToCart = [...this.productesAddToCart, {...this.productes[id]}];
+            console.log(this.productesAddToCart);
+           
         }
     },
     created() {
         // Cargar los datos de las bambas
         getProductes().then(data => {
             this.productes = data;
-            console.log(this.productes)
+            // console.log(this.productes)
         })
     },
 }).mount('#app');

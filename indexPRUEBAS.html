@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <div id="app" class="container-products">
-      <div v-for="(actual, index) in productes" class="products">
-        <div class="products__products">
-          <img
-            class="product__image"
-            :src="'./laravel/public/' + actual.image"
-            alt=""
-            style="width: 200px"
-          />
-          <div class="product__info">
-            <h1 class="product__name">{{actual.name}} || {{actual.artist}}</h1>
-            <h3 class="product__year">{{ actual.year}}</h3>
-            <h3 class="product__price">
-              <img
-                class="product__price-icon"
-                src="img/dollar-icon-price.png"
-                alt="Price Icon"
-              />
-              {{ actual.price }}
-            </h3>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="styleIndexTienda.css" />
+</head>
+
+<body>
+  <div id="app" class="container-products">
+    <div v-for="(actual, index) in productes" class="products">
+      <div class="products__products">
+        <img class="product__image" :src="'./laravel/public/' + actual.image" />
+        <div class="product__info">
+          <h3 class="product__name">{{actual.name}} || {{actual.artist}}</h3>
+          <h3 class="product__year">{{ actual.year}}</h3>
+          <h3 class="product__price">
+            <img class="product__price-icon" src="img/dollar-icon-price.png" alt="Price Icon" />
+            {{ actual.price }}
+          </h3>
+          <div class="product__addtocart">
+            <button @click="agregarAlCarro(index)"><img class="product__addtocart-icon" src="img/cart.jpg"
+                alt="" /></button>
+            <div class="product__addtocart-button">
+              <button class="product__addtocart-button__sumar">+</button>
+              <input class="product__adtocart-input__number" type="number" disabled value="1">
+              <button class="product__addtocart-button__restar">-</button>
+            </div>
           </div>
         </div>
-        <div class="products-separador">
-          <hr />
-        </div>
+      </div>
+      <div class="products-separador">
+        <hr />
       </div>
     </div>
-    <script src="project.js" type="module"></script>
-  </body>
+  </div>
+  <script src="project.js" type="module"></script>
+</body>
+
 </html>
