@@ -13,8 +13,19 @@ class productsController extends Controller
     //
     public function index()
     {
-        // $products = products::with(['genre_id'])->get();
-        $products = products::all();
+        // $products = products::all();
+        // $type = type::all();
+        // $genres = genres::all();
+        // return response()->json([$products, $type, $genres]);
+
+        // $products = products::with(['getProductRelation'])->get();
+
+        $products = DB::table("products")
+            ->join('genres', 'genre_id', '=', 'genres.id')
+            ->join('types', 'type_id', '=', 'types.id')
+            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->get();
+
         return response()->json($products);
     }
 
