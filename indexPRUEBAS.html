@@ -10,7 +10,7 @@
 
 <body>
   <div id="app" class="container-products">
-    <div v-for="(actual, index) in productes" class="products">
+    <div v-if="divActual==='tienda'" v-for="(actual, index) in productes" class="products">
       <div class="products__products">
         <img class="product__image" :src="'./laravel/public/' + actual.image" />
         <div class="product__info">
@@ -34,6 +34,9 @@
       <div class="products-separador">
         <hr />
       </div>
+    </div>
+    <div v-if="divActual==='carro'">
+      <h1>gola</h1>
     </div>
   </div>
   <script src="project.js" type="module"></script>

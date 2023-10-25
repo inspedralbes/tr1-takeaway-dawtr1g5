@@ -5,7 +5,7 @@ createApp({
     data() {
         return {
             productes: [],
-            divActual: 'portada',
+            divActual: 'tienda',
             search: '',
             productesAddToCart: []
 
@@ -35,6 +35,7 @@ createApp({
 
            this.productesAddToCart = [...this.productesAddToCart, {...this.productes[id]}];
             console.log(this.productesAddToCart);
+            
            
         }
     },
