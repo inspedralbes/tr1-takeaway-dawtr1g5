@@ -26,11 +26,15 @@
                     <img :src="'http://localhost:5501/laravel/public/' + actual.image" alt="" width="200" height="200">
                     <span class="d-producte">2023</span>
                     <h2 class="titol">Obras Maestras || El Cigala</h2>
-                    <div class="compra-cantitat">
-                        <img class="img-carrito" src="/img/cart.jpg">
-                        <input type="button" value="-">
-                        <input type="text" id="cantitat" name="id1" value="0">
-                        <input type="button" value="+">
+
+                    <div class="product__addtocart">
+                        <button @click="agregarAlCarro(index)"><img class="product__addtocart-icon" src="img/cart.jpg"
+                               ></button>
+                        <div class="product__addtocart-button">
+                            <button class="product__addtocart-button__sumar">+</button>
+                            <input class="product__adtocart-input__number" type="number" disabled value="1">
+                            <button class="product__addtocart-button__restar">-</button>
+                        </div>
                     </div>
 
                     <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus
