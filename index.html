@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
   <!-- <link rel="stylesheet" href="newCSS.css" /> -->
   <link rel="stylesheet" href="css/styleIndexTienda.css" />
   <link rel="stylesheet" href="css/navFooter.css">
@@ -16,8 +17,8 @@
 
   <!--HEADER-->
   <div id="app">
-    <div class="header" v-if="!mostrar('checkout') && !mostrar('carro')">
-      <div class="header__logo">
+    <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
+      <div class=" header__logo">
         <img src="img/logoPressidis.PNG" alt="">
       </div>
       <div class="search-container">
@@ -35,10 +36,13 @@
     <div id="app">
 
       <!--PORTADA-->
-      <div v-if='mostrar("portada")'>
-        <button @click="cambiarDiv('tienda')">TIENDA</button>
-
+      <div v-if='mostrar("portada")' class="portada">
+        <!-- <img class="fons" src="img/fons.png" alt=""> -->
+        <img class="logo" src="/img/presidis.png" alt="Trulli" />
+        <button @click="cambiarDiv('tienda')">CATALEG</button>
       </div>
+
+      <!-- TIENDA -->
       <div class="products-container">
         <div v-if="mostrar('tienda')" v-for="(actual, index) in productes" class="products">
           <img class="product__image" :src="'./laravel/public/' + actual.image" />
@@ -96,7 +100,7 @@
       <div class="container-footer">
         <footer>
           <div class="button-container">
-            <button class="button">
+            <button class="button" @click="cambiarDiv('portada')">
               <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
                 <path
