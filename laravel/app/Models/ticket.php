@@ -4,12 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\products;
 
-class genres extends Model
+class ticket extends Model
 {
     use HasFactory;
-
-
-
 }

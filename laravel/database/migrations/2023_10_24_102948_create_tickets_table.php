@@ -10,14 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('artist');
-            $table->string('year');
-            $table->decimal('price', 8, 2);
-            $table->integer('count')->default(0);
-            $table->binary('image')->nullable();
+            $table->decimal('final_price', 10, 2);
+            $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir'])->default('Pendent de preparar');
+            $table->binary('products');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('tickets');
     }
 };

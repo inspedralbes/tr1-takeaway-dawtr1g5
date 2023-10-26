@@ -1,53 +1,71 @@
 @extends('app')
 
 @section('content')
-<div class="container w-25 border p-4 mt-4">
+<div class="">
+    <h1>Creació d'un producte</h1>
     <form action="{{route('products')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @if (session('success'))
-        <h6 class="alert alert-success">{{session('success')}}</h6>
+        <h6 class="message is-success">{{session('success')}}</h6>
         @endif
 
         @error('title')
-        <h6 class="alert alert-danger">{{$message}} </h6>
+        <h6 class="message is-danger">{{$message}} </h6>
         @enderror
-        <div class="mb-3">
-            <label for="name" class="form-label">Nom del disc</label>
-            <input type="text" class="form-control" name="name">
+        <div class="">
+            <label for="name" class="label">Nom del disc</label>
+            <input type="text" class="input" name="name">
         </div>
-        <div class="mb-3">
-            <label for="artist" class="form-label">Nom de l'artista</label>
-            <input type="text" class="form-control" name="artist">
+        <div class="">
+            <label for="artist" class="label">Nom de l'artista</label>
+            <input type="text" class="input" name="artist">
         </div>
-        <div class="mb-3">
-            <label for="year" class="form-label">Any de publicació</label>
-            <input type="number" name="year" class="form-control" min="0">
+        <div class="">
+            <label for="year" class="label">Any de publicació</label>
+            <input type="number" name="year" class="input" min="0" value="2023">
         </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">Preu del producte (€)</label>
-            <input type="number" name="price" class="form-control" step="0.01" min="0">
+        <div class="">
+            <label for="price" class="label">Preu del producte (€)</label>
+            <input type="number" name="price" class="input" step="0.01" min="0" value="0">
         </div>
-        <div class="mb-3">
-            <label for="genre" class="form-label">Gènere del disc</label>
-            <select name="genre" class="form-select">
-                @foreach($genres as $genre)
-                <option value="{{$genre->id}}">{{$genre->genre_name}}</option>
-                @endforeach
-            </select>
+        <div class="">
+            <label for="genre" class="label">Gènere del disc</label>
+            <div class="select">
+                <select name="genre">
+                    @foreach($genres as $genre)
+                    <option value="{{$genre->id}}">{{$genre->genre_name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="type" class="form-label">Tipus del producte</label>
-            <select name="type" class="form-select">
+        <label for="type_id" class="label">Tipus del producte</label>
+        <div class="select">
+            <select name="type_id">
                 @foreach($type as $tipus)
                 <option value="{{$tipus->id}}">{{$tipus->type}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Imatge del producte</label>
-            <input type="file" class="form-control" name="image">
-        </div>
-        <button type="submit" class="btn btn-primary">Crear nueva tarea</button>
+        <br>
+        <br>
+        <label class="" for="image">
+            <input class="" type="file" name="image">
+        </label>
+        <br>
+        <br>
+        <button type="submit" class="button is-primary">Crear nueva tarea</button>
     </form>
-    @endsection
+</div>
+
+<div>
+    <hr>
+    <h1>Llistat de productes</h1>
+    <ul>
+        @foreach ($products as $product)
+        <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->type}}: {{$product->name}}</a></li>
+        @endforeach
+    </ul>
+</div>
+
+@endsection
