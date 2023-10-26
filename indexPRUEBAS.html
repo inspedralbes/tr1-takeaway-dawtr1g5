@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styleIndexTienda.css" />
   <link rel="stylesheet" href="navFooter.css">
   <link rel="stylesheet" href="compra.css">
+  <link rel="stylesheet" href="checkout.css">
 </head>
 
 <body>
@@ -52,7 +53,7 @@
         </div>
       </div>
       <div v-if="mostrar('carro')">
-        <div class="container">
+        <div class="container-carro">
           <div class="carrito">
             <h1>Carrito de Compras</h1>
             <div v-for="(actual, index) in productesAddToCart" class="products">
@@ -66,22 +67,53 @@
                   {{actual.price}}
                 </h3>
                 <h3 class="product__count">x{{actual.count}}</h3>
+                <button>remove</button>
               </div>
             </div>
             <div class="products-separador"></div>
-            <button @click="cambiarDiv('checkout')" class="checkout-button">Checkout</button>
+
+          </div>
+          <div class="button-back">
+            <button @click="cambiarDiv('tienda')">Seguir comprando</button>
+          </div>
+
+        </div>
+        <div class="container-checkout">
+          <div class="checkout">
+
+            <span class="total"><strong>Total: </strong> {{ calcularPriceTotal() }} €</span>
+            <div class="button-check">
+              <button @click="cambiarDiv('checkout')" class="checkout-button">Checkout
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="22" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l14 0"></path>
+                  <path d="M15 16l4 -4"></path>
+                  <path d="M15 8l4 4"></path>
+                </svg>
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
       <div v-if="mostrar('checkout')">
-        <ol>
-          <li v-for="(actual, index) in productesAddToCart">
-            {{ actual.name}} - {{actual.count}} - {{actual.price * actual.count}} €
-          </li>
-        </ol>
-        <span><strong>Total: </strong> {{ calcularPriceTotal() }} €</span>
+        <div class="container-chechout">
+          <div class="checkout">
+            <ol>
+              <li v-for="(actual, index) in productesAddToCart">
+                {{ actual.name}} - {{actual.count}} - {{actual.price * actual.count}} €
+              </li>
+            </ol>
+            <span class="total"><strong>Total: </strong> {{ calcularPriceTotal() }} €</span>
+
+
+
+          </div>
+        </div>
       </div>
-      <div class="container-footer">
+      <div class="container-footer" v-if="!mostrar('carro')">
         <footer>
           <div class="button-container">
             <button class="button">
@@ -125,6 +157,7 @@
           </div>
         </footer>
       </div>
+
     </div>
     <script src="project.js" type="module"></script>
 </body>
