@@ -12,14 +12,7 @@ createApp({
         };
     },
     computed: {
-        filteredProducts() {
 
-            return this.productes.productes.filter((disc) =>
-                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) ||
-                disc.artista.toLowerCase().includes(this.search.toLowerCase()) ||
-                disc.genero.toLowerCase().includes(this.search.toLowerCase())
-            );
-        },
     },
 
     methods: {
@@ -68,6 +61,6 @@ createApp({
     created() {
         getProductes().then(data => {
             this.productes = data;
-        })
-    },
+        });
+    }
 }).mount('#app');
