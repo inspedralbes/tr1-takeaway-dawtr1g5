@@ -5,7 +5,7 @@ createApp({
     data() {
         return {
             productes: [],
-            divActual: 'portada',
+            divActual: 'tienda',
             search: '',
             productesAddToCart: []
 
