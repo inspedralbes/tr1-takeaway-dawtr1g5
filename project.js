@@ -6,6 +6,7 @@ createApp({
         return {
             productes: [],
             divActual: 'tienda',
+            divCheckout: 'checkout',
             search: '',
             productesAddToCart: []
 
@@ -40,11 +41,10 @@ createApp({
                 }
                 this.productes[id].count = 0;
             }
-            console.log(this.productesAddToCart);
         },
         addCountProduct(index) {
             this.productes[index].count++;
-            count(this.productes[index].count);
+
         },
         substractCountProduct(index) {
             if (this.productes[index].count > 0) {
@@ -57,6 +57,13 @@ createApp({
         },
         repeatedProduct(id) {
             return this.productesAddToCart.filter(product => product.id === this.productes[id].id)
+        },
+        calcularPriceTotal() {
+            let total = 0;
+            for (let i = 0; i < this.productesAddToCart.length; i++) {
+                total += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
+            }
+            return total;
         }
     },
     created() {
