@@ -13,6 +13,8 @@
 </head>
 
 <body>
+
+    <!--HEADER-->
     <div id="app">
         <div class="header" v-if="!mostrar('checkout') && !mostrar('carro')">
             <div class="header__logo">
@@ -31,10 +33,14 @@
 
 
         <div id="app">
+
+            <!--PORTADA-->
             <div v-if='mostrar("portada")'>
                 <button @click="cambiarDiv('tienda')">TIENDA</button>
 
             </div>
+
+            <!--TIENDA-->
             <div class="products-container">
                 <div v-if="mostrar('tienda')" v-for="(actual, index) in productes" class="products">
                     <img class="product__image" :src="'./laravel/public/' + actual.image" />
@@ -60,6 +66,7 @@
                 </div>
             </div>
 
+            <!--CARRITO-->
             <div v-if="mostrar('carro')">
                 <div class="container">
                     <div class="carrito">
@@ -83,6 +90,7 @@
                 </div>
             </div>
 
+            <!--CHECKOUT-->
             <div v-if="mostrar('checkout')">
                 <ol>
                     <li v-for="(actual, index) in productesAddToCart">
@@ -92,6 +100,7 @@
                 <span><strong>Total: </strong> {{ calcularPriceTotal() }} €</span>
             </div>
 
+            <!--FOOTER-->
             <div class="container-footer">
                 <footer>
                     <div class="button-container">
