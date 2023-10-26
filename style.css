@@ -29,22 +29,6 @@ body{
   margin: auto;
 }
 
-/*PRIMER CARRUSEL*/
-
-.slider-container{
-  display: flex;
-  width: 100%;
-  height: 50vh;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-}
-
-.slider-container img {
-  flex: 0 0 100%;
-  width: 100%;
-  object-fit: cover;
-  scroll-snap-align: center;
-}
 
 /*SEGUNDO CARRUSEL*/
 
