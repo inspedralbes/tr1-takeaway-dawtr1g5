@@ -1,50 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-      
     <link rel="stylesheet" href="style.css" />
-  </head>
-  
-  <body>
-    <header>
-      <a href="index.html"><img class="logo" src="/img/presidis.png" alt="Trulli" /></a>
-    </header>
+
+
+</head>
+
+<body>
     <section class="section">
-      <div class="container-general">
-        <div id="app">
-          <div v-if="mostrar('portada')">
-            <div class="grid-container">
+        <div class="container-general">
+            <div id="app">
+                <div v-if="mostrar('portada')">
+                    <div class="grid-container">
+                        <img class="logo" src="/img/presidis.png" alt="Trulli" />
+                        <div id="carrusel-contenido">
+                            <div id="carrusel-caja">
+                                <div class="carrusel-elemento">
+                                    <img class="imagenes" src="/img/p1.jpg" >
+                                </div>
+                                <div class="carrusel-elemento">   
+                                    <img class="imagenes" src="/img/p2.jpg">
+                                </div>
+                                <div class="carrusel-elemento">   
+                                    <img class="imagenes" src="/img/p3.jpg">                        
+                                </div>
+                            </div>
+                        </div>
+                        
 
-                <div v-for>
-                    <img class="product_image" :src="''./laravel/public/'+actual.image">
+                        <button @click="cambiarDiv('tienda')">CATALEG</button>
+                    </div>
                 </div>
-  
+                <div v-if="mostrar('tienda')">
+                    <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
+                    <div class="buscador">
+                        <input type="text" v-model="search" placeholder="search..." />
+                    </div>
 
-              
-                <button @click="cambiarDiv('tienda')">CATALEG</button>
-                <br>
-              </div>
-          </div>
-          <div v-if="mostrar('tienda')">
-            <h1>tienda</h1>
-            <div class="buscador">
-              <input type="text" v-model="search" placeholder="search..." />
-            </div>
-            <ul>
-              <li v-for="(disc, index) in filteredProducts" :key="index">
-                <div class="titul-artista" @click="cambiarDiv('compra')">
-                  {{ disc.nombre}} || {{ disc.artista }}
+                    <hr>
+
+                    <div class="producte">
+                        <img src="" height="200" width="200">
+                        <p class="t-titol">Obras Maestras || El Cigala</p>
+                        <p class="t-data">2023</p>
+                    </div>
+
+
+                    <li v-for="(disc, index) in filteredProducts" :key="index">
+                        <div class="titul-artista" @click="cambiarDiv('compra')">
+                            {{ disc.nombre}} || {{ disc.artista }}
+                        </div>
+                    </li>
                 </div>
-              </li>
-            </ul>
-          </div>
 
                 <div v-if="mostrar('compra')">
                     <div class="compra">
-                        
+                        <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
                         <div v-if="mostrar('compra')">
                             <div class="compra">
                                 <img class="logo" src="/img/presidis.png" @click="cambiarDiv('portada')">
@@ -55,13 +70,8 @@
                         </div>
                     </div>
                 </div>
-
-          <div v-if="mostrar('checkout')">
-            <h1>tienda</h1>
-          </div>
+            </div>
         </div>
-      </div>
-
     </section>
     <script src="project.js" type="module"></script>
 </body>
