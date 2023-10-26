@@ -42,10 +42,11 @@ createApp({
             }
             console.log(this.productesAddToCart);
         },
-        addCountMovie(index) {
+        addCountProduct(index) {
             this.productes[index].count++;
+            count(this.productes[index].count);
         },
-        substractCountMovie(index) {
+        substractCountProduct(index) {
             if (this.productes[index].count > 0) {
                 this.productes[index].count--;
             }

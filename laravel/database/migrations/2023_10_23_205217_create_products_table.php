@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('artist');
             $table->string('year');
             $table->decimal('price', 8, 2);
+            $table->integer('count')->default(0);
             $table->binary('image')->nullable();
             $table->timestamps();
         });

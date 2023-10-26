@@ -35,9 +35,9 @@
             <h3 class="product__year">{{actual.artist}} ({{ actual.year}})</h3>
             <div class="product__addtocart">
               <div class="product__addtocart-button">
-                <button @click="substractCountMovie(index)" class="product__addtocart-button__sumar">-</button>
+                <button @click="substractCountProduct(index)" class="product__addtocart-button__sumar">-</button>
                 <input class="product__adtocart-input__number" type="text" disabled :value="actual.count">
-                <button @click="addCountMovie(index)" class="product__addtocart-button__restar">+</button>
+                <button @click="addCountProduct(index)" class="product__addtocart-button__restar">+</button>
               </div>
               <input class="product__addtocart-icon" @click="agregarAlCarro(index)" type="image" src="img/cart.jpg"
                 alt="">
