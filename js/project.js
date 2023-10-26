@@ -31,7 +31,7 @@ createApp({
                     let index = this.findByIndex(this.productesAddToCart, id);
                     this.productesAddToCart[index].count += this.productes[id].count;
                 }
-                this.productes[id].count = 0;
+                this.productes[id].count = 1;
             }
         },
         addCountProduct(index) {
