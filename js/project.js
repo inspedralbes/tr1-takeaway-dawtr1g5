@@ -8,6 +8,7 @@ createApp({
             divActual: 'tienda',
             search: '',
             productesAddToCart: [],
+            shoppingCartCount: 0,
             // totalPrice: 0,
 
         };
@@ -37,7 +38,6 @@ createApp({
         },
         addCountProduct(array, index) {
             array[index].count++;
-
         },
         substractCountProduct(array, index) {
             if (array[index].count > 1) {
@@ -65,6 +65,13 @@ createApp({
         },
         deleteProduct(array, index) {
             array.splice(index, 1);
+        },
+        calcularTotalCarrito() {
+            let total = 0;
+            for (let i = 0; i < this.productesAddToCart.length; i++) {
+                total += this.productesAddToCart[i].count;
+            }
+            return total;
         }
     },
     created() {

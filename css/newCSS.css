@@ -1,5 +1,6 @@
 :root {
     --main-bg-color: black;
+    --icon-color: rgb(255, 174, 0);
 
 }
 
@@ -103,7 +104,7 @@ header {
     margin: 0;
     padding: 5px;
     width: 20%;
-    background-color: rgb(255, 174, 0);
+    background-color: var(--icon-color);
     opacity: 0;
     transition: opacity 0.25s;
 }
@@ -157,6 +158,7 @@ header {
 .add-to-cart-container:active {
     transform: translateY(-10px);
 }
+
 
 /* SHOP STYLE ENDS */
 
@@ -237,40 +239,62 @@ header {
     display: flex;
     background-color: var(--main-bg-color);
     width: 100%;
-    height: 50px;
+    height: 60px;
     align-items: center;
     justify-content: space-around;
-    /* border-radius: 10px; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
-        rgba(88, 203, 244, 0.5) 5px 10px 15px;
     position: fixed;
     /* Esto fija el contenedor en la parte superior de la página */
     bottom: 0;
     left: 2;
-    padding-bottom: 5px;
+    margin-bottom: 0;
+    /* padding-bottom: 5px; */
+
 }
 
-.button {
+.button-footer {
     outline: 0 !important;
-    border: 0 !important;
-    width: 40px;
-    height: 40px;
+    border: 0;
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
     background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s, border 0s;
     cursor: pointer;
 }
 
-.button:hover {
-    transform: translateY(-3px);
+.button-footer svg {
+    padding: 3px;
 }
 
-.icon {
-    font-size: 20px;
+
+.button-footer.shop-cart {
+    position: relative;
+}
+
+.button-footer:hover {
+    transform: translateY(-3px);
+    color: var(--icon-color);
+}
+
+.bubble {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--icon-color);
+    color: black;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+
+.clicked {
+    border: 2px solid var(--icon-color);
+    color: var(--icon-color);
 }
 
 /* FOOTER STYLE ENDS */
