@@ -60,9 +60,8 @@ li {
   margin: auto;
 }
 
-
 body {
-  background-image: url('ruta-de-tu-imagen.jpg');
+  background-image: url("ruta-de-tu-imagen.jpg");
   background-size: cover;
   /* Ajusta la imagen para cubrir todo el fondo */
   background-repeat: no-repeat;
@@ -132,7 +131,6 @@ body {
   max-width: 20px;
   margin-right: 10px;
 }
-
 
 .footer p {
   margin: 0;
@@ -241,7 +239,7 @@ body {
   margin: 0px;
 }
 
-.compra>* {
+.compra > * {
   margin: 10px;
 }
 

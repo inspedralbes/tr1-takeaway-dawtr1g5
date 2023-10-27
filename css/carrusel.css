@@ -1,0 +1,41 @@
+body {
+  background-image: url(/img/fons.png);
+}
+.slider-container {
+  width: 50vh;
+  height: 77%;
+  overflow: hidden; /* Para ocultar las imágenes que se salen del carrusel */
+}
+
+.slider-box {
+  width: 100%; /* Ancho del carrusel igual al contenedor */
+  height: 100%; /* Cambiado para que el carrusel llene todo el contenedor */
+  overflow: hidden; /* Para ocultar las imágenes que se salen del carrusel */
+  position: relative;
+}
+
+.slider-box ul {
+  display: flex;
+  padding: 0;
+  width: 2700%; /* Ancho total del carrusel (100% x número de imágenes) */
+  animation: slide 25s infinite alternate;
+}
+
+.slider-box li {
+  width: 25%; /* Ancho de cada imagen (100% / número de imágenes) */
+  list-style: none;
+}
+
+.slider-box img {
+  width: 100%;
+  height: 100%; /* Ajusta la altura según tus necesidades */
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -300%;
+  }
+}

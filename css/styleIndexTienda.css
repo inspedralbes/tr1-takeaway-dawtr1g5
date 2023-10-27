@@ -18,7 +18,6 @@
   position: static;
 }
 
-
 .container-product {
   display: grid;
   grid-template-areas: "image info";
