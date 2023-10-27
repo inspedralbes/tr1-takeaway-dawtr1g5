@@ -7,7 +7,8 @@ createApp({
             productes: [],
             divActual: 'tienda',
             search: '',
-            productesAddToCart: []
+            productesAddToCart: [],
+            // totalPrice: 0,
 
         };
     },
@@ -34,15 +35,14 @@ createApp({
                 this.productes[id].count = 1;
             }
         },
-        addCountProduct(index) {
-            this.productes[index].count++;
+        addCountProduct(array, index) {
+            array[index].count++;
 
         },
-        substractCountProduct(index) {
-            if (this.productes[index].count > 0) {
-                this.productes[index].count--;
+        substractCountProduct(array, index) {
+            if (array[index].count > 1) {
+                array[index].count--;
             }
-
         },
         findByIndex(array, id) {
             return array.findIndex(product => product.id === this.productes[id].id);
@@ -55,7 +55,16 @@ createApp({
             for (let i = 0; i < this.productesAddToCart.length; i++) {
                 total += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
             }
+            total = (Math.round(total * 100) / 100).toFixed(2);
             return total;
+        },
+        calcularPriceProduct(id) {
+            let total = 0;
+            total = this.productesAddToCart[id].price * this.productesAddToCart[id].count;
+            return total;
+        },
+        deleteProduct(array, index) {
+            array.splice(index, 1);
         }
     },
     created() {

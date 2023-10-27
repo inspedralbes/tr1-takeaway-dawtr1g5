@@ -1,5 +1,6 @@
 :root {
     --main-bg-color: black;
+
 }
 
 img {
@@ -11,13 +12,13 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    background-color: var(--main-bg-color);
 }
 
 .header {
     display: grid;
     grid-template-areas: 'logo input';
     grid-template-columns: .2fr .8fr;
-    background-color: var(--main-bg-color);
     place-items: center;
 }
 
@@ -50,6 +51,16 @@ header {
     left: 90%;
     top: 30%;
     width: 1.5rem;
+}
+
+.header__price {
+    color: white;
+    font-size: 2rem;
+    font-variant: small-caps;
+    font-weight: bold;
+    margin-left: 1rem;
+    padding-top: 2%;
+    height: 4rem;
 }
 
 /* HEADER STYLE ENDS */
@@ -109,10 +120,7 @@ header {
     transform: translateY(-10px);
 }
 
-.add-to-cart-img {
-    width: 7.5rem;
-    bottom: 0;
-}
+
 
 .cd-name {
     font-variant: small-caps;
@@ -125,14 +133,100 @@ header {
     font-size: .7rem;
 }
 
+.cd-name:not(.carro),
+.cd-info:not(.carro) {
+    margin-left: .5rem;
+}
+
 .add-to-cart-container {
     display: flex;
     justify-content: center;
     margin-top: 0;
+    transform: translateY(0);
+    transition: transform .2s;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
+.add-to-cart-img {
+    width: 7.5rem;
+    bottom: 0;
+}
+
+.add-to-cart-container:active {
+    transform: translateY(-10px);
+}
 
 /* SHOP STYLE ENDS */
+
+
+
+/* CARRO STYLE STARTS */
+.carro.product-container {
+    display: grid;
+    grid-template-areas: 'img info';
+    grid-template-columns: 1fr 3fr;
+    margin: 10px;
+    border: solid 1px lightgray;
+}
+
+.carro.cd-image {
+    width: auto;
+    grid-area: img;
+
+}
+
+.carro.carro-info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas: 'name'
+        'artist'
+        'btn';
+    margin-left: .3rem;
+    grid-template-rows: .5fr .5fr 2fr;
+}
+
+.carro.cd-name {
+    grid-area: name;
+    margin-bottom: 0;
+}
+
+.carro.cd-info {
+    grid-area: artist;
+    margin-top: 0;
+}
+
+.carro.carro-btns {
+    grid-area: btn;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    height: 50%;
+    align-self: end;
+    margin-bottom: .3rem;
+}
+
+.carro.carro-btns input {
+    width: 20%;
+}
+
+.deleteCart {
+    margin-left: auto;
+    margin-right: .3rem;
+}
+
+.carro.total-price {
+    margin-left: 1rem;
+}
+
+.goToCheckout {
+    align-self: end;
+    bottom: 0;
+}
+
+/* CARRO STYLE ENDS */
 
 /* FOOTER STYLE STARTS */
 .container-footer {
