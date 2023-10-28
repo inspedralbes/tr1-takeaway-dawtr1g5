@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-<<<<<<< Updated upstream
 
-class OrderController extends Controller
-{
-    //
-=======
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use App\Models\products;
@@ -24,5 +18,5 @@ class OrderController extends Controller
             // ->get();
         }
     
->>>>>>> Stashed changes
+
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 ///PUBLIC ROUTES
 Route::get('/index', [productsController::class, 'index']);
-<<<<<<< Updated upstream
+
 Route::get('/comandes', [productsComandes::class, 'comdandes']);
-=======
 Route::get('/indexComand', [OrderController::class, 'comandes']);
 
->>>>>>> Stashed changes
+//Route::post('/insertar-datos', productsController::class);
 
-///PRIVATE ROUTES
+Route::get('/ticket/{id}', [TicketController::class, 'show']);
+Route::get('/tickets', [TicketController::class, 'index_all']);
+

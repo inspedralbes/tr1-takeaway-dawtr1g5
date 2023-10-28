@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('final_price', 10, 2);
-            $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir'])->default('Pendent de preparar');
-            
+        Schema::create('linea_tickets', function (Blueprint $table) {
+            $table->id('id_linea');
+            $table->string('product_name');
+            $table->string('product_price');
+            $table->integer('product_quantitat')->default(0);
             $table->timestamps();
         });
     }
+
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('linea_tickets');
     }
 };
