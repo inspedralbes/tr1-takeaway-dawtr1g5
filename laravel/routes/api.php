@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
@@ -21,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 ///PUBLIC ROUTES
 Route::get('/index', [productsController::class, 'index']);
+<<<<<<< Updated upstream
 Route::get('/comandes', [productsComandes::class, 'comdandes']);
+=======
+Route::get('/indexComand', [OrderController::class, 'comandes']);
+
+>>>>>>> Stashed changes
 
 ///PRIVATE ROUTES

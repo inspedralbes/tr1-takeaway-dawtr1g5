@@ -7,6 +7,7 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 
 class productsController extends Controller
 {
@@ -105,4 +106,13 @@ class productsController extends Controller
         $product->delete();
         return redirect()->route('products')->with('success', 'El producte ha sigut el·liminat correctament!');
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    // public funtion procesarComanda(Request $request){
+    //     // $comanda = new Order();
+    //     // $comanda->estat = ''
+    // }
+}
+>>>>>>> Stashed changes
