@@ -7,7 +7,6 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
-use App\Models\Order;
 
 class productsController extends Controller
 {
@@ -28,6 +27,7 @@ class productsController extends Controller
             ->get();
 
         return response()->json($products);
+        
     }
 
     public function index_all()
