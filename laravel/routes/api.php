@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 ///PUBLIC ROUTES
 Route::get('/index', [productsController::class, 'index']);
-
+Route::get('/comandes', [productsComandes::class, 'comdandes']);
 
 ///PRIVATE ROUTES

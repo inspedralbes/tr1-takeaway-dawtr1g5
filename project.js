@@ -5,21 +5,14 @@ createApp({
     data() {
         return {
             productes: [],
-            divActual: 'tienda',
+            divActual: 'portada',
             search: '',
             productesAddToCart: []
 
         };
     },
     computed: {
-        filteredProducts() {
 
-            return this.productes.productes.filter((disc) =>
-                disc.nombre.toLowerCase().includes(this.search.toLowerCase()) ||
-                disc.artista.toLowerCase().includes(this.search.toLowerCase()) ||
-                disc.genero.toLowerCase().includes(this.search.toLowerCase())
-            );
-        },
     },
 
     methods: {
@@ -40,12 +33,12 @@ createApp({
                 }
                 this.productes[id].count = 0;
             }
-            console.log(this.productesAddToCart);
         },
-        addCountMovie(index) {
+        addCountProduct(index) {
             this.productes[index].count++;
+
         },
-        substractCountMovie(index) {
+        substractCountProduct(index) {
             if (this.productes[index].count > 0) {
                 this.productes[index].count--;
             }
@@ -56,11 +49,18 @@ createApp({
         },
         repeatedProduct(id) {
             return this.productesAddToCart.filter(product => product.id === this.productes[id].id)
+        },
+        calcularPriceTotal() {
+            let total = 0;
+            for (let i = 0; i < this.productesAddToCart.length; i++) {
+                total += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
+            }
+            return total;
         }
     },
     created() {
         getProductes().then(data => {
             this.productes = data;
-        })
-    },
+        });
+    }
 }).mount('#app');
