@@ -8,7 +8,7 @@ createApp({
             divActual: 'tienda',
             search: '',
             productesAddToCart: [],
-            // totalPrice: 0,
+            totalPrice: 0,
 
         };
     },
@@ -51,12 +51,12 @@ createApp({
             return this.productesAddToCart.filter(product => product.id === this.productes[id].id)
         },
         calcularPriceTotal() {
-            let total = 0;
+            this.totalPrice = 0;
             for (let i = 0; i < this.productesAddToCart.length; i++) {
-                total += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
+                this.totalPrice += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
             }
-            total = (Math.round(total * 100) / 100).toFixed(2);
-            return total;
+            this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
+            return this.totalPrice;
         },
         calcularPriceProduct(id) {
             let total = 0;
@@ -65,6 +65,28 @@ createApp({
         },
         deleteProduct(array, index) {
             array.splice(index, 1);
+        },
+        checkout() {
+            const data = {
+                precio: this.totalPrice,
+                compra: this.productesAddToCart
+            };
+            this.divActual = "portada"
+
+            fetch('http://localhost:8000/api/ticket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
     },
     created() {

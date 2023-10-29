@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,8 +14,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('final_price', 10, 2);
             $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir'])->default('Pendent de preparar');
-            // $table->string('name_product');
-            //$table->json('productos');
+
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('comandes');
     }
 };
