@@ -25,6 +25,8 @@ class TicketController extends Controller
         ///STORE TICKET DATA
         $ticket = new Ticket;
         $ticket->final_price = $data["precio"];
+        $ticket->user_name = $data['userName'];
+        $ticket->user_email = $data['userEmail'];
         $ticket->save();
 
         ///STORE TICKET_LINE DATA

@@ -1,5 +1,6 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import { getProductes } from './copManager.js';
+import { storeTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -9,6 +10,9 @@ createApp({
             search: '',
             productesAddToCart: [],
             totalPrice: 0,
+            userName: '',
+            userEmail: '',
+            activeModal: false,
 
         };
     },
@@ -69,24 +73,26 @@ createApp({
         checkout() {
             const data = {
                 precio: this.totalPrice,
-                compra: this.productesAddToCart
+                compra: this.productesAddToCart,
+                userName: this.userName,
+                userEmail: this.userEmail
             };
-            this.divActual = "portada"
 
-            fetch('http://localhost:8000/api/ticket', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
+            storeTicket(data)
+                .then(data2 => {
+                    console.log(data2);
+                    this.productesAddToCart = [];
+                    this.activarModal();
+                    this.userName = '';
+                    this.userEmail = '';
+                    this.divActual = "portada"
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        },
+        activarModal() {
+            this.activeModal = !this.activeModal;
         }
     },
     created() {
