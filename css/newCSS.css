@@ -293,6 +293,10 @@ header {
     color: var(--icon-color);
 }
 
+.button-footer:disabled {
+    color: red;
+}
+
 .bubble {
     position: absolute;
     top: -5px;
