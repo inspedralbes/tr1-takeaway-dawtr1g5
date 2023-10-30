@@ -1,228 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css "
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
-    <!-- <link rel="stylesheet" href="newCSS.css" /> -->
-    <link rel="stylesheet" href="css/styleIndexTienda.css" />
-    <link rel="stylesheet" href="css/navFooter.css" />
-    <link rel="stylesheet" href="css/compra.css" />
-    <link rel="stylesheet" href="css/carrusel.css" />
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>PreSidis</title>
+  <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="css/newCSS.css">
+</head>
+
+<body>
+
+  <div id="app">
+
     <!--HEADER-->
-    <div id="app">
-      <div
-        class="header"
-        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')"
-      >
-        <div class="header__logo">
-          <img src="img/logoPressidis.PNG" alt="" />
-        </div>
+    <header>
+      <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
+        <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search..." />
-          <img class="search-icon" src="img/search.png" alt="Search" />
+          <input type="text" class="search-input" placeholder="Search...">
+          <img class="search-icon" src="img/search.png" alt="Search">
         </div>
       </div>
+      <div v-else-if="mostrar('carro')" class="header-carro">
+        <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
+      </div>
+    </header>
+    <!-- PORTADA -->
+    <div v-if="mostrar('portada')"></div>
 
-      <!--PORTADA-->
-      <div class="portada" v-if="mostrar('portada')">
-        <img class="logo" src="/img/presidis.png" alt="Trulli" />
-
-        <div class="slider-container">
-          <div class="slider-box" ref="sliderBox">
-            <ul>
-              <li v-for="(actual, index) in productes" :key="index">
-                <img
-                  :src="'./laravel/public/' + actual.image"
-                  alt="Imagen {{ index + 1 }}"
-                  class="imatge_carrusel"
-                />
-              </li>
-            </ul>
+    <!-- TIENDA -->
+    <div v-if="mostrar('tienda')" class="tienda">
+      <div v-for="(actual,index) in productes" :key="index" class="product-container">
+        <div class="cd-image-container">
+          <img :src="'./laravel/public/' + actual.image" alt="">
+          <p class="cd-price">€ {{actual.price}}</p>
+          <div :class="['in-cart',{'bought': findByIndex(productesAddToCart,index)!== -1}]">
+            <img src="img/shopping-cart-filled.png" alt="">
           </div>
         </div>
-        <button @click="cambiarDiv('tienda')">CATALEG</button>
-      </div>
-
-      <!-- TIENDA -->
-      <div class="products-container">
-        <div
-          v-if="mostrar('tienda')"
-          v-for="(actual, index) in productes"
-          class="products"
-        >
-          <img
-            class="product__image"
-            :src="'./laravel/public/' + actual.image"
-          />
-          <h3 class="product__price">{{ actual.price }}</h3>
-          <div class="product__info">
-            <h3 class="product__name">{{actual.name}}</h3>
-            <h3 class="product__year">{{actual.artist}} ({{ actual.year}})</h3>
-            <div class="product__addtocart">
-              <div class="product__addtocart-button">
-                <button
-                  @click="substractCountProduct(index)"
-                  class="product__addtocart-button__sumar"
-                >
-                  -
-                </button>
-                <input
-                  class="product__adtocart-input__number"
-                  type="text"
-                  disabled
-                  :value="actual.count"
-                />
-                <button
-                  @click="addCountProduct(index)"
-                  class="product__addtocart-button__restar"
-                >
-                  +
-                </button>
-              </div>
-              <input
-                class="product__addtocart-icon"
-                @click="agregarAlCarro(index)"
-                type="image"
-                src="img/cart.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="mostrar('carro')">
-        <div class="container">
-          <div class="carrito">
-            <h1>Carrito de Compras</h1>
-            <div v-for="(actual, index) in productesAddToCart" class="products">
-              <img
-                class="product__image"
-                :src="'./laravel/public/' + actual.image"
-              />
-              <div class="product__info">
-                <h3 class="product__name">{{actual.name}}</h3>
-                <h4 class="product__artist">{{actual.artist}}</h4>
-                <h4 class="product__year">{{actual.year}}</h4>
-                <h3 class="product__price">
-                  <img
-                    class="product__price-icon"
-                    src="img/dollar-icon-price.png"
-                    alt="Price Icon"
-                  />
-                  {{actual.price}}
-                </h3>
-                <h3 class="product__count">x{{actual.count}}</h3>
-              </div>
-            </div>
-            <div class="products-separador"></div>
-            <button @click="cambiarDiv('checkout')" class="checkout-button">
-              Checkout
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="mostrar('checkout')">
-        <ol>
-          <li v-for="(actual, index) in productesAddToCart">
-            {{ actual.name}} - {{actual.count}} - {{actual.price *
-            actual.count}} €
-          </li>
-        </ol>
-        <span><strong>Total: </strong> {{ calcularPriceTotal() }} €</span>
-      </div>
-
-      <div class="container-footer">
-        <footer>
-          <div class="button-container">
-            <button class="button" @click="cambiarDiv('portada')">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 1024 1024"
-                stroke-width="0"
-                fill="currentColor"
-                stroke="currentColor"
-                class="icon"
-              >
-                <path
-                  d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"
-                ></path>
-              </svg>
-            </button>
-            <button class="button" @click="cambiarDiv('tienda')">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-shopping-bag-check"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path
-                  d="M11.5 21h-2.926a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304h11.339a2 2 0 0 1 1.977 2.304l-.5 3.248"
-                ></path>
-                <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
-                <path d="M15 19l2 2l4 -4"></path>
-              </svg>
-            </button>
-            <button class="button">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                stroke-width="0"
-                fill="currentColor"
-                stroke="currentColor"
-                class="icon"
-              >
-                <path
-                  d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"
-                ></path>
-              </svg>
-            </button>
-
-            <button class="button" @click="cambiarDiv('carro')">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                stroke-linejoin="round"
-                stroke-linecap="round"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                fill="none"
-                stroke="currentColor"
-                class="icon"
-              >
-                <circle r="1" cy="21" cx="9"></circle>
-                <circle r="1" cy="21" cx="20"></circle>
-                <path
-                  d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </footer>
+        <p class="cd-name">{{actual.name}}</p>
+        <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
+        <button @click="agregarAlCarro(index)" class="add-to-cart-container">
+          <img class="add-to-cart-img" src="img/cart.jpg" alt="">
+        </button>
       </div>
     </div>
+
+    <!-- CARRO -->
+    <div class="allCart-container" v-if="mostrar('carro')">
+      <div v-for="(actual,index) in productesAddToCart" class="carro product-container">
+        <img :src="'./laravel/public/' + actual.image" alt="" class="carro cd-image">
+        <div class="carro carro-info">
+          <p class="carro cd-name">{{actual.name}}</p>
+          <p class="carro cd-info">{{actual.artist}} ({{actual.year}})</p>
+          <div class="carro carro-btns">
+            <button @click="substractCountProduct(productesAddToCart,index)">-</button>
+            <input type="text" :placeholder="actual.count" disabled>
+            <button @click="addCountProduct(productesAddToCart,index)">+</button>
+            <p class="carro total-price">€{{calcularPriceProduct(index)}}</p>
+            <button class="deleteCart" @click="deleteProduct(productesAddToCart,index)">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="checkout-btn-container">
+        <button @click="activarModal()" class="button is-dark goToCheckout">Confirmar?</button>
+      </div>
+
+      <div :class="['modal',{'is-active': activeModal}]">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Confirma les teves dades</p>
+            <button @click="activarModal()" class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+
+            <div class="confirm_payment">
+              <label for="user_name">Nom complet</label>
+              <input id="user_name" class="input" v-model="userName" type="text"
+                placeholder="Escriu el teu nom complet...">
+              <label for="user_email">Email</label>
+              <input id="user_email" class="input" v-model="userEmail" type="email" placeholder="exemple@exemple.cat">
+            </div>
+
+          </section>
+          <footer class="modal-card-foot">
+            <button @click="checkout()" class="button is-dark">Confirmar comanda</button>
+            <button @click="activarModal()" class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
+
+      <div class="payment-container">
+
+      </div>
+    </div>
+
+    <!-- CHECKOUT -->
+    <div v-if="mostrar('checkout')"></div>
+
+    <div class="container-footer">
+      <footer>
+        <div class="button-container">
+          <button :class="['button-footer',{'clicked': mostrar('portada')}]" @click="cambiarDiv('portada')">
+            <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 22L2 22" fill="none" stroke-width="1" stroke-linecap="round" />
+              <path
+                d="M2 11L6.06296 7.74968M22 11L13.8741 4.49931C12.7784 3.62279 11.2216 3.62279 10.1259 4.49931L9.34398 5.12486"
+                stroke-width="1" stroke-linecap="round" />
+              <path d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5" stroke-width="1"
+                stroke-linecap="round" />
+              <path d="M4 22V9.5" stroke-width="1" stroke-linecap="round" />
+              <path d="M20 9.5V13.5M20 22V17.5" stroke-width="1" stroke-linecap="round" />
+              <path
+                d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17"
+                stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z"
+                stroke-width="1" />
+            </svg>
+          </button>
+          <button :class="['button-footer',{'clicked': mostrar('tienda')}]" @click="cambiarDiv('tienda')">
+            <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                stroke-width="1" />
+              <path
+                d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                stroke-width="1" />
+              <path d="M8 13V17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M16 13V17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M12 13V17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M3.864 16.4552C4.40967 18.6379 4.68251 19.7292 5.49629 20.3646C6.31008 21 7.435 21 9.68486 21H14.3155C16.5654 21 17.6903 21 18.5041 20.3646C19.3179 19.7292 19.5907 18.6379 20.1364 16.4552C20.9943 13.0234 21.4233 11.3075 20.5225 10.1538C19.6217 9 17.853 9 14.3155 9H9.68486C6.14745 9 4.37875 9 3.47791 10.1538C2.94912 10.831 2.87855 11.702 3.08398 13"
+                stroke-width="1" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')"
+            :disabled="productesAddToCart.length===0">
+            <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z"
+                stroke-width="1" />
+              <path
+                d="M16.5 18.0001C17.3284 18.0001 18 18.6716 18 19.5001C18 20.3285 17.3284 21.0001 16.5 21.0001C15.6716 21.0001 15 20.3285 15 19.5001C15 18.6716 15.6716 18.0001 16.5 18.0001Z"
+                stroke-width="1" />
+              <path
+                d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7"
+                stroke-width="1" stroke-linecap="round" />
+            </svg>
+            <div class="bubble">{{calcularTotalCarrito()}}</div>
+          </button>
+        </div>
+      </footer>
+    </div>
+
     <script src="js/project.js" type="module"></script>
-  </body>
+  </div>
+</body>
+
 </html>
