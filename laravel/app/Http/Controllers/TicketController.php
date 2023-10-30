@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\ticket;
 use App\Models\LineaTicket;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Mail\EnviarCodigoQR;
 
 class TicketController extends Controller
 {
@@ -42,10 +44,28 @@ class TicketController extends Controller
             $linea->product_type = $compraData['type'];
             $linea->ticket_id = $ticket->id;
             $linea->save();
+
         }
 
+        //Generate QR code with Ticket ID, status, and price
+        $qrData = [
+          'Ticket ID' => $ticket->id,
+          'Email' => $ticket->user_email,
+          'Name' => $ticket->user_name,
+          'Price' => $ticket->final_price,
+      ];
 
+      // Generar el QR y guardarlo
+      $qrCode = QrCode::size(300)->generate(json_encode($qrData));
 
+      // Ruta donde se guarda el QR
+      $qrCodeFolderPath = 'public/qrcodes';
+
+      // Nombre de archivo único para el QR
+      $qrCodeFileName = uniqid() . '.png';
+
+      // Guardar el QR en la carpeta
+      Storage::disk('local')->put($qrCodeFolderPath . '/' . $qrCodeFileName, $qrCode);
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
     }
 
@@ -59,6 +79,7 @@ class TicketController extends Controller
 
         return response()->json($ticket);
     }
+
 
     public function showWeb($id)
     {
