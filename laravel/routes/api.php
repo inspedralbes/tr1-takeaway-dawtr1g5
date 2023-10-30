@@ -30,3 +30,11 @@ Route::get('/index', [productsController::class, 'index']);
 
 Route::get('/ticket/{id}', [TicketController::class, 'show']);
 Route::get('/tickets', [TicketController::class, 'index']);
+
+// Route::get('/comandes', [productsController::class, 'comdandes']);
+// Route::get('/indexComand', [OrderController::class, 'comandes']);
+
+//Route::post('/insertar-datos', productsController::class);
+
+Route::get('/ticket/{id}', [TicketController::class, 'show']);
+Route::get('/tickets', [TicketController::class, 'index']);
