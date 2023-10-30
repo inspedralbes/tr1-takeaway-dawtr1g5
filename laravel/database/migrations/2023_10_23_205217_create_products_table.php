@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('artist');
             $table->string('year')->nullable();
             $table->decimal('price', 8, 2);
-            $table->integer('count')->default(0);
+            $table->integer('count')->default(1);
             $table->binary('image')->nullable();
             $table->text('compositores')->nullable();
             $table->text('productora')->nullable();

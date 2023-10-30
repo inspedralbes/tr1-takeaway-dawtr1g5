@@ -143,7 +143,8 @@
             </svg>
           </button>
 
-          <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')">
+          <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')"
+            :disabled="productesAddToCart.length===0">
             <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
