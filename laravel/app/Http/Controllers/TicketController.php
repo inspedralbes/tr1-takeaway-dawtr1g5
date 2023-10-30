@@ -34,6 +34,8 @@ class TicketController extends Controller
         $ticket->user_email = $data['userEmail'];
 
         //Generate QR code with Ticket ID, status, and price
+        $ticket->save();
+
         $qrData = [
             'Ticket ID' => $ticket->id,
             'Email' => $ticket->user_email,
@@ -43,21 +45,19 @@ class TicketController extends Controller
         $jsonQrCode = json_encode($qrData);
         $qrCode = QrCode::size(300)->generate($jsonQrCode);
 
-        $qrCodeFileName = uniqid() . '.svg';
+        $qrCodeFileName = 'ticket_' . $ticket->id . '_qr.svg';
 
         try {
             Storage::disk('qr')->put('/' . $qrCodeFileName, $qrCode);
 
             $imagePath = 'qrcodes/' . $qrCodeFileName;
             $ticket->qr = $imagePath;
+            $ticket->save();
 
         } catch (\Exception $e) {
             \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
             return response()->json(['error' => 'Error al almacenar el código QR'], 500);
         }
-
-
-        $ticket->save();
 
         ///STORE TICKET_LINE DATA
         $compras = $data['compra'];

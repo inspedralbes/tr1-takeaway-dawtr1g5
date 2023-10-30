@@ -102,7 +102,6 @@ createApp({
 
                 const lastTicketData = await getLastTicket();
                 this.ticket = lastTicketData;
-                console.log(this.ticket);
 
                 this.divActual = "checkout";
             } catch (error) {

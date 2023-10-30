@@ -124,11 +124,6 @@
           </footer>
         </div>
       </div>
-
-
-      <div class="payment-container">
-
-      </div>
     </div>
 
     <!-- CHECKOUT -->
@@ -136,6 +131,7 @@
       <h1>Gràcies per la compra, {{ticket.user_name}}</h1>
       <h2>El teu id de compra es:</h2>
       <h3>{{ticket.id}}</h3>
+      <img :src="'./laravel/public/' + ticket.qr" alt="">
       <button @click="cambiarDiv('portada')" class="button is-dark">Tornar a l'inici</button>
     </div>
 
