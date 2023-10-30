@@ -228,6 +228,19 @@ header {
     bottom: 0;
 }
 
+/* .payment-container {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    background-color: red;
+}
+
+.confirm_payment {
+    display: inline-block;
+    text-align: center;
+    width: 90%;
+} */
+
 /* CARRO STYLE ENDS */
 
 /* FOOTER STYLE STARTS */

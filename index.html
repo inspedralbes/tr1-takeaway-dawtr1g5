@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>PreSidis</title>
   <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -49,7 +50,7 @@
     </div>
 
     <!-- CARRO -->
-    <div v-if="mostrar('carro')">
+    <div class="allCart-container" v-if="mostrar('carro')">
       <div v-for="(actual,index) in productesAddToCart" class="carro product-container">
         <img :src="'./laravel/public/' + actual.image" alt="" class="carro cd-image">
         <div class="carro carro-info">
@@ -65,7 +66,37 @@
         </div>
       </div>
       <div class="checkout-btn-container">
-        <button class="goToCheckout">Checkout</button>
+        <button @click="activarModal()" class="button is-dark goToCheckout">Confirmar?</button>
+      </div>
+
+      <div :class="['modal',{'is-active': activeModal}]">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Confirma les teves dades</p>
+            <button @click="activarModal()" class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+
+            <div class="confirm_payment">
+              <label for="user_name">Nom complet</label>
+              <input id="user_name" class="input" v-model="userName" type="text"
+                placeholder="Escriu el teu nom complet...">
+              <label for="user_email">Email</label>
+              <input id="user_email" class="input" v-model="userEmail" type="email" placeholder="exemple@exemple.cat">
+            </div>
+
+          </section>
+          <footer class="modal-card-foot">
+            <button @click="checkout()" class="button is-dark">Confirmar comanda</button>
+            <button @click="activarModal()" class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
+
+      <div class="payment-container">
+
       </div>
     </div>
 
