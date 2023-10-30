@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
-    //MOSTRA TOTS ELS TICKETS EN UN LLISTAT
-
-
+    //
     public function index_all()
     {
         $ticket = ticket::all();
 
-        return view('tickets.index', ['tickets' => $ticket]);
+        return response()->json($ticket);
     }
 
 
@@ -24,6 +22,7 @@ class TicketController extends Controller
     {
         ///GET POST REQUEST DATA
         $data = $request->all();
+
         ///STORE TICKET DATA
         $ticket = new Ticket;
         $ticket->final_price = $data["precio"];
@@ -56,29 +55,40 @@ class TicketController extends Controller
             ->select('tickets.*', 'linea_tickets.*')
             ->where('tickets.id', '=', $id)
             ->get();
-        $linea_ticket = LineaTicket::all();
+
+        return response()->json($ticket);
+    }
+
+    public function getLastTicket()
+    {
+        $ticket = DB::table('tickets')
+            ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+            ->select('tickets.*', 'linea_tickets.*')
+            ->latest('tickets.id') // Ordenar por el campo id de forma descendente
+            ->first();
+
+        return response()->json($ticket);
+    }
+
+    public function showWeb($id)
+    {
+        $ticket = DB::table('tickets')
+            ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+            ->select('tickets.*', 'linea_tickets.*')
+            ->where('tickets.id', '=', $id)
+            ->get();
 
         // dd($ticket);
-        // dd($linea_ticket);
 
-        return view('tickets.show', ['tickets' => $ticket, 'linea_ticket' => $linea_ticket]);
+        return view('tickets.show', ['ticket' => $ticket]);
     }
-    public function update(Request $request, $id)
+    public function update($id)
     {
-
-        $ticket = ticket::find($id);
-        $ticket->estat = $request->estat;
-
-        $ticket->save();
-
-        return redirect()->route('tickets')->with('success', 'Ticket actualitzat correctament!');
     }
 
     public function destroy($id)
     {
         $ticket = ticket::find($id);
         $ticket->delete();
-
-        return redirect()->route('tickets')->with('success', 'El Ticket ha sigut eliminat correctament!');
     }
 }
