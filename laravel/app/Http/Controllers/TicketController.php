@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\ticket;
 use App\Models\LineaTicket;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Mail\EnviarCodigoQR;
+use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
@@ -29,6 +32,31 @@ class TicketController extends Controller
         $ticket->final_price = $data["precio"];
         $ticket->user_name = $data['userName'];
         $ticket->user_email = $data['userEmail'];
+
+        //Generate QR code with Ticket ID, status, and price
+        $qrData = [
+            'Ticket ID' => $ticket->id,
+            'Email' => $ticket->user_email,
+            'Name' => $ticket->user_name,
+            'Price' => $ticket->final_price,
+        ];
+        $jsonQrCode = json_encode($qrData);
+        $qrCode = QrCode::size(300)->generate($jsonQrCode);
+
+        $qrCodeFileName = uniqid() . '.svg';
+
+        try {
+            Storage::disk('qr')->put('/' . $qrCodeFileName, $qrCode);
+
+            $imagePath = 'qrcodes/' . $qrCodeFileName;
+            $ticket->qr = $imagePath;
+
+        } catch (\Exception $e) {
+            \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
+            return response()->json(['error' => 'Error al almacenar el código QR'], 500);
+        }
+
+
         $ticket->save();
 
         ///STORE TICKET_LINE DATA
@@ -44,6 +72,7 @@ class TicketController extends Controller
             $linea->product_type = $compraData['type'];
             $linea->ticket_id = $ticket->id;
             $linea->save();
+
         }
 
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
@@ -59,6 +88,7 @@ class TicketController extends Controller
 
         return response()->json($ticket);
     }
+
 
     public function getLastTicket()
     {

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir', 'Recollit'])->default('Pendent de preparar');
             $table->string('user_name');
             $table->string('user_email');
-            // $table->binary('products');
+            $table->binary('qr')->nullable();
             $table->timestamps();
         });
 

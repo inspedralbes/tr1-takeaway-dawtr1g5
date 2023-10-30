@@ -34,6 +34,11 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'qr' => [
+          'driver' => 'local',
+          'root' => public_path('qrcodes'),
+        ],
+
         'public' => [
             'driver' => 'local',
             // 'root' => storage_path('app/public'),
