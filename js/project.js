@@ -77,9 +77,34 @@ createApp({
             }
             return total;
         },
+        checkout() {
+            const data = {
+                precio: this.totalPrice,
+                compra: this.productesAddToCart,
+                userName: this.userName,
+                userEmail: this.userEmail
+            };
+
+            storeTicket(data)
+                .then(data2 => {
+                    console.log(data2);
+                    this.productesAddToCart = [];
+                    this.activarModal();
+                    this.userName = '';
+                    this.userEmail = '';
+                    this.divActual = "portada"
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        activarModal() {
+            this.activeModal = !this.activeModal;
+        },
         created() {
             getProductes().then(data => {
                 this.productes = data;
             });
         }
-    }).mount('#app');
+    }
+}).mount('#app');
