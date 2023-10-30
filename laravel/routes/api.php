@@ -24,4 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 ///PUBLIC ROUTES
 Route::get('/index', [productsController::class, 'index']);
 Route::post('/ticket', [TicketController::class, 'store']);
+Route::get('/ticket/{id}', [TicketController::class, 'show']);
+Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
 

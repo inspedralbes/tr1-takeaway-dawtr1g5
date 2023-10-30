@@ -24,26 +24,10 @@ Route::get('/ticket', function () {
     return view('tickets.show');
 });
 
-
-
-
-Route::get('/comand', function(){
-    return view('products.comandes');
-});
-
-
-
 Route::get('/', [productsController::class, 'index_all'])->name('products');
 Route::post('/', [productsController::class, 'store'])->name('products');
 Route::get('/products/{id}', [productsController::class, 'show'])->name('products-edit');
 Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');
-
-Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
-
-Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
-
-//COMANDES
-Route::get('/comands', [OrderController::class,'comandes'])->name('comands');
 
 Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
 

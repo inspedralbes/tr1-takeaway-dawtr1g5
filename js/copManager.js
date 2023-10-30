@@ -14,3 +14,9 @@ export function storeTicket(data) {
     })
         .then(response => response.json())
 }
+
+export async function getLastTicket() {
+    const response = await fetch('http://localhost:8000/api/ticketLast');
+    const data = await response.json();
+    return data;
+}

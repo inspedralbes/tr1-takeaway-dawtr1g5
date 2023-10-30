@@ -265,23 +265,13 @@ header {
     margin-left: 1rem;
 }
 
-.goToCheckout {
-    align-self: end;
-    bottom: 0;
+.checkout-btn-container {
+    margin: 10px;
 }
 
-/* .payment-container {
-    display: flex;
-    justify-content: center;
-    height: 30vh;
-    background-color: red;
+.checkout-btn-container button {
+    width: 100%;
 }
-
-.confirm_payment {
-    display: inline-block;
-    text-align: center;
-    width: 90%;
-} */
 
 /* CARRO STYLE ENDS */
 

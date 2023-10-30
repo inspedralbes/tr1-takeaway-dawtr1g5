@@ -20,10 +20,10 @@
     <header>
       <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
         <img class="header__logo" src="img/logoPressidis.PNG" alt="">
-        <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search...">
+        <!-- <div class="search-container">
+          <input v-model="inputValue" type="text" class="search-input" placeholder="Search...">
           <img class="search-icon" src="img/search.png" alt="Search">
-        </div>
+        </div> -->
       </div>
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="checkout-btn-container">
-        <button @click="activarModal()" class="button is-dark goToCheckout">Confirmar?</button>
+        <button @click="activarModal()" class="button is-dark">Confirmar?</button>
       </div>
 
       <div :class="['modal',{'is-active': activeModal}]">
@@ -101,8 +101,20 @@
               <label for="user_name">Nom complet</label>
               <input id="user_name" class="input" v-model="userName" type="text"
                 placeholder="Escriu el teu nom complet...">
-              <label for="user_email">Email</label>
-              <input id="user_email" class="input" v-model="userEmail" type="email" placeholder="exemple@exemple.cat">
+
+              <div class="field">
+                <label for="user_email">Email</label>
+                <div class="control">
+                  <input id="user_email" class="input" v-model="userEmail" type="email"
+                    placeholder="exemple@exemple.cat">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
             </div>
 
           </section>
@@ -120,7 +132,12 @@
     </div>
 
     <!-- CHECKOUT -->
-    <div v-if="mostrar('checkout')"></div>
+    <div v-if="mostrar('checkout')">
+      <h1>Gràcies per la compra, {{ticket.user_name}}</h1>
+      <h2>El teu id de compra es:</h2>
+      <h3>{{ticket.id}}</h3>
+      <button @click="cambiarDiv('portada')" class="button is-dark">Tornar a l'inici</button>
+    </div>
 
     <!-- <div class="container-footer"> -->
     <div v-if="divActual!='portada'" class="container-footer">

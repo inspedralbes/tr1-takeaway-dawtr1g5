@@ -22,6 +22,7 @@ class TicketController extends Controller
     {
         ///GET POST REQUEST DATA
         $data = $request->all();
+
         ///STORE TICKET DATA
         $ticket = new Ticket;
         $ticket->final_price = $data["precio"];
@@ -58,6 +59,17 @@ class TicketController extends Controller
         return response()->json($ticket);
     }
 
+    public function getLastTicket()
+    {
+        $ticket = DB::table('tickets')
+            ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+            ->select('tickets.*', 'linea_tickets.*')
+            ->latest('tickets.id') // Ordenar por el campo id de forma descendente
+            ->first();
+
+        return response()->json($ticket);
+    }
+
     public function showWeb($id)
     {
         $ticket = DB::table('tickets')
@@ -66,7 +78,7 @@ class TicketController extends Controller
             ->where('tickets.id', '=', $id)
             ->get();
 
-        dd($ticket);
+        // dd($ticket);
 
         return view('tickets.show', ['ticket' => $ticket]);
     }

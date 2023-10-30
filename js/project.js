@@ -1,21 +1,23 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import { getProductes } from './copManager.js';
 import { storeTicket } from './copManager.js';
+import { getLastTicket } from './copManager.js';
 
 createApp({
     data() {
         return {
             productes: [],
+            productesFiltered: [],
             divActual: 'portada',
             search: '',
             productesAddToCart: [],
             shoppingCartCount: 0,
-            // totalPrice: 0,
             totalPrice: 0,
             userName: '',
             userEmail: '',
             activeModal: false,
-
+            inputValue: null,
+            ticket: [],
         };
     },
     computed: {
@@ -80,26 +82,32 @@ createApp({
             }
             return total;
         },
-        checkout() {
-            const data = {
-                precio: this.totalPrice,
-                compra: this.productesAddToCart,
-                userName: this.userName,
-                userEmail: this.userEmail
-            };
+        async checkout() {
+            try {
+                const data = {
+                    precio: this.totalPrice,
+                    compra: this.productesAddToCart,
+                    userName: this.userName,
+                    userEmail: this.userEmail
+                };
 
-            storeTicket(data)
-                .then(data2 => {
-                    console.log(data2);
-                    this.productesAddToCart = [];
-                    this.activarModal();
-                    this.userName = '';
-                    this.userEmail = '';
-                    this.divActual = "portada"
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                const data2 = await storeTicket(data);
+
+                console.log(data2);
+
+                this.productesAddToCart = [];
+                this.activarModal();
+                this.userName = '';
+                this.userEmail = '';
+
+                const lastTicketData = await getLastTicket();
+                this.ticket = lastTicketData;
+                console.log(this.ticket);
+
+                this.divActual = "checkout";
+            } catch (error) {
+                console.error('Error:', error);
+            }
         },
         activarModal() {
             this.activeModal = !this.activeModal;
