@@ -28,7 +28,6 @@ class productsController extends Controller
             ->get();
 
         return response()->json($products);
-        
     }
 
     public function index_all()
