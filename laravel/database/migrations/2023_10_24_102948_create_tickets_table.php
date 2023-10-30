@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,7 +14,7 @@ return new class extends Migration {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->decimal('final_price', 10, 2);
-            $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir'])->default('Pendent de preparar');
+            $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir', 'Recollit'])->default('Pendent de preparar');
             $table->string('user_name');
             $table->string('user_email');
             // $table->binary('products');
