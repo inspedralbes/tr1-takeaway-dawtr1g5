@@ -50,4 +50,3 @@ Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('p
 Route::post('/', [TicketController::class, 'store'])->name('tickets');
 Route::get('/tickets', [TicketController::class, 'index_all'])->name('tickets');
 Route::get('/ticket/{id}', [TicketController::class, 'showWeb'])->name('tickets-update');
-

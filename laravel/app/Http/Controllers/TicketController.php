@@ -8,6 +8,7 @@ use App\Models\LineaTicket;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Mail\EnviarCodigoQR;
+use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
@@ -55,17 +56,21 @@ class TicketController extends Controller
           'Price' => $ticket->final_price,
       ];
 
-      // Generar el QR y guardarlo
       $qrCode = QrCode::size(300)->generate(json_encode($qrData));
 
-      // Ruta donde se guarda el QR
       $qrCodeFolderPath = 'public/qrcodes';
 
-      // Nombre de archivo único para el QR
       $qrCodeFileName = uniqid() . '.png';
 
-      // Guardar el QR en la carpeta
-      Storage::disk('local')->put($qrCodeFolderPath . '/' . $qrCodeFileName, $qrCode);
+      try {
+        Storage::disk('local')->put($qrCodeFolderPath . '/' . $qrCodeFileName, $qrCode);
+    } catch (\Exception $e) {
+        // Registra el error para fines de depuración
+        \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
+        // Maneja el error de manera adecuada o devuelve una respuesta de error.
+        return response()->json(['error' => 'Error al almacenar el código QR'], 500);
+    }    
+      
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
     }
 
