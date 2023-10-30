@@ -20,32 +20,50 @@
     <header>
       <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
         <img class="header__logo" src="img/logoPressidis.PNG" alt="">
-        <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search...">
+        <!-- <div class="search-container">
+          <input v-model="inputValue" type="text" class="search-input" placeholder="Search...">
           <img class="search-icon" src="img/search.png" alt="Search">
-        </div>
+        </div> -->
       </div>
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
       </div>
+      <div class="header-landing" v-else-if="mostrar('portada')">
+        <img class="landing-logo" src="img/presidis.png" alt="">
+        <button class="button-footer">
+          <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="6" r="4" stroke-width="1" />
+            <path
+              d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+              stroke-width="1" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
     </header>
     <!-- PORTADA -->
-    <div v-if="mostrar('portada')"></div>
+    <div class="landing-page" v-if="mostrar('portada')">
+      <div class="landing-container">
+        <input class="input" type="text" placeholder="Escriu el ID de la teva comanda...">
+        <img :src="'./laravel/public/img/Random-access-memories.jpg' " alt="">
+        <button @click="cambiarDiv('tienda')" class="button">Ir a la tienda</button>
+      </div>
+    </div>
 
     <!-- TIENDA -->
     <div v-if="mostrar('tienda')" class="tienda">
       <div v-for="(actual,index) in productes" :key="index" class="product-container">
         <div class="cd-image-container">
-          <img :src="'./laravel/public/' + actual.image" alt="" />
+          <img :src="'./laravel/public/' + actual.image" alt="">
           <p class="cd-price">€ {{actual.price}}</p>
           <div :class="['in-cart',{'bought': findByIndex(productesAddToCart,index)!== -1}]">
-            <img src="img/shopping-cart-filled.png" alt="" />
+            <img src="img/shopping-cart-filled.png" alt="">
           </div>
         </div>
         <p class="cd-name">{{actual.name}}</p>
         <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
         <button @click="agregarAlCarro(index)" class="add-to-cart-container">
-          <img class="add-to-cart-img" src="img/cart.jpg" alt="" />
+          <img class="add-to-cart-img" src="img/cart.jpg" alt="">
         </button>
       </div>
     </div>
@@ -83,8 +101,20 @@
               <label for="user_name">Nom complet</label>
               <input id="user_name" class="input" v-model="userName" type="text"
                 placeholder="Escriu el teu nom complet...">
-              <label for="user_email">Email</label>
-              <input id="user_email" class="input" v-model="userEmail" type="email" placeholder="exemple@exemple.cat">
+
+              <div class="field">
+                <label for="user_email">Email</label>
+                <div class="control">
+                  <input id="user_email" class="input" v-model="userEmail" type="email"
+                    placeholder="exemple@exemple.cat">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
             </div>
 
           </section>
@@ -95,7 +125,10 @@
         </div>
       </div>
 
-      <div class="payment-container"></div>
+
+      <div class="payment-container">
+
+      </div>
     </div>
 
     <!-- CHECKOUT -->
