@@ -60,6 +60,17 @@ class TicketController extends Controller
         return response()->json($ticket);
     }
 
+    public function getLastTicket()
+    {
+        $ticket = DB::table('tickets')
+            ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+            ->select('tickets.*', 'linea_tickets.*')
+            ->latest('tickets.id')
+            ->first();
+
+        return response()->json($ticket);
+    }
+
     public function show($id)
     {
         $ticket = DB::table('tickets')
@@ -68,9 +79,6 @@ class TicketController extends Controller
             ->where('tickets.id', '=', $id)
             ->get();
         $linea_ticket = LineaTicket::all();
-
-        // dd($ticket);
-        // dd($linea_ticket);
 
         return view('tickets.show', ['tickets' => $ticket, 'linea_ticket' => $linea_ticket]);
     }
