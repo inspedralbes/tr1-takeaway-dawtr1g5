@@ -101,10 +101,10 @@ createApp({
         activarModal() {
             this.activeModal = !this.activeModal;
         },
-        created() {
-            getProductes().then(data => {
-                this.productes = data;
-            });
-        }
+    },
+    created() {
+        getProductes().then(data => {
+            this.productes = data;
+        });
     }
 }).mount('#app');
