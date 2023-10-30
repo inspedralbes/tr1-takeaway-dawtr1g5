@@ -49,6 +49,17 @@ class TicketController extends Controller
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
     }
 
+    public function showOne_Ticket($id)
+    {
+        $ticket = DB::table('tickets')
+            ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+            ->select('tickets.*', 'linea_tickets.*')
+            ->where('tickets.id', '=', $id)
+            ->get();
+
+        return response()->json($ticket);
+    }
+
     public function show($id)
     {
         $ticket = DB::table('tickets')
