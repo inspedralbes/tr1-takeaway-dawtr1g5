@@ -44,8 +44,6 @@ class TicketController extends Controller
             $linea->save();
         }
 
-
-
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
     }
 

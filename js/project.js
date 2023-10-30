@@ -6,7 +6,7 @@ createApp({
     data() {
         return {
             productes: [],
-            divActual: 'tienda',
+            divActual: 'portada',
             search: '',
             productesAddToCart: [],
             shoppingCartCount: 0,
@@ -69,6 +69,9 @@ createApp({
         },
         deleteProduct(array, index) {
             array.splice(index, 1);
+            if (this.productesAddToCart.length === 0) {
+                this.divActual = 'tienda';
+            }
         },
         calcularTotalCarrito() {
             let total = 0;

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>PreSidis</title>
+  <script src="https://ssense.github.io/vue-carousel/js/vue-carousel.min.js"></script>
   <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="css/newCSS.css">
@@ -27,9 +28,27 @@
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
       </div>
+      <div class="header-landing" v-else-if="mostrar('portada')">
+        <img class="landing-logo" src="img/presidis.png" alt="">
+        <button class="button-footer">
+          <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="6" r="4" stroke-width="1" />
+            <path
+              d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+              stroke-width="1" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
     </header>
     <!-- PORTADA -->
-    <div v-if="mostrar('portada')"></div>
+    <div class="landing-page" v-if="mostrar('portada')">
+      <div class="landing-container">
+        <input class="input" type="text" placeholder="Escriu el ID de la teva comanda...">
+        <img :src="'./laravel/public/img/Random-access-memories.jpg' " alt="">
+        <button @click="cambiarDiv('tienda')" class="button">Ir a la tienda</button>
+      </div>
+    </div>
 
     <!-- TIENDA -->
     <div v-if="mostrar('tienda')" class="tienda">
@@ -103,7 +122,8 @@
     <!-- CHECKOUT -->
     <div v-if="mostrar('checkout')"></div>
 
-    <div class="container-footer">
+    <!-- <div class="container-footer"> -->
+    <div v-if="divActual!='portada'" class="container-footer">
       <footer>
         <div class="button-container">
           <button :class="['button-footer',{'clicked': mostrar('portada')}]" @click="cambiarDiv('portada')">
@@ -157,7 +177,7 @@
                 d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7"
                 stroke-width="1" stroke-linecap="round" />
             </svg>
-            <div class="bubble">{{calcularTotalCarrito()}}</div>
+            <div v-if="productesAddToCart.length!=0" class="bubble">{{calcularTotalCarrito()}}</div>
           </button>
         </div>
       </footer>
