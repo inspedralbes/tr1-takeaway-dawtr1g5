@@ -36,6 +36,7 @@ createApp({
         });
     },
     methods: {
+
         mostrar(div) {
             return this.navegacion.divActual == div;
         },
