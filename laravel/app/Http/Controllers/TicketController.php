@@ -74,7 +74,6 @@ class TicketController extends Controller
             $linea->product_type = $compraData['type'];
             $linea->ticket_id = $ticket->id;
             $linea->save();
-
         }
 
         // Mail::to($ticket->user_email)->send(new confirmCompra());
