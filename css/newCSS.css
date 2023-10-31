@@ -1,6 +1,6 @@
 :root {
     --main-bg-color: black;
-    --icon-color: rgb(255, 174, 0);
+    --icon-color: #ffae00;
 
 }
 
@@ -47,7 +47,35 @@ img {
     margin: 10px;
 }
 
+.search-order {
+    color: black !important;
+}
+
 /* LANDING PAGE ENDS */
+
+/* CHECK ORDER STYLE STARTS */
+.check-order svg {
+    /* width: 40px; */
+    height: 300px;
+}
+
+.pendent-preparar {
+    color: #ff0800;
+}
+
+.preparacio {
+    color: var(--icon-color);
+}
+
+.preparat {
+    color: #00ff6a;
+}
+
+.recollit {
+    color: #33ff00;
+}
+
+/* CHECK ORDER STYLE ENDS */
 
 /* HEADER STYLE STARTS */
 header {
@@ -274,6 +302,37 @@ header {
 }
 
 /* CARRO STYLE ENDS */
+
+/* CHECKOUT STYLE STARTS */
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10%;
+}
+
+.checkout-container .checkout-id {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.checkout-container p>span {
+    font-weight: bold;
+}
+
+
+.checkout-container img {
+    width: 50%;
+    margin: auto;
+}
+
+.checkout-container button {
+    margin: 5%;
+}
+
+/* CHECKOUT STYLE ENDS */
 
 /* FOOTER STYLE STARTS */
 .container-footer {

@@ -2,6 +2,7 @@ import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import { getProductes } from './copManager.js';
 import { storeTicket } from './copManager.js';
 import { getLastTicket } from './copManager.js';
+import { getTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -17,6 +18,7 @@ createApp({
             userEmail: '',
             activeModal: false,
             inputValue: null,
+            ticketInput: '',
             ticket: [],
         };
     },
@@ -111,6 +113,15 @@ createApp({
         activarModal() {
             this.activeModal = !this.activeModal;
         },
+        buscarTicket() {
+            getTicket(this.ticketInput)
+                .then(data => {
+                    this.ticket = data;
+                })
+                .then(() => {
+                    this.divActual = 'check-order';
+                });
+        }
     },
     created() {
         getProductes().then(data => {
