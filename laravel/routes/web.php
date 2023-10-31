@@ -22,14 +22,6 @@ Route::get('/tickets', function () {
     return view('tickets.index');
 });
 
-Route::get('/app', function () {
-    return view('app');
-});
-
-// Route::get('/comand', function(){
-//     return view('products.comandes');
-// });
-
 
 //PRODUCTS
 Route::get('/', [productsController::class, 'index_all'])->name('products');
