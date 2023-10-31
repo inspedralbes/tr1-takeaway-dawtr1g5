@@ -9,21 +9,26 @@ createApp({
             productes: [],
             productesFiltered: [],
             divActual: 'portada',
-            search: '',
             productesAddToCart: [],
             shoppingCartCount: 0,
             totalPrice: 0,
             userName: '',
             userEmail: '',
             activeModal: false,
-            inputValue: null,
+            inputValue: '',
             ticket: [],
         };
     },
-    computed: {
-
-    },
+    // computed: {
+    //     productesFiltered() {
+    //         return this.productes.filter((product) =>
+    //             product.name.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+    //             product.artist.toLowerCase().includes(this.inputValue.toLowerCase())
+    //         );
+    //     }
+    // },
     methods: {
+
         mostrar(div) {
             return this.divActual == div;
         },
