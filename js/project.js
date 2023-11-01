@@ -36,19 +36,26 @@ createApp({
         cambiarDiv(div) {
             this.navegacion.divActual = div;
         },
+        findByID(array, id) {
+            if (typeof array[id] !== 'undefined') {
+                return this.tienda.productes.findIndex(productes => productes.id === array[id].id);
+            } else {
+                return -1;
+            }
+        },
         findByIndex(array, id) {
             return this.tienda.productes.findIndex(productes => productes.id === array[id].id);
         },
         agregarAlCarro(id) {
-            let ogIndex = this.findByIndex(this.filterProducts, id);
+            let ogIndex = this.findByID(this.filterProducts, id);
 
             if (this.tienda.productes[ogIndex].count >= 1) {
                 let elementosRepetidos = this.repeatedProduct(ogIndex);
                 if (elementosRepetidos.length === 0) {
                     this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.productes[ogIndex] }]);
                 } else {
-                    let index = this.findByIndex(this.carrito.productesAddToCart, ogIndex);
-                    this.carrito.productesAddToCart[index].count += this.tienda.productes[index].count;
+                    let index = this.findByIndex(this.carrito.productesAddToCart, index);
+                    this.carrito.productesAddToCart[index].count++;
                 }
                 this.tienda.productes[ogIndex].count = 1;
             }
