@@ -7,41 +7,50 @@ import { getTicket } from './copManager.js';
 createApp({
     data() {
         return {
-            productes: [],
-            productesFiltered: [],
-            divActual: 'portada',
-            search: '',
-            productesAddToCart: [],
-            shoppingCartCount: 0,
-            totalPrice: 0,
-            userName: '',
-            userEmail: '',
-            activeModal: false,
-            inputValue: null,
-            ticketInput: '',
-            ticket: [],
+            navegacion: {
+                divActual: 'tienda',
+                activeModal: false,
+                inputValue: null,
+            },
+            tienda: {
+                productes: [],
+            },
+            carrito: {
+                productesAddToCart: [],
+                totalPrice: 0,
+            },
+            usuario: {
+                userName: '',
+                userEmail: '',
+            },
+            ticket: {
+                ticketInput: '',
+                ticket: [],
+            }
         };
-    },
-    computed: {
-
     },
     methods: {
         mostrar(div) {
-            return this.divActual == div;
+            return this.navegacion.divActual == div;
         },
         cambiarDiv(div) {
-            this.divActual = div;
+            this.navegacion.divActual = div;
+        },
+        findByIndex(array, id) {
+            return this.tienda.productes.findIndex(productes => productes.id === array[id].id);
         },
         agregarAlCarro(id) {
-            if (this.productes[id].count >= 1) {
-                let elementosRepetidos = this.repeatedProduct(id);
+            let ogIndex = this.findByIndex(this.filterProducts, id);
+
+            if (this.tienda.productes[ogIndex].count >= 1) {
+                let elementosRepetidos = this.repeatedProduct(ogIndex);
                 if (elementosRepetidos.length === 0) {
-                    this.productesAddToCart = ([...this.productesAddToCart, { ...this.productes[id] }]);
+                    this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.productes[ogIndex] }]);
                 } else {
-                    let index = this.findByIndex(this.productesAddToCart, id);
-                    this.productesAddToCart[index].count += this.productes[id].count;
+                    let index = this.findByIndex(this.carrito.productesAddToCart, ogIndex);
+                    this.carrito.productesAddToCart[index].count += this.tienda.productes[index].count;
                 }
-                this.productes[id].count = 1;
+                this.tienda.productes[ogIndex].count = 1;
             }
         },
         addCountProduct(array, index) {
@@ -52,80 +61,94 @@ createApp({
                 array[index].count--;
             }
         },
-        findByIndex(array, id) {
-            return array.findIndex(product => product.id === this.productes[id].id);
-        },
         repeatedProduct(id) {
-            return this.productesAddToCart.filter(product => product.id === this.productes[id].id)
+            return this.carrito.productesAddToCart.filter(product => product.id === this.tienda.productes[id].id)
         },
         calcularPriceTotal() {
-            this.totalPrice = 0;
-            for (let i = 0; i < this.productesAddToCart.length; i++) {
-                this.totalPrice += this.productesAddToCart[i].price * this.productesAddToCart[i].count;
+            this.carrito.totalPrice = 0;
+            for (let i = 0; i < this.carrito.productesAddToCart.length; i++) {
+                this.carrito.totalPrice += this.carrito.productesAddToCart[i].price * this.carrito.productesAddToCart[i].count;
             }
-            this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
-            return this.totalPrice;
+            this.carrito.totalPrice = (Math.round(this.carrito.totalPrice * 100) / 100).toFixed(2);
+            return this.carrito.totalPrice;
         },
         calcularPriceProduct(id) {
             let total = 0;
-            total = this.productesAddToCart[id].price * this.productesAddToCart[id].count;
+            total = this.carrito.productesAddToCart[id].price * this.carrito.productesAddToCart[id].count;
             return total;
         },
         deleteProduct(array, index) {
             array.splice(index, 1);
-            if (this.productesAddToCart.length === 0) {
-                this.divActual = 'tienda';
+            if (this.carrito.productesAddToCart.length === 0) {
+                this.navegacion.divActual = 'tienda';
             }
         },
         calcularTotalCarrito() {
             let total = 0;
-            for (let i = 0; i < this.productesAddToCart.length; i++) {
-                total += this.productesAddToCart[i].count;
+            for (let i = 0; i < this.carrito.productesAddToCart.length; i++) {
+                total += this.carrito.productesAddToCart[i].count;
             }
             return total;
         },
         async checkout() {
             try {
                 const data = {
-                    precio: this.totalPrice,
-                    compra: this.productesAddToCart,
-                    userName: this.userName,
-                    userEmail: this.userEmail
+                    precio: this.carrito.totalPrice,
+                    compra: this.carrito.productesAddToCart,
+                    userName: this.usuario.userName,
+                    userEmail: this.usuario.userEmail
                 };
 
                 const data2 = await storeTicket(data);
 
                 console.log(data2);
 
-                this.productesAddToCart = [];
+                this.carrito.productesAddToCart = [];
                 this.activarModal();
-                this.userName = '';
-                this.userEmail = '';
+                this.usuario.userName = '';
+                this.usuario.userEmail = '';
 
                 const lastTicketData = await getLastTicket();
-                this.ticket = lastTicketData;
+                this.ticket.ticket = lastTicketData;
 
-                this.divActual = "checkout";
+                this.navegacion.divActual = "checkout";
             } catch (error) {
                 console.error('Error:', error);
             }
         },
         activarModal() {
-            this.activeModal = !this.activeModal;
+            if (this.navegacion.activeModal == false) {
+                this.navegacion.activeModal = true;
+            } else {
+                this.navegacion.activeModal = false;
+            }
         },
         buscarTicket() {
-            getTicket(this.ticketInput)
+            getTicket(this.ticket.ticketInput)
                 .then(data => {
-                    this.ticket = data;
+                    this.ticket.ticket = data;
                 })
                 .then(() => {
-                    this.divActual = 'check-order';
+                    this.navegacion.divActual = 'check-order';
                 });
+        }
+    },
+    computed: {
+        filterProducts() {
+            if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
+                return this.tienda.productes;
+            } else {
+                const input = this.navegacion.inputValue.toLowerCase();
+                return this.tienda.productes.filter(product =>
+                    product.name.toLowerCase().includes(input)
+                    || product.artist.toLowerCase().includes(input)
+                );
+            }
         }
     },
     created() {
         getProductes().then(data => {
-            this.productes = data;
+            this.tienda.productes = data;
         });
-    }
+    },
 }).mount('#app');

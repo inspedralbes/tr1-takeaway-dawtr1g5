@@ -19,10 +19,10 @@
     <header>
       <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
         <img class="header__logo" src="img/logoPressidis.PNG" alt="">
-        <!-- <div class="search-container">
-          <input v-model="inputValue" type="text" class="search-input" placeholder="Search...">
+        <div class="search-container">
+          <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Search...">
           <img class="search-icon" src="img/search.png" alt="Search">
-        </div> -->
+        </div>
       </div>
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
@@ -45,7 +45,8 @@
     <div class="landing-page" v-if="mostrar('portada')">
       <div class="landing-container">
         <form @submit.prevent="buscarTicket">
-          <input class="input" v-model="ticketInput" type="text" placeholder="Escriu el ID de la teva comanda...">
+          <input class="input" v-model="ticket.ticketInput" type="text"
+            placeholder="Escriu el ID de la teva comanda...">
           <button @click="buscarTicket" class="button-footer search-order">
             <svg width="50x" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
               stroke="currentColor">
@@ -63,13 +64,13 @@
 
     <!-- TIENDA -->
     <div v-if="mostrar('tienda')" class="tienda">
-      <div v-for="(actual,index) in productes" :key="index" class="product-container">
+      <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
         <div class="cd-image-container">
           <img :src="'./laravel/public/' + actual.image" alt="">
           <p class="cd-price">€ {{actual.price}}</p>
-          <div :class="['in-cart',{'bought': findByIndex(productesAddToCart,index)!== -1}]">
+          <!-- <div :class="['in-cart',{'bought': findByIndex(carrito.productesAddToCart,index)!== -1}]">
             <img src="img/shopping-cart-filled.png" alt="">
-          </div>
+          </div> -->
         </div>
         <p class="cd-name">{{actual.name}}</p>
         <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
@@ -81,17 +82,17 @@
 
     <!-- CARRO -->
     <div class="allCart-container" v-if="mostrar('carro')">
-      <div v-for="(actual,index) in productesAddToCart" class="carro product-container">
+      <div v-for="(actual,index) in carrito.productesAddToCart" class="carro product-container">
         <img :src="'./laravel/public/' + actual.image" alt="" class="carro cd-image">
         <div class="carro carro-info">
           <p class="carro cd-name">{{actual.name}}</p>
           <p class="carro cd-info">{{actual.artist}} ({{actual.year}})</p>
           <div class="carro carro-btns">
-            <button @click="substractCountProduct(productesAddToCart,index)">-</button>
+            <button @click="substractCountProduct(carrito.productesAddToCart,index)">-</button>
             <input type="text" :placeholder="actual.count" disabled>
-            <button @click="addCountProduct(productesAddToCart,index)">+</button>
+            <button @click="addCountProduct(carrito.productesAddToCart,index)">+</button>
             <p class="carro total-price">€{{calcularPriceProduct(index)}}</p>
-            <button class="deleteCart" @click="deleteProduct(productesAddToCart,index)">Delete</button>
+            <button class="deleteCart" @click="deleteProduct(carrito.productesAddToCart,index)">Delete</button>
           </div>
         </div>
       </div>
@@ -99,7 +100,7 @@
         <button @click="activarModal()" class="button is-black">Confirmar?</button>
       </div>
 
-      <div :class="['modal',{'is-active': activeModal}]">
+      <div :class="['modal',{'is-active': navegacion.activeModal}]">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -110,13 +111,13 @@
 
             <div class="confirm_payment">
               <label for="user_name">Nom complet</label>
-              <input id="user_name" class="input" v-model="userName" type="text"
+              <input id="user_name" class="input" v-model="usuario.userName" type="text"
                 placeholder="Escriu el teu nom complet...">
 
               <div class="field">
                 <label for="user_email">Email</label>
                 <div class="control">
-                  <input id="user_email" class="input" v-model="userEmail" type="email"
+                  <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
                     placeholder="exemple@exemple.cat">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
@@ -139,10 +140,10 @@
     <!-- CHECKOUT -->
     <div v-if="mostrar('checkout')" class="checkout">
       <div class="checkout-container">
-        <p class="checkout-gracies">Gràcies per la teva compra, <span>{{ticket.user_name}}</span></p>
+        <p class="checkout-gracies">Gràcies per la teva compra, <span>{{ticket.ticket.user_name}}</span></p>
         <p class="">El teu id de recollida es:</p>
-        <h1 class="checkout-id">{{ticket.id}}</h1>
-        <img class="checkout-qr" :src="'./laravel/public/' + ticket.qr" alt="">
+        <h1 class="checkout-id">{{ticket.ticket.id}}</h1>
+        <img class="checkout-qr" :src="'./laravel/public/' + ticket.ticket.qr" alt="">
         <button @click="cambiarDiv('portada')" class="button is-black">Tornar a l'inici</button>
       </div>
     </div>
@@ -150,11 +151,11 @@
     <!-- CHECK ORDER -->
     <div v-if="mostrar('check-order')" class="check-order">
       <div class="checkout-container">
-        <p class="checkout-gracies">Gràcies per la teva compra, <span>{{ticket[0].user_name}}</span></p>
+        <p class="checkout-gracies">Gràcies per la teva compra, <span>{{ticket.ticket.user_name}}</span></p>
         <p class="">El teu id de recollida es:</p>
-        <h1 class="checkout-id">{{ticket[0].id}}</h1>
+        <h1 class="checkout-id">{{ticket.ticket.id}}</h1>
 
-        <div v-if="ticket[0].estat==='Pendent de preparar'" class="pendent-preparar">
+        <div v-if="ticket.ticket.estat==='Pendent de preparar'" class="pendent-preparar">
           <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 19L17.5 17.5" stroke-width="1" stroke-linecap="round" />
             <path d="M19 5L17.5 6.5" stroke-width="1" stroke-linecap="round" />
@@ -171,7 +172,7 @@
               stroke-width="1" stroke-linecap="round" />
           </svg>
         </div>
-        <div v-else-if="ticket[0].estat==='En preparació'" class="preparacio">
+        <div v-else-if="ticket.ticket.estat==='En preparació'" class="preparacio">
           <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M9 21.5422C4.94289 20.2679 2 16.4776 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 16.4776 19.0571 20.2679 15 21.5422"
@@ -189,7 +190,7 @@
           </svg>
         </div>
 
-        <div v-else-if="ticket[0].estat==='Preparat per recollir'" class="preparat">
+        <div v-else-if="ticket.ticket.estat==='Preparat per recollir'" class="preparat">
           <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 19L17.5 17.5" stroke-width="1" stroke-linecap="round" />
             <path d="M19 5L17.5 6.5" stroke-width="1" stroke-linecap="round" />
@@ -207,7 +208,7 @@
           </svg>
         </div>
 
-        <div v-else-if="ticket[0].estat==='Recollit'" class="recollit">
+        <div v-else-if="ticket.ticket.estat==='Recollit'" class="recollit">
           <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 14H3" stroke-width="1" stroke-linecap="round" />
             <path d="M8 18H3" stroke-width="1" stroke-linecap="round" />
@@ -218,7 +219,7 @@
             <path d="M13 10L6.82353 10M3 10H4.32353" stroke-width="1" stroke-linecap="round" />
           </svg>
         </div>
-        <p>{{ticket[0].estat}}</p>
+        <p>{{ticket.ticket.estat}}</p>
         <button @click="cambiarDiv('portada')" class="button is-black">Tornar a l'inici</button>
       </div>
     </div>
@@ -265,7 +266,7 @@
           </button>
 
           <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')"
-            :disabled="productesAddToCart.length===0">
+            :disabled="carrito.productesAddToCart.length===0">
             <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -278,7 +279,7 @@
                 d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7"
                 stroke-width="1" stroke-linecap="round" />
             </svg>
-            <div v-if="productesAddToCart.length!=0" class="bubble">{{calcularTotalCarrito()}}</div>
+            <div v-if="carrito.productesAddToCart.length!=0" class="bubble">{{calcularTotalCarrito()}}</div>
           </button>
         </div>
       </footer>
