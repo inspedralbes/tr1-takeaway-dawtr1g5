@@ -44,7 +44,7 @@ createApp({
             }
         },
         findByIndex(array, id) {
-            return this.tienda.productes.findIndex(productes => productes.id === array[id].id);
+            return array.findIndex(product => product.id === this.tienda.productes[id].id);
         },
         agregarAlCarro(id) {
             let ogIndex = this.findByID(this.filterProducts, id);
@@ -54,7 +54,7 @@ createApp({
                 if (elementosRepetidos.length === 0) {
                     this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.productes[ogIndex] }]);
                 } else {
-                    let index = this.findByIndex(this.carrito.productesAddToCart, index);
+                    let index = this.findByIndex(this.carrito.productesAddToCart, id);
                     this.carrito.productesAddToCart[index].count++;
                 }
                 this.tienda.productes[ogIndex].count = 1;
