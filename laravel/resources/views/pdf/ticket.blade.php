@@ -33,7 +33,6 @@
       <th>Preu/Unitat</th>
       <th>Total</th>
     </tr>
-
     @foreach ($lineas as $item)
     <tr>
       <td>{{ $item->product_name }}</td>

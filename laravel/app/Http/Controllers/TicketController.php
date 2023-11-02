@@ -80,7 +80,6 @@ class TicketController extends Controller
       ->where('ticket_id', $ticket->id)
       ->get();
 
-
     $pdf = PDF::loadView('pdf.ticket', compact('ticket', 'lineas'));
 
     $pdffilename = 'ticket_' . $ticket->id . '.pdf';
