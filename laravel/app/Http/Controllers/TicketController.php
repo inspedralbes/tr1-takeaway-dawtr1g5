@@ -76,7 +76,11 @@ class TicketController extends Controller
       $linea->save();
     }
 
-    $pdf = PDF::loadView('pdf.ticket', compact('ticket', 'linea'));
+    $lineas = DB::table('linea_tickets')
+      ->where('ticket_id', $ticket->id)
+      ->get();
+
+    $pdf = PDF::loadView('pdf.ticket', compact('ticket', 'lineas'));
 
     $pdffilename = 'ticket_' . $ticket->id . '.pdf';
 

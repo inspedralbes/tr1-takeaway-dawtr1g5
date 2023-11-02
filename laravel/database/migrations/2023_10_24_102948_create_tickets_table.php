@@ -22,7 +22,6 @@ return new class extends Migration {
 
     });
 
-    // SELECT * FROM tickets JOIN linea_tickets ON linea_tickets.ticket_id = tickets.id WHERE linea_tickets.ticket_id = 1; 
   }
 
   /**
