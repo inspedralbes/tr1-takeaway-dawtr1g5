@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\ticket;
 use App\Models\LineaTicket;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Mail\EnviarCodigoQR;
 use Illuminate\Support\Facades\Storage;
+use app\Mail\confirmCompra;
 
 class TicketController extends Controller
 {
@@ -74,6 +76,8 @@ class TicketController extends Controller
             $linea->save();
 
         }
+
+        // Mail::to($ticket->user_email)->send(new confirmCompra());
 
         return response()->json(['mensaje' => 'Ticket guardado correctamente']);
     }

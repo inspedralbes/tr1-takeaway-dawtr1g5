@@ -184,7 +184,6 @@ header {
 
 .bought {
     opacity: 1;
-    background-color: red;
 }
 
 .cd-image-container:hover>.cd-price {

@@ -8,7 +8,7 @@ createApp({
     data() {
         return {
             navegacion: {
-                divActual: 'tienda',
+                divActual: 'portada',
                 activeModal: false,
                 inputValue: null,
             },
@@ -26,8 +26,14 @@ createApp({
             ticket: {
                 ticketInput: '',
                 ticket: [],
+                checkOrder_Activo: false,
             }
         };
+    },
+    created() {
+        getProductes().then(data => {
+            this.tienda.productes = data;
+        });
     },
     methods: {
         mostrar(div) {
@@ -130,6 +136,11 @@ createApp({
                 this.navegacion.activeModal = false;
             }
         },
+        startBuscarTicket() {
+            this.ticket.checkOrder_Activo = true;
+            this.buscarTicket();
+            this.fetchInterval = setInterval(this.buscarTicket, 10000);
+        },
         buscarTicket() {
             getTicket(this.ticket.ticketInput)
                 .then(data => {
@@ -138,24 +149,40 @@ createApp({
                 .then(() => {
                     this.navegacion.divActual = 'check-order';
                 });
-        }
+        },
+        stopBuscarTicket() {
+            this.ticket.checkOrder_Activo = false;
+            clearInterval(this.fetchInterval);
+        },
     },
     computed: {
         filterProducts() {
+
             if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
                 return this.tienda.productes;
             } else {
-                const input = this.navegacion.inputValue.toLowerCase();
-                return this.tienda.productes.filter(product =>
-                    product.name.toLowerCase().includes(input)
-                    || product.artist.toLowerCase().includes(input)
-                );
+                const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
+                let filteredProducts = this.tienda.productes;
+                for (let i = 0; i < inputs.length; i++) {
+                    let currentInput = inputs[i];
+                    filteredProducts = filteredProducts.filter(product =>
+                        product.name.toLowerCase().includes(currentInput)
+                        || product.artist.toLowerCase().includes(currentInput)
+                    );
+                }
+
+                return filteredProducts;
             }
         }
     },
-    created() {
-        getProductes().then(data => {
-            this.tienda.productes = data;
-        });
-    },
+    watch: {
+        'navegacion.divActual': function (newDivActual) {
+            if (newDivActual !== 'check-order') {
+                this.stopBuscarTicket();
+            } else if (!this.buscarActivo) {
+                this.startBuscarTicket();
+            }
+        },
+    }
+
 }).mount('#app');

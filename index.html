@@ -68,9 +68,9 @@
         <div class="cd-image-container">
           <img :src="'./laravel/public/' + actual.image" alt="">
           <p class="cd-price">€ {{actual.price}}</p>
-          <!-- <div :class="['in-cart',{'bought': findByIndex(carrito.productesAddToCart,index)!== -1}]">
+          <div :class="['in-cart',{'bought': findByIndex(carrito.productesAddToCart,index)!== -1}]">
             <img src="img/shopping-cart-filled.png" alt="">
-          </div> -->
+          </div>
         </div>
         <p class="cd-name">{{actual.name}}</p>
         <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
