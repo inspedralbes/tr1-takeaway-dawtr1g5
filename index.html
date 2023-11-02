@@ -45,19 +45,21 @@
     <!-- PORTADA -->
     <div class="landing-page" v-if="mostrar('portada')">
       <div class="landing-container">
-        <form @submit.prevent="buscarTicket">
-          <input class="input" v-model="ticket.ticketInput" type="text"
-            placeholder="Escriu el ID de la teva comanda...">
-          <button @click="buscarTicket" class="button-footer search-order">
-            <svg width="50x" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              stroke="currentColor">
-              <path d="M18.5 18.5L22 22" stroke-width="1" stroke-linecap="round" />
-              <path
-                d="M6.75 3.27093C8.14732 2.46262 9.76964 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 9.76964 2.46262 8.14732 3.27093 6.75"
-                stroke-width="1" stroke-linecap="round" />
-            </svg>
-          </button>
-        </form>
+        <div class="landing-form">
+          <form @submit.prevent="buscarTicket">
+            <input class="input" v-model="ticket.ticketInput" type="text"
+              placeholder="Escriu el ID de la teva comanda...">
+            <button @click="buscarTicket" class="button-footer search-order">
+              <svg width="50x" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                stroke="currentColor">
+                <path d="M18.5 18.5L22 22" stroke-width="1" stroke-linecap="round" />
+                <path
+                  d="M6.75 3.27093C8.14732 2.46262 9.76964 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 9.76964 2.46262 8.14732 3.27093 6.75"
+                  stroke-width="1" stroke-linecap="round" />
+              </svg>
+            </button>
+          </form>
+        </div>
         <section id="slideshow">
           <div class="entire-content">
             <div class="content-carrousel">
@@ -234,7 +236,7 @@
     </div>
 
     <!-- <div class="container-footer"> -->
-    <div v-if="divActual!='portada'" class="container-footer">
+    <div v-if="navegacion.divActual!='portada'" class="container-footer">
       <footer>
         <div class="button-container">
           <button :class="['button-footer',{'clicked': mostrar('portada')}]" @click="cambiarDiv('portada')">
