@@ -12,6 +12,9 @@ createApp({
                 activeModal: false,
                 inputValue: null,
             },
+            portada: {
+                productosRandom: [],
+            },
             tienda: {
                 productes: [],
             },
@@ -31,9 +34,23 @@ createApp({
         };
     },
     created() {
-        getProductes().then(data => {
-            this.tienda.productes = data;
-        });
+        getProductes()
+            .then(data => {
+                this.tienda.productes = data;
+            })
+            .then(() => {
+                const randomIndices = [];
+                while (randomIndices.length < 10) {
+                    const num = Math.floor(Math.random() * this.tienda.productes.length);
+                    if (!randomIndices.includes(num)) {
+                        randomIndices.push(num);
+                    }
+                }
+
+                for (const index of randomIndices) {
+                    this.portada.productosRandom.push(this.tienda.productes[index]);
+                }
+            });
     },
     methods: {
 

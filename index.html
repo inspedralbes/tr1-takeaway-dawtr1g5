@@ -9,6 +9,7 @@
   <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="css/newCSS.css">
+  <link rel="stylesheet" href="css/carrousel.css">
 </head>
 
 <body>
@@ -57,7 +58,15 @@
             </svg>
           </button>
         </form>
-        <img :src="'./laravel/public/img/Random-access-memories.jpg' " alt="">
+        <section id="slideshow">
+          <div class="entire-content">
+            <div class="content-carrousel">
+              <figure v-for="(actual, index) in portada.productosRandom" class="shadow" :key="index">
+                <img :src="'./laravel/public/' + actual.image" />
+              </figure>
+            </div>
+          </div>
+        </section>
         <button @click="cambiarDiv('tienda')" class="button is-black">Ir a la tienda</button>
       </div>
     </div>
