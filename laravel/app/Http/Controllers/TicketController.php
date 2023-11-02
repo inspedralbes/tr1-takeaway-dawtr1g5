@@ -9,17 +9,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
-use PDF;
 use App\Mail\compraMail;
+use PDF;
 
 class TicketController extends Controller
 {
-  //
+  //MOSTRA TOTS ELS TICKETS EN UN LLISTAT
+
+
   public function index_all()
   {
     $ticket = ticket::all();
 
-    return response()->json($ticket);
+    return view('tickets.index', ['tickets' => $ticket]);
   }
 
 
@@ -32,8 +34,10 @@ class TicketController extends Controller
     $ticket->final_price = $data["precio"];
     $ticket->user_name = $data['userName'];
     $ticket->user_email = $data['userEmail'];
-    $ticket->save();
+
     //Generate QR code with Ticket ID, status, and price
+    $ticket->save();
+
     $qrData = [
       'Ticket ID' => $ticket->id,
       'Email' => $ticket->user_email,
@@ -43,7 +47,7 @@ class TicketController extends Controller
     $jsonQrCode = json_encode($qrData);
     $qrCode = QrCode::size(300)->generate($jsonQrCode);
 
-    $qrCodeFileName = 'ticket_' . $ticket->id . '.svg';
+    $qrCodeFileName = 'ticket_' . $ticket->id . '_qr.svg';
 
     try {
       Storage::disk('qr')->put('/' . $qrCodeFileName, $qrCode);
@@ -56,9 +60,6 @@ class TicketController extends Controller
       \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
       return response()->json(['error' => 'Error al almacenar el código QR'], 500);
     }
-
-
-
 
     ///STORE TICKET_LINE DATA
     $compras = $data['compra'];
@@ -73,7 +74,6 @@ class TicketController extends Controller
       $linea->product_type = $compraData['type'];
       $linea->ticket_id = $ticket->id;
       $linea->save();
-
     }
 
     $pdf = PDF::loadView('pdf.ticket', compact('ticket', 'linea'));
@@ -97,7 +97,7 @@ class TicketController extends Controller
     return response()->json(['mensaje' => 'Ticket guardado correctamente']);
   }
 
-  public function show($id)
+  public function showOne_Ticket($id)
   {
     $ticket = DB::table('tickets')
       ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
@@ -109,25 +109,44 @@ class TicketController extends Controller
   }
 
 
-  public function showWeb($id)
+  public function getLastTicket()
+  {
+    $ticket = DB::table('tickets')
+      ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
+      ->select('tickets.*', 'linea_tickets.*')
+      ->latest('tickets.id')
+      ->first();
+
+    return response()->json($ticket);
+  }
+
+  public function show($id)
   {
     $ticket = DB::table('tickets')
       ->join('linea_tickets', 'linea_tickets.ticket_id', '=', 'tickets.id')
       ->select('tickets.*', 'linea_tickets.*')
       ->where('tickets.id', '=', $id)
       ->get();
+    $linea_ticket = LineaTicket::all();
 
-    dd($ticket);
-
-    return view('tickets.show', ['ticket' => $ticket]);
+    return view('tickets.show', ['tickets' => $ticket, 'linea_ticket' => $linea_ticket]);
   }
-  public function update($id)
+  public function update(Request $request, $id)
   {
+
+    $ticket = ticket::find($id);
+    $ticket->estat = $request->estat;
+
+    $ticket->save();
+
+    return redirect()->route('tickets')->with('success', 'Ticket actualitzat correctament!');
   }
 
   public function destroy($id)
   {
     $ticket = ticket::find($id);
     $ticket->delete();
+
+    return redirect()->route('tickets')->with('success', 'El Ticket ha sigut eliminat correctament!');
   }
 }
