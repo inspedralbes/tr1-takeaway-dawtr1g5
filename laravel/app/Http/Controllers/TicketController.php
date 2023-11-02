@@ -134,3 +134,4 @@ class TicketController extends Controller
         return redirect()->route('tickets')->with('success', 'El Ticket ha sigut eliminat correctament!');
     }
 }
+
