@@ -77,7 +77,7 @@
     <div v-if="mostrar('tienda')" class="tienda">
       <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
         <div class="cd-image-container">
-          <button class="btn-single-product" @click="botonProducte(index + 1)">
+          <button class="btn-single-product" @click="botonProducte(actual.id)">
             <img :src="'./laravel/public/' + actual.image" alt="">
           </button>
           <p class="cd-price">€ {{actual.price}}</p>

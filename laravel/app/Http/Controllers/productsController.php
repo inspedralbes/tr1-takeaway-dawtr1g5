@@ -19,6 +19,7 @@ class productsController extends Controller
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->join('types', 'type_id', '=', 'types.id')
             ->select('products.*', 'genres.genre_name', 'types.type')
+            // ->orderBy('name', 'asc')
             ->get();
 
         return response()->json($products);

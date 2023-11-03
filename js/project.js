@@ -146,7 +146,7 @@ createApp({
 
                 const data2 = await storeTicket(data);
 
-                console.log(data2);
+                // console.log(data2);
 
                 this.carrito.productesAddToCart = [];
                 this.activarModal();
@@ -189,6 +189,7 @@ createApp({
         botonProducte(id) {
             let index = this.findPositionById(this.tienda.productes, id);
             this.tienda.singleProduct = this.tienda.productes[index];
+
             this.navegacion.divActual = 'producte';
         },
         splitTracklist(tracklist) {
