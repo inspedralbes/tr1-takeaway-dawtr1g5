@@ -50,6 +50,11 @@ class productsController extends Controller
         $product->artist = $request->artist;
         $product->year = $request->year;
         $product->price = $request->price;
+        $product->compositores = $request->compositores;
+        $product->productora = $request->productora;
+        $product->reproducciones = $request->reproducciones;
+        $product->duracion = $request->duracion;
+        $product->tracklist = $request->tracklist;
         $product->genre_id = $request->genre;
         $product->type_id = $request->type_id;
         $product->image = null;
@@ -94,6 +99,11 @@ class productsController extends Controller
         $product->artist = $request->artist;
         $product->year = $request->year;
         $product->price = $request->price;
+        $product->compositores = $request->compositores;
+        $product->productora = $request->productora;
+        $product->reproducciones = $request->reproducciones;
+        $product->duracion = $request->duracion;
+        $product->tracklist = $request->tracklist;
         $product->genre_id = $request->genre;
         $product->type_id = $request->type_id;
         // $product->image = null;
