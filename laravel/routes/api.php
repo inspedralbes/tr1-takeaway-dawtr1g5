@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,14 @@ use App\Http\Controllers\TicketController;
 |
 */
 
+// Route::get('register', [UserController::class, 'register']);
+// Route::get('login', [UserController::class, 'login']);
+
+// Route::group(['middleware' => ["auth:sanctum"]], function() {
+//     Route::get('user-profile', [UserController::class, 'userProfile']);
+//     Route::get('logout', [UserController::class, 'logout']);
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -24,6 +33,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 ///PUBLIC ROUTES
 Route::get('/index', [productsController::class, 'index']);
 Route::get('/index/{id}', [productsController::class, 'index_single']);
+//Route::post('/insertar-datos', productsController::class);
+
 Route::post('/ticket', [TicketController::class, 'store']);
-Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
-Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
+// Route::get('/ticket/{id}', [TicketController::class, 'show']);
+// Route::get('/tickets', [TicketController::class, 'index_all']);
+
