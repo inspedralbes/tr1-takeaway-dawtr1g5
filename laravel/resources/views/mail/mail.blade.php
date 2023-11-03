@@ -1,4 +1,5 @@
-<!DOCTYPE html> <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 <body>
 
   <h2>Confirmació comanda</h2>
-  <p>Estimat Sr./ Estimada Sra.:</p>
+  <p>Estimat Sr./ Estimada Sra.: {{$ticket->user_name}}</p>
   <p>Moltes gracies per confiar en nosaltres. A continuació confirmem la compra realitzada</p>
   <h4>Nº de seguiment : {{ $ticket->id }}</h4>
 

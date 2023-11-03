@@ -7,19 +7,19 @@
   <title>Factura </title>
 </head>
 <style>
-table,
-td,
-th {
-  border: 1px solid black;
-}
+  table,
+  td,
+  th {
+    border: 1px solid black;
+  }
 
-h3 {
-  text-align: right;
-}
+  h3 {
+    text-align: right;
+  }
 
-table {
-  width: 100%;
-}
+  table {
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -34,13 +34,15 @@ table {
       <th>Total</th>
     </tr>
 
+    @foreach ($lineas as $item)
     <tr>
-      <th>{{ $linea->product_name }}</th>
-      <th>{{ $linea->product_artist}}</th>
-      <th>{{ $linea->quantity }}</th>
-      <th>{{ $linea->price}}</th>
-      <th>{{ $linea->quantity * $linea->price}}</th>
+      <td>{{ $item->product_name }}</td>
+      <td>{{ $item->product_artist}}</td>
+      <td>{{ $item->quantity }}</td>
+      <td>{{ $item->price}}</td>
+      <td>{{ $item->quantity * $item->price}}</td>
     </tr>
+    @endforeach
   </table>
   <h3>TOTAL(EUR): {{ $ticket->final_price}}</h3>
 
