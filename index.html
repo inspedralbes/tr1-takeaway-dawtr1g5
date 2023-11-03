@@ -75,7 +75,9 @@
     <div v-if="mostrar('tienda')" class="tienda">
       <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
         <div class="cd-image-container">
-          <img :src="'./laravel/public/' + actual.image" alt="">
+          <button class="btn-single-product" @click="botonProducte(index + 1)">
+            <img :src="'./laravel/public/' + actual.image" alt="">
+          </button>
           <p class="cd-price">€ {{actual.price}}</p>
           <div :class="['in-cart',{'bought': findByIndex(carrito.productesAddToCart,index)!== -1}]">
             <img src="img/shopping-cart-filled.png" alt="">
@@ -88,6 +90,88 @@
         </button>
       </div>
     </div>
+
+    <!-- PRODUCTE -->
+    <div v-if="mostrar('producte')">
+      <div v-for="(actual, index) in tienda.singleProduct" :key="index" class="singleProduct-container">
+        <button class="btn-atras" @click="cambiarDiv('tienda'); divInfoActual = ''">
+          <svg class="flecha-producte" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 12H8M8 12L11 9M8 12L11 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path
+              d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+              stroke-width="1" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <div class="img-container">
+          <img :src="'./laravel/public/' + actual.image" alt="" class="img-product">
+          <p class="cd-price-product">€ {{actual.price}}</p>
+        </div>
+
+        <p class="product-name">{{actual.name}}</p>
+        <p class="product-info">{{ actual.artist }} ({{ actual.year }})</p>
+        <p class="product-info">{{ formatDuration(actual.duracion)}}</p>
+        <p class="product-info">{{actual.reproducciones}}M</p>
+        <div class="valoration-container">
+          <div class="rating">
+            <input value="5" name="rate" id="star5" type="radio">
+            <label title="text" for="star5"></label>
+            <input value="4" name="rate" id="star4" type="radio">
+            <label title="text" for="star4"></label>
+            <input value="3" name="rate" id="star3" type="radio" checked="">
+            <label title="text" for="star3"></label>
+            <input value="2" name="rate" id="star2" type="radio">
+            <label title="text" for="star2"></label>
+            <input value="1" name="rate" id="star1" type="radio">
+            <label title="text" for="star1"></label>
+          </div>
+        </div>
+        <div class="add-product-cart">
+          <button @click="agregarAlCarro(actual.id - 1)" class="add-to-cart-product-container">
+            <img class="add-to-cart-product-img" src="img/cart.jpg" alt="">
+          </button>
+        </div>
+
+
+        <hr>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li :class="{ active: tienda.divInfoActual === 'tracklist' }">
+                <a @click="mostrarInfo('tracklist')">Tracklist</a>
+              </li>
+              <li :class="{ active: tienda.divInfoActual === 'productora' }">
+                <a @click="mostrarInfo('productora')">Productora</a>
+              </li>
+              <li :class="{ active: tienda.divInfoActual === 'compositores' }">
+                <a @click="mostrarInfo('compositores')">Compositores</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div v-if="tienda.divInfoActual==='tracklist'">
+          <div class="info-producte">
+            <ul>
+              <li v-for="track in splitTracklist(actual.tracklist)">{{ track }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div v-if="tienda.divInfoActual==='productora'">
+          <p class="product-productora">{{actual.productora}}</p>
+        </div>
+
+        <div v-if="tienda.divInfoActual==='compositores'">
+          <p class="product-compositores">{{actual.compositores}}</p>
+        </div>
+
+      </div>
+    </div>
+
 
     <!-- CARRO -->
     <div class="allCart-container" v-if="mostrar('carro')">

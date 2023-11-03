@@ -1,8 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes } from './copManager.js';
-import { storeTicket } from './copManager.js';
-import { getLastTicket } from './copManager.js';
-import { getTicket } from './copManager.js';
+import { getProductes, storeTicket, getLastTicket, getTicket, getSingleProductes } from './copManager.js';
 
 createApp({
     data() {
@@ -17,6 +14,8 @@ createApp({
             },
             tienda: {
                 productes: [],
+                divInfoActual: '',
+                singleProduct: null,
             },
             carrito: {
                 productesAddToCart: [],
@@ -53,13 +52,18 @@ createApp({
             });
     },
     methods: {
-
-
         mostrar(div) {
             return this.navegacion.divActual == div;
         },
         cambiarDiv(div) {
             this.navegacion.divActual = div;
+        },
+        mostrarInfo(div) {
+            if (this.tienda.divInfoActual === div) {
+                this.tienda.divInfoActual = '';
+            } else {
+                this.tienda.divInfoActual = div;
+            }
         },
         findByID(array, id) {
             if (typeof array[id] !== 'undefined') {
@@ -172,6 +176,41 @@ createApp({
         stopBuscarTicket() {
             this.ticket.checkOrder_Activo = false;
             clearInterval(this.fetchInterval);
+        },
+        botonProducte(id) {
+            getSingleProductes(id)
+                .then(productData => {
+                    this.tienda.singleProduct = { ...productData };
+                    this.navegacion.divActual = 'producte';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        splitTracklist(tracklist) {
+            return tracklist.split('\r\n').map(track => {
+                const parts = track.split('. ');
+                if (parts.length === 2) {
+                    const trackNumber = parts[0];
+                    const trackInfo = parts[1];
+                    return `${trackNumber}. ${trackInfo}`;
+                }
+                return track;
+            });
+        },
+        formatDuration(duracion) {
+            const horas = Math.floor(duracion / 60);
+            const minutos = duracion % 60;
+
+            if (horas > 0) {
+                if (horas == 2) {
+                    return `${horas} horas ${minutos} minutos`;
+                } else {
+                    return `${horas} hora ${minutos} minutos`;
+                }
+            } else {
+                return `${minutos} minutos`;
+            }
         },
     },
     computed: {

@@ -75,6 +75,18 @@ class productsController extends Controller
         return view('products.show', ['product' => $product, 'genres' => $genres, 'type' => $type]);
     }
 
+    public function index_single($id)
+    {
+        $products = DB::table("products")
+            ->where('products.id', '=', $id)
+            ->join('genres', 'genre_id', '=', 'genres.id')
+            ->join('types', 'type_id', '=', 'types.id')
+            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->get();
+
+        return response()->json($products);
+    }
+
     public function update(Request $request, $id)
     {
         $product = products::find($id);
