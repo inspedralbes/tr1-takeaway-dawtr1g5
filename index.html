@@ -114,7 +114,7 @@
         <p class="product-info">{{ actual.artist }} ({{ actual.year }})</p>
         <p class="product-info">{{ formatDuration(actual.duracion)}}</p>
         <p class="product-info">{{actual.reproducciones}}M</p>
-        <div class="valoration-container">
+        <!-- <div class="valoration-container">
           <div class="rating">
             <input value="5" name="rate" id="star5" type="radio">
             <label title="text" for="star5"></label>
@@ -127,7 +127,7 @@
             <input value="1" name="rate" id="star1" type="radio">
             <label title="text" for="star1"></label>
           </div>
-        </div>
+        </div> -->
         <div class="add-product-cart">
           <button @click="agregarAlCarro(actual.id - 1)" class="add-to-cart-product-container">
             <img class="add-to-cart-product-img" src="img/cart.jpg" alt="">
