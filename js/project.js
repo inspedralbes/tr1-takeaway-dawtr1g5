@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes, storeTicket, getLastTicket, getTicket, getSingleProductes } from './copManager.js';
+import { getProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -15,7 +15,7 @@ createApp({
             tienda: {
                 productes: [],
                 divInfoActual: '',
-                singleProduct: null,
+                singleProduct: [],
             },
             carrito: {
                 productesAddToCart: [],
@@ -74,6 +74,14 @@ createApp({
         },
         findByIndex(array, id) {
             return array.findIndex(product => product.id === this.tienda.productes[id].id);
+        },
+        findPositionById(arr, id) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].id === id) {
+                    return i;
+                }
+            }
+            return -1; // Retorna -1 si el ID no fue encontrado
         },
         agregarAlCarro(id) {
             let ogIndex = this.findByID(this.filterProducts, id);
@@ -178,14 +186,9 @@ createApp({
             clearInterval(this.fetchInterval);
         },
         botonProducte(id) {
-            getSingleProductes(id)
-                .then(productData => {
-                    this.tienda.singleProduct = { ...productData };
-                    this.navegacion.divActual = 'producte';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            let index = this.findPositionById(this.tienda.productes, id);
+            this.tienda.singleProduct = this.tienda.productes[index];
+            this.navegacion.divActual = 'producte';
         },
         splitTracklist(tracklist) {
             return tracklist.split('\r\n').map(track => {

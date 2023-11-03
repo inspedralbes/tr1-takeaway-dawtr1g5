@@ -28,9 +28,3 @@ export async function getTicket(index) {
     const data = await response.json();
     return data[0];
 }
-
-export async function getSingleProductes(id) {
-    const response = await fetch(url + '/index/' + id);
-    const data = await response.json();
-    return data;
-}
