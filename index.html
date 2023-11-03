@@ -87,7 +87,7 @@
         </div>
         <p class="cd-name">{{actual.name}}</p>
         <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
-        <button @click="agregarAlCarro(index)" class="add-to-cart-container">
+        <button @click="agregarAlCarro(actual.id)" class="add-to-cart-container">
           <img class="add-to-cart-img" src="img/cart.jpg" alt="">
         </button>
       </div>
@@ -131,8 +131,8 @@
           </div>
         </div> -->
         <div class="add-product-cart">
-          <button @click="agregarAlCarro(tienda.singleProduct.id)" class="add-to-cart-product-container">
-            <img class="add-to-cart-product-img" src="img/cart.jpg" alt="">
+          <button @click="agregarAlCarro(tienda.singleProduct.id)" class="add-to-cart-container">
+            <img class="add-to-cart-img" src="img/cart.jpg" alt="">
           </button>
         </div>
 

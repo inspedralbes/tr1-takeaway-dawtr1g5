@@ -84,7 +84,8 @@ createApp({
             return -1; // Retorna -1 si el ID no fue encontrado
         },
         agregarAlCarro(id) {
-            let ogIndex = this.findByID(this.filterProducts, id);
+            // let ogIndex = this.findByID(this.filterProducts, id);
+            let ogIndex = this.findPositionById(this.filterProducts, id);
 
             if (this.tienda.productes[ogIndex].count >= 1) {
                 let elementosRepetidos = this.repeatedProduct(ogIndex);
