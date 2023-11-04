@@ -74,7 +74,10 @@ createApp({
                     return i;
                 }
             }
-            return -1; // Retorna -1 si el ID no fue encontrado
+            return -1;
+        },
+        esRepetido(id) {
+            return this.carrito.productesAddToCart.some(elemento => elemento.id === id);
         },
         agregarAlCarro(id) {
             let ogIndex = this.findPositionById(id);
