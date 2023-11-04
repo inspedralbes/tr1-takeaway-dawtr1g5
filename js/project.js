@@ -65,28 +65,19 @@ createApp({
                 this.tienda.divInfoActual = div;
             }
         },
-        findByID(array, id) {
-            if (typeof array[id] !== 'undefined') {
-                return this.tienda.productes.findIndex(productes => productes.id === array[id].id);
-            } else {
-                return -1;
-            }
-        },
         findByIndex(array, id) {
             return array.findIndex(product => product.id === this.tienda.productes[id].id);
         },
-        findPositionById(arr, id) {
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].id === id) {
+        findPositionById(id) {
+            for (let i = 0; i < this.tienda.productes.length; i++) {
+                if (this.tienda.productes[i].id === id) {
                     return i;
                 }
             }
             return -1; // Retorna -1 si el ID no fue encontrado
         },
         agregarAlCarro(id) {
-            // let ogIndex = this.findByID(this.filterProducts, id);
-            let ogIndex = this.findPositionById(this.filterProducts, id);
-
+            let ogIndex = this.findPositionById(id);
             if (this.tienda.productes[ogIndex].count >= 1) {
                 let elementosRepetidos = this.repeatedProduct(ogIndex);
                 if (elementosRepetidos.length === 0) {
@@ -187,7 +178,7 @@ createApp({
             clearInterval(this.fetchInterval);
         },
         botonProducte(id) {
-            let index = this.findPositionById(this.tienda.productes, id);
+            let index = this.findPositionById(id);
             this.tienda.singleProduct = this.tienda.productes[index];
 
             this.navegacion.divActual = 'producte';
