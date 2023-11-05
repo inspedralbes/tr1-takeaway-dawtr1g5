@@ -15,13 +15,18 @@
 <body>
 
   <div id="app">
-
     <!--HEADER-->
     <header>
       <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
         <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         <div class="search-container">
           <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Search...">
+          <div class="select is-warning is-rounded">
+            <select v-model="navegacion.tipoBusqueda">
+              <option value=1>Pàgina actual</option>
+              <option value=2>A tota la web</option>
+            </select>
+          </div>
           <img class="search-icon" src="img/search.png" alt="Search">
         </div>
       </div>
@@ -74,7 +79,26 @@
     </div>
 
     <!-- TIENDA -->
-    <div v-if="mostrar('tienda')" class="tienda">
+    <!-- PAGINATION STARTS -->
+    <nav v-if="navegacion.divActual==='tienda'" class="pagination is-centered" role="navigation"
+      aria-label="pagination">
+      <button @click="fetchPrevPage"
+        :class="['pagination-previous',{'is-disabled':navegacion.currentPage===1}]">&lt;</button>
+      <ul class="pagination-list">
+        <li><span v-if="navegacion.currentPage>2" class="pagination-ellipsis">&hellip;</span></li>
+        <li v-for="index in navegacion.lastPage" :key="index">
+          <button @click="fetchData(index)"
+            v-if="index===navegacion.currentPage-1 || index===navegacion.currentPage || index===navegacion.currentPage+1"
+            :class="['pagination-link',{'is-current':navegacion.currentPage===index}]">{{index}}</button>
+        </li>
+        <li><span v-if="navegacion.currentPage<navegacion.lastPage-1" class="pagination-ellipsis">&hellip;</span></li>
+      </ul>
+      <button @click="fetchNextPage"
+        :class="['pagination-next',{'is-disabled':navegacion.currentPage===navegacion.lastPage}]">&gt;</button>
+    </nav>
+    <hr>
+    <!-- PAGINATION ENDS -->
+    <div ref="productsList" v-if="mostrar('tienda')" class="tienda">
       <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
         <div class="cd-image-container">
           <button class="btn-single-product" @click="botonProducte(actual.id)">

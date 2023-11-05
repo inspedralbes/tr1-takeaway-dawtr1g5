@@ -14,14 +14,20 @@ class productsController extends Controller
     //
     public function index()
     {
-
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->join('types', 'type_id', '=', 'types.id')
             ->select('products.*', 'genres.genre_name', 'types.type')
-            // ->orderBy('name', 'asc')
             ->get();
-
+        return response()->json($products);
+    }
+    public function index_paginated()
+    {
+        $products = DB::table("products")
+            ->join('genres', 'genre_id', '=', 'genres.id')
+            ->join('types', 'type_id', '=', 'types.id')
+            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->paginate(10);
         return response()->json($products);
     }
 

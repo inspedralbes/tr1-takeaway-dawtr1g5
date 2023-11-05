@@ -1,7 +1,14 @@
 const url = 'http://localhost:8000/api/';
+// const url = 'http://192.168.0.131:8000/api/';
 
-export async function getProductes() {
+export async function getLandingProductes() {
     const response = await fetch(url + 'index');
+    const data = await response.json();
+    return data;
+}
+
+export async function getProductes(page) {
+    const response = await fetch(`${url}index_pg?page=${page}`);
     const data = await response.json();
     return data;
 }

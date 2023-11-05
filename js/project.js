@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
+import { getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -8,12 +8,16 @@ createApp({
                 divActual: 'portada',
                 activeModal: false,
                 inputValue: null,
+                currentPage: 1,
+                lastPage: '',
+                tipoBusqueda: 1,
             },
             portada: {
                 productosRandom: [],
             },
             tienda: {
                 productes: [],
+                allProductes: [],
                 divInfoActual: '',
                 singleProduct: [],
             },
@@ -33,25 +37,46 @@ createApp({
         };
     },
     created() {
-        getProductes()
-            .then(data => {
-                this.tienda.productes = data;
-            })
-            .then(() => {
-                const randomIndices = [];
-                while (randomIndices.length < 10) {
-                    const num = Math.floor(Math.random() * this.tienda.productes.length);
-                    if (!randomIndices.includes(num)) {
-                        randomIndices.push(num);
-                    }
+        getLandingProductes().then(data => {
+            this.tienda.allProductes = data;
+            const randomIndices = [];
+            while (randomIndices.length < 10) {
+                const num = Math.floor(Math.random() * data.length);
+                if (!randomIndices.includes(num)) {
+                    randomIndices.push(num);
                 }
+            }
 
-                for (const index of randomIndices) {
-                    this.portada.productosRandom.push(this.tienda.productes[index]);
-                }
-            });
+            for (const index of randomIndices) {
+                this.portada.productosRandom.push(data[index]);
+            }
+        });
+        this.fetchData(this.navegacion.currentPage);
+    },
+    mounted() {
+        window.addEventListener('scroll', this.comprobarFinalScroll);
     },
     methods: {
+        async fetchData(page) {
+            await getProductes(page).then(data => {
+                this.tienda.productes = data.data;
+                this.navegacion.currentPage = data.current_page;
+                this.navegacion.lastPage = data.last_page;
+            });
+
+        },
+        fetchNextPage() {
+            if (this.navegacion.currentPage < this.navegacion.lastPage) {
+                const nextPage = this.navegacion.currentPage + 1;
+                this.fetchData(nextPage);
+            }
+        },
+        fetchPrevPage() {
+            if (this.navegacion.currentPage > 1) {
+                const prevPage = this.navegacion.currentPage - 1;
+                this.fetchData(prevPage);
+            }
+        },
         mostrar(div) {
             return this.navegacion.divActual == div;
         },
@@ -210,16 +235,20 @@ createApp({
             } else {
                 return `${minutos} minutos`;
             }
-        },
+        }
     },
     computed: {
         filterProducts() {
-
             if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
                 return this.tienda.productes;
             } else {
+                let filteredProducts;
+                if (this.navegacion.tipoBusqueda === 1) {
+                    filteredProducts = this.tienda.productes;
+                } else {
+                    filteredProducts = this.tienda.allProductes;
+                }
                 const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
-                let filteredProducts = this.tienda.productes;
                 for (let i = 0; i < inputs.length; i++) {
                     let currentInput = inputs[i];
                     filteredProducts = filteredProducts.filter(product =>
@@ -227,7 +256,6 @@ createApp({
                         || product.artist.toLowerCase().includes(currentInput)
                     );
                 }
-
                 return filteredProducts;
             }
         }
