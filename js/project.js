@@ -91,11 +91,11 @@ createApp({
             }
         },
         findByIndex(array, id) {
-            return array.findIndex(product => product.id === this.tienda.productes[id].id);
+            return array.findIndex(product => product.id === this.tienda.allProductes[id].id);
         },
         findPositionById(id) {
-            for (let i = 0; i < this.tienda.productes.length; i++) {
-                if (this.tienda.productes[i].id === id) {
+            for (let i = 0; i < this.tienda.allProductes.length; i++) {
+                if (this.tienda.allProductes[i].id === id) {
                     return i;
                 }
             }
@@ -106,15 +106,15 @@ createApp({
         },
         agregarAlCarro(id) {
             let ogIndex = this.findPositionById(id);
-            if (this.tienda.productes[ogIndex].count >= 1) {
+            if (this.tienda.allProductes[ogIndex].count >= 1) {
                 let elementosRepetidos = this.repeatedProduct(ogIndex);
                 if (elementosRepetidos.length === 0) {
-                    this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.productes[ogIndex] }]);
+                    this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.allProductes[ogIndex] }]);
                 } else {
                     let index = this.findByIndex(this.carrito.productesAddToCart, id);
                     this.carrito.productesAddToCart[index].count++;
                 }
-                this.tienda.productes[ogIndex].count = 1;
+                this.tienda.allProductes[ogIndex].count = 1;
             }
         },
         addCountProduct(array, index) {
@@ -126,7 +126,7 @@ createApp({
             }
         },
         repeatedProduct(id) {
-            return this.carrito.productesAddToCart.filter(product => product.id === this.tienda.productes[id].id)
+            return this.carrito.productesAddToCart.filter(product => product.id === this.tienda.allProductes[id].id)
         },
         calcularPriceTotal() {
             this.carrito.totalPrice = 0;
@@ -207,7 +207,7 @@ createApp({
         },
         botonProducte(id) {
             let index = this.findPositionById(id);
-            this.tienda.singleProduct = this.tienda.productes[index];
+            this.tienda.singleProduct = this.tienda.allProductes[index];
 
             this.navegacion.divActual = 'producte';
         },
@@ -242,12 +242,13 @@ createApp({
             if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
                 return this.tienda.productes;
             } else {
-                let filteredProducts;
+                let filteredProducts = [];
                 if (this.navegacion.tipoBusqueda === 1) {
                     filteredProducts = this.tienda.productes;
                 } else {
                     filteredProducts = this.tienda.allProductes;
                 }
+                console.log(filteredProducts);
                 const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
                 for (let i = 0; i < inputs.length; i++) {
                     let currentInput = inputs[i];
