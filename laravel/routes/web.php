@@ -16,16 +16,20 @@ use App\Http\Controllers\TicketController;
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/products', function () {
     return view('products.index');
 });
+
 Route::get('/tickets', function () {
     return view('tickets.index');
 });
 
-
 //PRODUCTS
-Route::get('/', [productsController::class, 'index_all'])->name('products');
-Route::post('/', [productsController::class, 'store'])->name('products');
+Route::get('/products', [productsController::class, 'index_all'])->name('products');
+Route::post('/products', [productsController::class, 'store'])->name('products');
 Route::get('/products/{id}', [productsController::class, 'show'])->name('products-edit');
 Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');
 

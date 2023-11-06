@@ -1,0 +1,157 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.container {
+    width: 80%;
+    /* Ajusta el ancho según tus preferencias */
+    max-width: 400px;
+    /* Ajusta el ancho máximo según tus preferencias */
+    margin: 0 auto;
+    /* Centra horizontalmente */
+    padding: 20px;
+    border: 2px solid #0074d9;
+    /* Estilo del borde */
+    border-radius: 10px;
+    /* Borde redondeado */
+    background-color: #f5f5f5;
+    /* Color de fondo */
+}
+
+h1 {
+    text-align: center;
+    /* Centra el título horizontalmente */
+}
+
+form {
+    text-align: center;
+    /* Centra el formulario horizontalmente */
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+.label {
+    font-weight: bold;
+}
+
+hr {
+    border-bottom: solid 1px black;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #0074d9;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+.create {
+    margin-left: .5rem;
+}
+
+/* Listado */
+
+/* Estilos para la lista de productos */
+ul {
+    list-style-type: none;
+    /* Quita los marcadores de lista */
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    /* Color de fondo de cada elemento de la lista */
+    border-radius: 5px;
+    /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+li:hover {
+    background-color: #0074d9;
+    /* Color de fondo al pasar el ratón */
+    color: white;
+    /* Color de texto al pasar el ratón */
+    transform: scale(1.02);
+    /* Escalar ligeramente en el hover */
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    /* Quita el subrayado de los enlaces */
+    color: inherit;
+    /* Hereda el color del texto del elemento padre */
+}
+
+/* Estilos para el título de la lista de productos */
+h1 {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Estilos para el separador horizontal */
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    /* Línea horizontal gris */
+    margin: 20px 0;
+}
+
+/*table linea_ticket show*/
+
+.linea-detalle {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    margin-bottom: 10px;
+}
+
+.product-item label {
+    font-weight: bold;
+}
+
+.product-item hr {
+    border: 1px solid #ddd;
+}
+
+/* Estilos específicos para pantallas más pequeñas, como dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .linea-detalle {
+        padding: 10px;
+    }
+
+    .label {
+        font-size: 14px;
+    }
+}
