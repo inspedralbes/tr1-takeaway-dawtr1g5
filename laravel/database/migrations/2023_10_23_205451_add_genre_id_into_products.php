@@ -17,7 +17,7 @@ return new class extends Migration {
                 ->references('id')
                 ->on('genres')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
         });
     }
