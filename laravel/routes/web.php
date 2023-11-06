@@ -1,20 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 // Ruta para mostrar el formulario de registro
 Route::get('/register', function () {
@@ -34,17 +22,22 @@ Route::post('/login', [UserController::class, 'login']);
 
 // Grupo de rutas protegidas por autenticación
 Route::group(['middleware' => ["auth:sanctum"]], function() {
+
     Route::get('logout', [UserController::class, 'logout']);
 
     //PRODUCTS
     Route::get('/products/{id}', [productsController::class, 'show'])->name('products-edit');
     Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');   
     Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
-    
+
     //TICKETS
     Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets-edit');
     Route::patch('/ticket/{id}', [TicketController::class, 'update'])->name('tickets-update');
     Route::delete('/ticket/{id}', [TicketController::class, 'destroy'])->name('tickets-destroy');
+
+    Route::get('/welcome', function () {
+        return view('welcome');
+    })->name('welcome');
 });
 
 // Ruta de inicio por defecto, muestra la vista de inicio de sesión

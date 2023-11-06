@@ -34,12 +34,16 @@ class UserController extends Controller
     ]);
 
     $user = User::where("email", "=", $request->email)->first();
+    // $user = $request->user();
 
         if (isset($user->id) ) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken("auth_token")->plainTextToken;
+                
 
-                return redirect()->route('products');
+                // return redirect()->route('products');
+                return view('/welcome', ['user' => $user, 'token' => $token]);
+                
 
             } else {
                 return redirect()->route('login')->with('error', 'Contrasenya incorrecta.');

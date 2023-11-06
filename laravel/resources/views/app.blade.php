@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    @yield('welcome')
     @yield('content')
 </body>
 
