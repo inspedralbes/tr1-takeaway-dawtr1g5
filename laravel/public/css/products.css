@@ -111,3 +111,47 @@ hr {
     /* Línea horizontal gris */
     margin: 20px 0;
 }
+
+/*table linea_ticket show*/
+
+.linea-detalle {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    margin-bottom: 10px;
+}
+
+.product-item label {
+    font-weight: bold;
+}
+
+.product-item hr {
+    border: 1px solid #ddd;
+}
+
+/* Estilos específicos para pantallas más pequeñas, como dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .linea-detalle {
+        padding: 10px;
+    }
+
+    .label {
+        font-size: 14px;
+    }
+}

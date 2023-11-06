@@ -58,10 +58,6 @@
             <input type="text" name="productora" class="input" step="0.01" min="0" value="">
         </div>
         <div class="form-group">
-            <label for="reproducciones" class="label">Reproduccions</label>
-            <input type="number" name="reproducciones" class="input" step="0.01" min="0" value="0">
-        </div>
-        <div class="form-group">
             <label for="duracion" class="label">Duració</label>
             <input type="number" name="duracion" class="input" step="0.01" min="0" value="0">
         </div>
@@ -80,15 +76,6 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-
-        <label for="type_id" class="label">Tipus del producte</label>
-        <div class="select">
-            <select name="type_id">
-                @foreach ($type as $tipus)
-                <option value="{{ $tipus->id }}">{{ $tipus->type }}</option>
-                @endforeach
-            </select>
         </div>
 
         <br>
@@ -114,8 +101,7 @@
         <h1>Llistat de productes</h1>
         <ul>
             @foreach ($products as $product)
-            <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->type}}: {{$product->name}}</a>
-
+            <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->artist}} - {{$product->name}}</a>
             </li>
             @endforeach
         </ul>

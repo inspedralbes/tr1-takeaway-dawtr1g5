@@ -55,7 +55,6 @@ class TicketController extends Controller
       $imagePath = 'qrcodes/' . $qrCodeFileName;
       $ticket->qr = $imagePath;
       $ticket->save();
-
     } catch (\Exception $e) {
       \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
       return response()->json(['error' => 'Error al almacenar el código QR'], 500);
@@ -71,7 +70,6 @@ class TicketController extends Controller
       $linea->price = $compraData['price'];
       $linea->quantity = $compraData['count'];
       $linea->product_genre = $compraData['genre_name'];
-      $linea->product_type = $compraData['type'];
       $linea->ticket_id = $ticket->id;
       $linea->save();
     }

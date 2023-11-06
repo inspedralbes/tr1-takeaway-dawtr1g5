@@ -35,7 +35,8 @@
         </div>
         <div class="">
             <label for="price" class="label">Preu del producte (€)</label>
-            <input type="number" name="price" class="input is-primary" step="0.01" min="0" value="{{$product[0]->price}}">
+            <input type="number" name="price" class="input is-primary" step="0.01" min="0"
+                value="{{$product[0]->price}}">
         </div>
         <div class="">
             <label for="compositores" class="label">Compositores</label>
@@ -43,9 +44,9 @@
                 {{ str_replace(', ', "\n", $product[0]->compositores) }}
             </textarea>
         </div>
-        
-        
-        
+
+
+
         <div class="">
             <label for="productora" class="label">Productora</label>
             <textarea class="textarea is-primary" name="productora">
@@ -53,12 +54,8 @@
             </textarea>
         </div>
         <div class="">
-            <label for="reproduciones" class="label">Reproducions</label>
-            <input type="number" class="input is-primary" name="reproduciones"  value="{{ $product[0]->reproducciones }}"></input>
-        </div>
-        <div class="">
-            <label for="duracion" class="label">Duracion</label>
-            <input type="text" class="input is-primary" name="duracion"  value="{{ $product[0]->duracion }} min" ></input>
+            <label for="duracion" class="label">Duracion (min)</label>
+            <input type="text" class="input is-primary" name="duracion" value="{{ $product[0]->duracion }}"></input>
         </div>
         <div class="">
             <label for="tracklist" class="label">Tracklist</label>
@@ -66,8 +63,6 @@
                 {{ str_replace(', ', "\n", $product[0]->tracklist) }}
             </textarea>
         </div>
-        
-
 
         <div class="">
             <label for="genre" class="label">Gènere del disc</label>
@@ -80,15 +75,7 @@
                 </select>
             </div>
         </div>
-        <label for="type_id" class="label">Tipus del producte</label>
-        <div class="select">
-            <select name="type_id">
-                @foreach($type as $tipus)
-                <option value="{{$tipus->id}}" @if ($tipus->type === $product[0]->type) selected
-                    @endif>{{$tipus->type}}</option>
-                @endforeach
-            </select>
-        </div>
+
         <br>
         <br>
         <label class="" for="image">
