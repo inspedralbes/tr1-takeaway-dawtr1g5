@@ -59,11 +59,14 @@ class productsController extends Controller
         }
 
         $product->save();
-        return redirect()->route('products')->with('success', 'Producte registrat correctament!');
+        return redirect()->route('products')->with(['success', 'Producte registrat correctament!'],['token',$token]);
     }
 
     public function show($id)
     {
+        $user = Auth::user();
+
+        $token = $user->currentAccessToken();
         $product = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->join('types', 'type_id', '=', 'types.id')
@@ -72,7 +75,7 @@ class productsController extends Controller
             ->get();
         $genres = genres::all();
         $type = type::all();
-        return view('products.show', ['product' => $product, 'genres' => $genres, 'type' => $type]);
+        return view('products.show', ['product' => $product, 'genres' => $genres, 'type' => $type, 'user' => $user, 'token' => $token]);
     }
 
     public function index_single($id)
