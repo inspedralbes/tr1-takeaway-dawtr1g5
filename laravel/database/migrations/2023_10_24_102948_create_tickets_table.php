@@ -12,7 +12,7 @@ return new class extends Migration {
   {
     Schema::create('tickets', function (Blueprint $table) {
       $table->id();
-      $table->decimal('final_price', 10, 2);
+      $table->decimal('final_price', 10, 2)->default(0);
       $table->enum('estat', ['Pendent de preparar', 'En preparació', 'Preparat per recollir', 'Recollit'])->default('Pendent de preparar');
       $table->string('user_name');
       $table->string('user_email');

@@ -71,12 +71,6 @@ createApp({
                 this.fetchData(nextPage);
             }
         },
-        // fetchPrevPage() {
-        //     if (this.navegacion.currentPage > 1) {
-        //         const prevPage = this.navegacion.currentPage - 1;
-        //         this.fetchData(prevPage);
-        //     }
-        // },
         mostrar(div) {
             return this.navegacion.divActual == div;
         },
@@ -157,7 +151,7 @@ createApp({
         async checkout() {
             try {
                 const data = {
-                    precio: this.carrito.totalPrice,
+                    // precio: this.carrito.totalPrice,
                     compra: this.carrito.productesAddToCart,
                     userName: this.usuario.userName,
                     userEmail: this.usuario.userEmail

@@ -31,7 +31,6 @@ class TicketController extends Controller
     $data = $request->all();
     ///STORE TICKET DATA
     $ticket = new Ticket;
-    $ticket->final_price = $data["precio"];
     $ticket->user_name = $data['userName'];
     $ticket->user_email = $data['userEmail'];
 
@@ -42,7 +41,6 @@ class TicketController extends Controller
       'Ticket ID' => $ticket->id,
       'Email' => $ticket->user_email,
       'Name' => $ticket->user_name,
-      'Price' => $ticket->final_price,
     ];
     $jsonQrCode = json_encode($qrData);
     $qrCode = QrCode::size(300)->generate($jsonQrCode);
@@ -63,6 +61,7 @@ class TicketController extends Controller
 
     ///STORE TICKET_LINE DATA
     $compras = $data['compra'];
+    $precioFinal = 0;
     foreach ($compras as $compraData) {
       $linea = new LineaTicket;
       $linea->product_name = $compraData['name'];
@@ -70,11 +69,18 @@ class TicketController extends Controller
       $linea->product_year_release = $compraData['year'];
       $linea->price = $compraData['price'];
       $linea->quantity = $compraData['count'];
-      $linea->product_genre = $compraData['genre_name'];
-      $linea->product_type = $compraData['type'];
-      $linea->ticket_id = $ticket->id;
-      $linea->save();
+      if ($compraData['count'] >= 1) {
+        $precioFinal += ($compraData['price'] * $compraData['count']);
+        $linea->product_genre = $compraData['genre_name'];
+        $linea->product_type = $compraData['type'];
+        $linea->ticket_id = $ticket->id;
+        $linea->save();
+      }
+
     }
+
+    $ticket->final_price = $precioFinal;
+    $ticket->save();
 
     $lineas = DB::table('linea_tickets')
       ->where('ticket_id', $ticket->id)
