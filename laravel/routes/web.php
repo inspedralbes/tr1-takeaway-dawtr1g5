@@ -16,24 +16,24 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('products.index');
-});
-
-Route::get('/tickets', function () {
-    return view('tickets.index');
-});
-
-Route::post('/register', function () {
+// Ruta para mostrar el formulario de registro
+Route::get('/register', function () {
     return view('register.register');
 })->name('register');
 
-Route::post('/login', function () {
+// Ruta para procesar el formulario de registro
+Route::post('/register', [UserController::class, 'register']);
+
+// Ruta para mostrar el formulario de inicio de sesión
+Route::get('/login', function () {
     return view('register.login');
 })->name('login');
 
+// Ruta para procesar el inicio de sesión
+Route::post('/login', [UserController::class, 'login']);
+
+// Grupo de rutas protegidas por autenticación
 Route::group(['middleware' => ["auth:sanctum"]], function() {
-    Route::get('user-profile', [UserController::class, 'userProfile']);
     Route::get('logout', [UserController::class, 'logout']);
 
     //PRODUCTS
@@ -45,10 +45,15 @@ Route::group(['middleware' => ["auth:sanctum"]], function() {
     Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets-edit');
     Route::patch('/ticket/{id}', [TicketController::class, 'update'])->name('tickets-update');
     Route::delete('/ticket/{id}', [TicketController::class, 'destroy'])->name('tickets-destroy');
-    
 });
 
-Route::get('/', [productsController::class, 'index_all'])->name('products');
-Route::post('/', [productsController::class, 'store'])->name('products');
+// Ruta de inicio por defecto, muestra la vista de inicio de sesión
+Route::get('/', function () {
+    return view('register.login');
+})->name('home');
+
+// Resto de rutas de productos y tickets protegidas por autenticación
+Route::get('/products', [productsController::class, 'index_all'])->name('products');
+Route::post('/products', [productsController::class, 'store']);
 Route::get('/tickets', [TicketController::class, 'index_all'])->name('tickets');
-Route::post('/tickets', [TicketController::class, 'store'])->name('tickets');
+Route::post('/tickets', [TicketController::class, 'store']);

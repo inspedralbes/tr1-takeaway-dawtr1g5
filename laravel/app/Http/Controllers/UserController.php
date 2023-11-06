@@ -24,10 +24,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json([
-            "status" => 1,
-            "msg" => "Registro de usuario exitoso!",
-        ]);
+        return redirect()->route('products')->with('Usuario registrado correctamente!');
     }
     public function login(Request $request) {
     
@@ -42,32 +39,14 @@ class UserController extends Controller
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken("auth_token")->plainTextToken;
 
-                return response()->json([
-                    "status" => 1,
-                    "msg" => "Usuario logueado exitosamente!",
-                    "access_token" => $token
-                ]);
+                return redirect()->route('products');
 
             } else {
-                return response()->json([
-                    "status" => 0,
-                    "msg" => "La password es incorrecta."
-                ]);
+                return redirect()->route('login')->with('error', 'Contrasenya incorrecta.');
             }
         } else {
-            return response()->json([
-                "status" => 0,
-                "msg" => "Usuario no registrado."
-            ], 404);
+            return redirect()->route('login')->with('error', 'Usuario no registrado.');
         }
-    }
-
-    public function userProfile() {
-        return response()->json([
-            "status" => 0,
-            "msg" => "Acerca del perfil de usuario",
-            "data" => auth()->user()
-        ]);
     }
     public function logout() {
         auth()->user()->tokens()->delete();
