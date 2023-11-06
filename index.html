@@ -73,25 +73,27 @@
     </div>
 
     <!-- TIENDA -->
-    <div ref="productsList" v-if="mostrar('tienda')" class="tienda">
-      <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
-        <div class="cd-image-container">
-          <button class="btn-single-product" @click="botonProducte(actual.id)">
-            <img :src="'./laravel/public/' + actual.image" alt="">
-          </button>
-          <p class="cd-price">€ {{actual.price}}</p>
-          <div :class="['in-cart',{'bought': esRepetido(actual.id)}]">
-            <img src="img/shopping-cart-filled.png" alt="">
+    <div v-if="mostrar('tienda')" class="tienda-container">
+      <div ref="productsList" class="tienda">
+        <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
+          <div class="cd-image-container">
+            <button class="btn-single-product" @click="botonProducte(actual.id)">
+              <img :src="'./laravel/public/' + actual.image" alt="">
+            </button>
+            <p class="cd-price">€ {{actual.price}}</p>
+            <div :class="['in-cart',{'bought': esRepetido(actual.id)}]">
+              <img src="img/shopping-cart-filled.png" alt="">
+            </div>
           </div>
+          <p class="cd-name">{{actual.name}}</p>
+          <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
+          <button @click="agregarAlCarro(actual.id)" class="add-to-cart-container">
+            <img class="add-to-cart-img" src="img/cart.jpg" alt="">
+          </button>
         </div>
-        <p class="cd-name">{{actual.name}}</p>
-        <p class="cd-info">{{actual.artist}} ({{actual.year}})</p>
-        <button @click="agregarAlCarro(actual.id)" class="add-to-cart-container">
-          <img class="add-to-cart-img" src="img/cart.jpg" alt="">
-        </button>
       </div>
       <button v-if="navegacion.inputValue===null||navegacion.inputValue===''" @click="fetchNextPage"
-        class="button">Carrega següents</button>
+        class="button btn-carrega">Carrega següents</button>
     </div>
 
     <!-- PRODUCTE -->

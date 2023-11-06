@@ -138,6 +138,11 @@ header {
 
 
 /* SHOP STYLE STARTS */
+.tienda-container,
+.allCart-container {
+    margin-bottom: 5rem;
+}
+
 .product-container {
     overflow: hidden;
     display: flex;
@@ -234,6 +239,12 @@ header {
 .add-to-cart-container:active {
     transform: scale(1.1);
     transform: translateY(-10px);
+}
+
+.btn-carrega {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
 }
 
 
