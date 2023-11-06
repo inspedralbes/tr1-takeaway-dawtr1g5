@@ -292,7 +292,17 @@ createApp({
         },
         showLoadButton() {
             return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '');
-        }
+        },
+        fetchWithFilter() {
+            this.filter.advancedFilter = true;
+            const data = {
+                genre: this.filter.genre,
+                maxPrice: this.filter.maxPrice,
+            };
+            productsAdvanced(data).then(response => {
+                this.tienda.productes = response;
+            });
+        },
     },
     watch: {
         'navegacion.divActual': function (newDivActual) {
@@ -304,16 +314,14 @@ createApp({
         },
         'filter.genre': function (newGenre) {
             if (newGenre != 0) {
-                this.filter.advancedFilter = true;
-                const data = {
-                    genre: this.filter.genre,
-                    maxPrice: this.filter.maxPrice,
-                };
-                productsAdvanced(data).then(response => {
-                    this.tienda.productes = response;
-                });
+                this.fetchWithFilter;
             }
-        }
+        },
+        // 'filter.maxPrice': function (newPrice) {
+        //     if (newPrice != null) {
+        //         this.fetchWithFilter;
+        //     }
+        // }
     }
 
 }).mount('#app');

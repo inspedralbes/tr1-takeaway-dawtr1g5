@@ -44,13 +44,18 @@ class productsController extends Controller
 
     public function index_adv(Request $request)
     {
+        $maxPrice = intval($request->maxPrice);
+        $query = products::query(); // Inicializar la consulta
+
+
         if ($request->has('genre')) {
-            $query = products::where('genre_id', '=', $request->genre);
+            $query->where('genre_id', '=', $request->genre);
         }
 
-        // if ($request->has('maxPrice')) {
-        //     $query->where('price', '<', $request->maxPrice);
-        // }
+        if ($maxPrice) {
+            $query->where('price', '<', $maxPrice);
+        }
+
 
         $products = $query->get();
         return response()->json($products);
@@ -136,10 +141,4 @@ class productsController extends Controller
         $product->delete();
         return redirect()->route('products')->with('success', 'El producte ha sigut el·liminat correctament!');
     }
-
-
-    // public funtion procesarComanda(Request $request){
-    //     // $comanda = new Order();
-    //     // $comanda->estat = ''
-    // }
 }

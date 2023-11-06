@@ -138,6 +138,16 @@ header {
 
 
 /* SHOP STYLE STARTS */
+.filtro {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height ease 1s;
+}
+
+.shown {
+    max-height: 100px;
+}
+
 .tienda-container,
 .allCart-container {
     margin-bottom: 5rem;
