@@ -79,25 +79,6 @@
     </div>
 
     <!-- TIENDA -->
-    <!-- PAGINATION STARTS -->
-    <nav v-if="navegacion.divActual==='tienda'" class="pagination is-centered" role="navigation"
-      aria-label="pagination">
-      <button @click="fetchPrevPage"
-        :class="['pagination-previous',{'is-disabled':navegacion.currentPage===1}]">&lt;</button>
-      <ul class="pagination-list">
-        <li><span v-if="navegacion.currentPage>2" class="pagination-ellipsis">&hellip;</span></li>
-        <li v-for="index in navegacion.lastPage" :key="index">
-          <button @click="fetchData(index)"
-            v-if="index===navegacion.currentPage-1 || index===navegacion.currentPage || index===navegacion.currentPage+1"
-            :class="['pagination-link',{'is-current':navegacion.currentPage===index}]">{{index}}</button>
-        </li>
-        <li><span v-if="navegacion.currentPage<navegacion.lastPage-1" class="pagination-ellipsis">&hellip;</span></li>
-      </ul>
-      <button @click="fetchNextPage"
-        :class="['pagination-next',{'is-disabled':navegacion.currentPage===navegacion.lastPage}]">&gt;</button>
-    </nav>
-    <hr>
-    <!-- PAGINATION ENDS -->
     <div ref="productsList" v-if="mostrar('tienda')" class="tienda">
       <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
         <div class="cd-image-container">
@@ -115,6 +96,8 @@
           <img class="add-to-cart-img" src="img/cart.jpg" alt="">
         </button>
       </div>
+      <button v-if="navegacion.inputValue===null||navegacion.inputValue===''" @click="fetchNextPage"
+        class="button">Carrega següents</button>
     </div>
 
     <!-- PRODUCTE -->
@@ -196,6 +179,7 @@
         </div>
 
       </div>
+
     </div>
 
 

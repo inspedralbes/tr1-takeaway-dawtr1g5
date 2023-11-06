@@ -18,6 +18,7 @@ class productsController extends Controller
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->join('types', 'type_id', '=', 'types.id')
             ->select('products.*', 'genres.genre_name', 'types.type')
+            ->orderBy('artist', 'asc')
             ->get();
         return response()->json($products);
     }
@@ -27,6 +28,7 @@ class productsController extends Controller
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->join('types', 'type_id', '=', 'types.id')
             ->select('products.*', 'genres.genre_name', 'types.type')
+            ->orderBy('artist', 'asc')
             ->paginate(10);
         return response()->json($products);
     }

@@ -59,7 +59,7 @@ createApp({
     methods: {
         async fetchData(page) {
             await getProductes(page).then(data => {
-                this.tienda.productes = data.data;
+                this.tienda.productes.push(...data.data);
                 this.navegacion.currentPage = data.current_page;
                 this.navegacion.lastPage = data.last_page;
             });
@@ -71,12 +71,12 @@ createApp({
                 this.fetchData(nextPage);
             }
         },
-        fetchPrevPage() {
-            if (this.navegacion.currentPage > 1) {
-                const prevPage = this.navegacion.currentPage - 1;
-                this.fetchData(prevPage);
-            }
-        },
+        // fetchPrevPage() {
+        //     if (this.navegacion.currentPage > 1) {
+        //         const prevPage = this.navegacion.currentPage - 1;
+        //         this.fetchData(prevPage);
+        //     }
+        // },
         mostrar(div) {
             return this.navegacion.divActual == div;
         },
