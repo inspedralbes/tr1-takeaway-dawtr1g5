@@ -16,8 +16,7 @@ class productsController extends Controller
     {
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
-            ->join('types', 'type_id', '=', 'types.id')
-            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->select('products.*', 'genres.genre_name')
             ->orderBy('artist', 'asc')
             ->get();
         return response()->json($products);
@@ -26,8 +25,7 @@ class productsController extends Controller
     {
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
-            ->join('types', 'type_id', '=', 'types.id')
-            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->select('products.*', 'genres.genre_name')
             ->orderBy('artist', 'asc')
             ->paginate(10);
         return response()->json($products);

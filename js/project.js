@@ -10,7 +10,6 @@ createApp({
                 inputValue: null,
                 currentPage: 1,
                 lastPage: '',
-                tipoBusqueda: '1',
             },
             portada: {
                 productosRandom: [],
@@ -237,11 +236,7 @@ createApp({
                 return this.tienda.productes;
             } else {
                 let filteredProducts = [];
-                if (this.navegacion.tipoBusqueda === '1') {
-                    filteredProducts = this.tienda.productes;
-                } else {
-                    filteredProducts = this.tienda.allProductes;
-                }
+                filteredProducts = this.tienda.allProductes;
                 const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
                 for (let i = 0; i < inputs.length; i++) {
                     let currentInput = inputs[i];
