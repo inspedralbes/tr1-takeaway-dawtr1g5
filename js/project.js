@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
+import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -13,8 +13,9 @@ createApp({
                 showFiltroAvanzado: false,
             },
             filter: {
-                maxPrice: 0,
-                genre: '',
+                advancedFilter: false,
+                maxPrice: null,
+                genre: 0,
             },
             portada: {
                 productosRandom: [],
@@ -56,8 +57,6 @@ createApp({
                 this.portada.productosRandom.push(data[index]);
             }
         });
-
-        this.fetchData(this.navegacion.currentPage);
 
         getGenres().then(data => {
             this.tienda.genres = data;
@@ -245,25 +244,54 @@ createApp({
             } else {
                 this.navegacion.showFiltroAvanzado = true;
             }
-        }
+        },
+        clearFilter() {
+            this.filter.genre = 0;
+            this.filter.maxPrice = null;
+            this.filter.advancedFilter = false;
+            this.tienda.productes = [];
+            this.mostrarFiltroAvanzado();
+        },
     },
     computed: {
         filterProducts() {
-            if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
-                return this.tienda.productes;
-            } else {
-                let filteredProducts = [];
-                filteredProducts = this.tienda.allProductes;
-                const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
-                for (let i = 0; i < inputs.length; i++) {
-                    let currentInput = inputs[i];
-                    filteredProducts = filteredProducts.filter(product =>
-                        product.name.toLowerCase().includes(currentInput)
-                        || product.artist.toLowerCase().includes(currentInput)
-                    );
+            if (!this.filter.advancedFilter) {
+                if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
+                    this.fetchData(1);
+                    return this.tienda.productes;
+                } else {
+                    let filteredProducts = [];
+                    filteredProducts = this.tienda.allProductes;
+                    const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
+                    for (let i = 0; i < inputs.length; i++) {
+                        let currentInput = inputs[i];
+                        filteredProducts = filteredProducts.filter(product =>
+                            product.name.toLowerCase().includes(currentInput)
+                            || product.artist.toLowerCase().includes(currentInput)
+                        );
+                    }
+                    return filteredProducts;
                 }
-                return filteredProducts;
+            } else {
+                if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
+                    return this.tienda.productes;
+                } else {
+                    let filteredProducts = [];
+                    filteredProducts = this.tienda.productes;
+                    const inputs = this.navegacion.inputValue.split(' ').map(input => input.toLowerCase());
+                    for (let i = 0; i < inputs.length; i++) {
+                        let currentInput = inputs[i];
+                        filteredProducts = filteredProducts.filter(product =>
+                            product.name.toLowerCase().includes(currentInput)
+                            || product.artist.toLowerCase().includes(currentInput)
+                        );
+                    }
+                    return filteredProducts;
+                }
             }
+        },
+        showLoadButton() {
+            return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '');
         }
     },
     watch: {
@@ -274,6 +302,18 @@ createApp({
                 this.startBuscarTicket();
             }
         },
+        'filter.genre': function (newGenre) {
+            if (newGenre != 0) {
+                this.filter.advancedFilter = true;
+                const data = {
+                    genre: this.filter.genre,
+                    maxPrice: this.filter.maxPrice,
+                };
+                productsAdvanced(data).then(response => {
+                    this.tienda.productes = response;
+                });
+            }
+        }
     }
 
 }).mount('#app');

@@ -7,7 +7,6 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
-use App\Models\Order;
 
 class productsController extends Controller
 {
@@ -39,9 +38,24 @@ class productsController extends Controller
             ->select('products.*', 'genres.genre_name')
             ->get();
         $genres = genres::all();
-        $type = type::all();
 
         return view('products.index', ['products' => $products, 'genres' => $genres]);
+    }
+
+    public function index_adv(Request $request)
+    {
+        if ($request->has('genre')) {
+            $query = products::where('genre_id', '=', $request->genre);
+        }
+
+        // if ($request->has('maxPrice')) {
+        //     $query->where('price', '<', $request->maxPrice);
+        // }
+
+        $products = $query->get();
+        return response()->json($products);
+
+
     }
 
     public function store(Request $request)

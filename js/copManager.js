@@ -41,3 +41,14 @@ export async function getGenres() {
     const data = await response.json();
     return data;
 }
+
+export async function productsAdvanced(data) {
+    return fetch(`${url}index_adv`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+}

@@ -76,12 +76,17 @@
     <div v-if="mostrar('tienda')" class="tienda-container">
       <button @click="mostrarFiltroAvanzado">click</button>
       <div v-if="navegacion.showFiltroAvanzado">
-        <input type="range" v-model="filter.maxPrice" min="0" max="10">
+        <!-- <input type="range" v-model="filter.maxPrice" min="0" max="100">
+        <p>{{this.filter.maxPrice}}</p> -->
         <div class="select">
-          <option v-for value=""></option>
-
+          <select v-model="filter.genre">
+            <option value="0">Selecciona gènere</option>
+            <option v-for="actual in tienda.genres" :key="actual.id" :value="actual.id">{{actual.genre_name}}</option>
+          </select>
         </div>
+        <button @click="clearFilter">Netejar el filtre</button>
       </div>
+      <p>Productes: {{this.tienda.allProductes.length}}</p>
       <div ref="productsList" class="tienda">
         <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
           <div class="cd-image-container">
@@ -100,8 +105,7 @@
           </button>
         </div>
       </div>
-      <button v-if="navegacion.inputValue===null||navegacion.inputValue===''" @click="fetchNextPage"
-        class="button btn-carrega">Carrega següents</button>
+      <button v-if="showLoadButton" @click="fetchNextPage" class="button btn-carrega">Carrega següents</button>
     </div>
 
     <!-- PRODUCTE -->
