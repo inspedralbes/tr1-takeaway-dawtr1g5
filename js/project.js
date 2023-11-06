@@ -53,7 +53,6 @@ createApp({
         this.fetchData(this.navegacion.currentPage);
     },
     mounted() {
-        window.addEventListener('scroll', this.comprobarFinalScroll);
     },
     methods: {
         async fetchData(page) {
