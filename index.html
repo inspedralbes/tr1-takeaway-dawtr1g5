@@ -74,6 +74,14 @@
 
     <!-- TIENDA -->
     <div v-if="mostrar('tienda')" class="tienda-container">
+      <button @click="mostrarFiltroAvanzado">click</button>
+      <div v-if="navegacion.showFiltroAvanzado">
+        <input type="range" v-model="filter.maxPrice" min="0" max="10">
+        <div class="select">
+          <option v-for value=""></option>
+
+        </div>
+      </div>
       <div ref="productsList" class="tienda">
         <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
           <div class="cd-image-container">

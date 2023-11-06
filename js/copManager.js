@@ -35,3 +35,9 @@ export async function getTicket(index) {
     const data = await response.json();
     return data[0];
 }
+
+export async function getGenres() {
+    const response = await fetch(`${url}genres`);
+    const data = await response.json();
+    return data;
+}

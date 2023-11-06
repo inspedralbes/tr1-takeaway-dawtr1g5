@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
+import { getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
 
 createApp({
     data() {
@@ -10,6 +10,11 @@ createApp({
                 inputValue: null,
                 currentPage: 1,
                 lastPage: '',
+                showFiltroAvanzado: false,
+            },
+            filter: {
+                maxPrice: 0,
+                genre: '',
             },
             portada: {
                 productosRandom: [],
@@ -19,6 +24,7 @@ createApp({
                 allProductes: [],
                 divInfoActual: '',
                 singleProduct: [],
+                genres: [],
             },
             carrito: {
                 productesAddToCart: [],
@@ -50,7 +56,12 @@ createApp({
                 this.portada.productosRandom.push(data[index]);
             }
         });
+
         this.fetchData(this.navegacion.currentPage);
+
+        getGenres().then(data => {
+            this.tienda.genres = data;
+        })
     },
     mounted() {
     },
@@ -226,6 +237,13 @@ createApp({
                 }
             } else {
                 return `${minutos} minutos`;
+            }
+        },
+        mostrarFiltroAvanzado() {
+            if (this.navegacion.showFiltroAvanzado) {
+                this.navegacion.showFiltroAvanzado = false;
+            } else {
+                this.navegacion.showFiltroAvanzado = true;
             }
         }
     },

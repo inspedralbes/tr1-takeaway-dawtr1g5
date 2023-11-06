@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\genresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::get('/index_pg', [productsController::class, 'index_paginated']);
 Route::post('/ticket', [TicketController::class, 'store']);
 Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
 Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
+
+///GENRES
+Route::get('/genres', [genresController::class, 'index']);
