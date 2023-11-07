@@ -7,6 +7,7 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class productsController extends Controller
 {
@@ -44,17 +45,17 @@ class productsController extends Controller
 
     public function index_adv(Request $request)
     {
+        $minPrice = intval($request->minPrice);
         $maxPrice = intval($request->maxPrice);
+        $genre = intval($request->genre);
         $query = products::query(); // Inicializar la consulta
 
 
-        if ($request->has('genre')) {
+        if ($genre != 0) {
             $query->where('genre_id', '=', $request->genre);
         }
-
-        if ($maxPrice) {
-            $query->where('price', '<', $maxPrice);
-        }
+        $query->where('price', '>', $minPrice);
+        $query->where('price', '<', $maxPrice);
 
 
         $products = $query->get();
@@ -87,11 +88,14 @@ class productsController extends Controller
         }
 
         $product->save();
-        return redirect()->route('products')->with('success', 'Producte registrat correctament!');
+        return redirect()->route('products')->with(['success' => 'Producte registrat correctament!', 'token' => $token]);
     }
 
     public function show($id)
     {
+        $user = Auth::user();
+
+        $token = $user->currentAccessToken();
         $product = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->select('products.*', 'genres.genre_name')
@@ -99,7 +103,7 @@ class productsController extends Controller
             ->get();
         $genres = genres::all();
         $type = type::all();
-        return view('products.show', ['product' => $product, 'genres' => $genres]);
+        return view('products.show', ['product' => $product, 'genres' => $genres, 'user' => $user, 'token' => $token]);
     }
 
     public function index_single($id)

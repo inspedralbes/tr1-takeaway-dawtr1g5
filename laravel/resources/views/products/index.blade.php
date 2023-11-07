@@ -18,6 +18,20 @@
         </svg>
 
     </a>
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/products.css')}}">
+    </head>
+
+    <a href="http://127.0.0.1:8000/"> </a>
+
+    <div class="btn-logout">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="button is-link">Cerrar sesión</button>
+        </form>
+    </div>
+
     <h1>Creació d'un producte</h1>
     <form action="{{ route('products') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -101,13 +115,11 @@
         <h1>Llistat de productes</h1>
         <ul>
             @foreach ($products as $product)
-            <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->artist}} - {{$product->name}}</a>
+            <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->artist}} -
+                    {{$product->name}}</a>
             </li>
             @endforeach
         </ul>
     </div>
-</div>
 
-
-
-@endsection
+    @endsection

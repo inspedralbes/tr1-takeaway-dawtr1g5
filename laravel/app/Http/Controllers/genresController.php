@@ -9,7 +9,7 @@ class genresController extends Controller
 {
     public function index()
     {
-        $genres = genres::all();
+        $genres = genres::orderBy("genre_name")->get();
         return response()->json($genres);
     }
 }
