@@ -1,0 +1,276 @@
+:root {
+    --main-bg-color: black;
+
+}
+
+img {
+    display: block;
+}
+
+/* HEADER STYLE STARTS */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--main-bg-color);
+}
+
+.header {
+    display: grid;
+    grid-template-areas: 'logo input';
+    grid-template-columns: .2fr .8fr;
+    place-items: center;
+}
+
+.header__logo {
+    grid-area: logo;
+    filter: invert();
+}
+
+.search-container {
+    text-align: center;
+    grid-area: input;
+    width: 100%;
+}
+
+.search-container input {
+    width: 95%;
+    filter: invert();
+    border: solid black 1px;
+    border-radius: 10px;
+    height: 2rem;
+    position: relative;
+    padding-left: 10px;
+}
+
+
+.search-container img {
+    filter: invert();
+    position: absolute;
+    /* top: 50%; */
+    left: 90%;
+    top: 30%;
+    width: 1.5rem;
+}
+
+.header__price {
+    color: white;
+    font-size: 2rem;
+    font-variant: small-caps;
+    font-weight: bold;
+    margin-left: 1rem;
+    padding-top: 2%;
+    height: 4rem;
+}
+
+/* HEADER STYLE ENDS */
+
+
+/* SHOP STYLE STARTS */
+.product-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.tienda {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: .3%;
+}
+
+.cd-image-container {
+    position: relative;
+}
+
+.cd-price {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    margin: 0;
+    transform: translateY(0px);
+    transition: transform .25s;
+}
+
+.in-cart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    width: 20%;
+    background-color: rgb(255, 174, 0);
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.in-cart img {
+    filter: invert();
+}
+
+.bought {
+    opacity: 1;
+}
+
+.cd-image-container:hover>.cd-price {
+    transform: translateY(-10px);
+}
+
+
+
+.cd-name {
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: .9rem;
+}
+
+.cd-info {
+    color: gray;
+    font-size: .7rem;
+}
+
+.cd-name:not(.carro),
+.cd-info:not(.carro) {
+    margin-left: .5rem;
+}
+
+.add-to-cart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    transform: translateY(0);
+    transition: transform .2s;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.add-to-cart-img {
+    width: 7.5rem;
+    bottom: 0;
+}
+
+.add-to-cart-container:active {
+    transform: translateY(-10px);
+}
+
+/* SHOP STYLE ENDS */
+
+
+
+/* CARRO STYLE STARTS */
+.carro.product-container {
+    display: grid;
+    grid-template-areas: 'img info';
+    grid-template-columns: 1fr 3fr;
+    margin: 10px;
+    border: solid 1px lightgray;
+}
+
+.carro.cd-image {
+    width: auto;
+    grid-area: img;
+
+}
+
+.carro.carro-info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas: 'name'
+        'artist'
+        'btn';
+    margin-left: .3rem;
+    grid-template-rows: .5fr .5fr 2fr;
+}
+
+.carro.cd-name {
+    grid-area: name;
+    margin-bottom: 0;
+}
+
+.carro.cd-info {
+    grid-area: artist;
+    margin-top: 0;
+}
+
+.carro.carro-btns {
+    grid-area: btn;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    height: 50%;
+    align-self: end;
+    margin-bottom: .3rem;
+}
+
+.carro.carro-btns input {
+    width: 20%;
+}
+
+.deleteCart {
+    margin-left: auto;
+    margin-right: .3rem;
+}
+
+.carro.total-price {
+    margin-left: 1rem;
+}
+
+.goToCheckout {
+    align-self: end;
+    bottom: 0;
+}
+
+/* CARRO STYLE ENDS */
+
+/* FOOTER STYLE STARTS */
+.container-footer {
+    margin-top: 2rem;
+}
+
+.button-container {
+    display: flex;
+    background-color: var(--main-bg-color);
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+    /* border-radius: 10px; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
+        rgba(88, 203, 244, 0.5) 5px 10px 15px;
+    position: fixed;
+    /* Esto fija el contenedor en la parte superior de la página */
+    bottom: 0;
+    left: 2;
+    padding-bottom: 5px;
+}
+
+.button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.icon {
+    font-size: 20px;
+}
+
+/* FOOTER STYLE ENDS */
