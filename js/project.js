@@ -332,12 +332,12 @@ createApp({
       }
     },
     'filter.maxPrice': function (newPrice) {
-      if (newPrice != null) {
+      if (newPrice != 100) {
         this.fetchWithFilter;
       }
     },
     'filter.minPrice': function (newPrice) {
-      if (newPrice != null) {
+      if (newPrice != 0) {
         this.fetchWithFilter;
       }
     }
