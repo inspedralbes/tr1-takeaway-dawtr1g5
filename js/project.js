@@ -113,7 +113,7 @@ createApp({
                 if (elementosRepetidos.length === 0) {
                     this.carrito.productesAddToCart = ([...this.carrito.productesAddToCart, { ...this.tienda.allProductes[ogIndex] }]);
                 } else {
-                    let index = this.findByIndex(this.carrito.productesAddToCart, id);
+                    let index = this.findByIndex(this.carrito.productesAddToCart, ogIndex);
                     this.carrito.productesAddToCart[index].count++;
                 }
                 this.tienda.allProductes[ogIndex].count = 1;
