@@ -6,7 +6,9 @@
 </head>
 
 <body>
+    <h1>WELCOME</h1>
     <div class="animation"></div>
+
     <div class="buttons-container">
         <a class="button-doc" href="products">Products</a>
         <a class="button-doc" href="tickets">Tickets</a>

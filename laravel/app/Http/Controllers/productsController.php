@@ -7,6 +7,7 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class productsController extends Controller
 {
@@ -87,11 +88,14 @@ class productsController extends Controller
         }
 
         $product->save();
-        return redirect()->route('products')->with('success', 'Producte registrat correctament!');
+        return redirect()->route('products')->with(['success' => 'Producte registrat correctament!', 'token' => $token]);
     }
 
     public function show($id)
     {
+        $user = Auth::user();
+
+        $token = $user->currentAccessToken();
         $product = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->select('products.*', 'genres.genre_name')
@@ -99,7 +103,7 @@ class productsController extends Controller
             ->get();
         $genres = genres::all();
         $type = type::all();
-        return view('products.show', ['product' => $product, 'genres' => $genres]);
+        return view('products.show', ['product' => $product, 'genres' => $genres, 'user' => $user, 'token' => $token]);
     }
 
     public function index_single($id)

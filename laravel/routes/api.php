@@ -17,6 +17,14 @@ use App\Http\Controllers\genresController;
 |
 */
 
+// Route::get('register', [UserController::class, 'register']);
+// Route::get('login', [UserController::class, 'login']);
+
+// Route::group(['middleware' => ["auth:sanctum"]], function() {
+//     Route::get('user-profile', [UserController::class, 'userProfile']);
+//     Route::get('logout', [UserController::class, 'logout']);
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
