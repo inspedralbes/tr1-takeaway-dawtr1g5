@@ -113,6 +113,10 @@ class TicketController extends Controller
       ->where('tickets.id', '=', $id)
       ->get();
 
+    if ($ticket->isEmpty()) {
+      return response()->json(['error' => "El ticket no s'ha trobat"], 404);
+    }
+
     return response()->json($ticket);
   }
 

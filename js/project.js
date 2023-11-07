@@ -201,10 +201,17 @@ createApp({
     buscarTicket() {
       getTicket(this.ticket.ticketInput)
         .then((data) => {
-          this.ticket.ticket = data;
+          if (data.length > 0) {
+            this.ticket.ticket = data[0];
+          } else {
+            throw new Error(data.error);
+          }
         })
         .then(() => {
           this.navegacion.divActual = "check-order";
+        })
+        .catch((error) => {
+          console.error(error.message);
         });
     },
     stopBuscarTicket() {
@@ -315,7 +322,7 @@ createApp({
     'navegacion.divActual': function (newDivActual) {
       if (newDivActual !== 'check-order') {
         this.stopBuscarTicket();
-      } else if (!this.buscarActivo) {
+      } else {
         this.startBuscarTicket();
       }
     },
