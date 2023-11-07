@@ -13,19 +13,20 @@ class productsController extends Controller
     //
     public function index()
     {
-        // $products = products::all();
-        // $type = type::all();
-        // $genres = genres::all();
-        // return response()->json([$products, $type, $genres]);
-
-        // $products = products::with(['getProductRelation'])->get();
-
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
-            ->join('types', 'type_id', '=', 'types.id')
-            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->select('products.*', 'genres.genre_name')
+            ->orderBy('artist', 'asc')
             ->get();
-
+        return response()->json($products);
+    }
+    public function index_paginated()
+    {
+        $products = DB::table("products")
+            ->join('genres', 'genre_id', '=', 'genres.id')
+            ->select('products.*', 'genres.genre_name')
+            ->orderBy('artist', 'asc')
+            ->paginate(10);
         return response()->json($products);
     }
 
@@ -34,13 +35,32 @@ class productsController extends Controller
 
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
-            ->join('types', 'type_id', '=', 'types.id')
-            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->select('products.*', 'genres.genre_name')
             ->get();
         $genres = genres::all();
-        $type = type::all();
 
-        return view('products.index', ['products' => $products, 'genres' => $genres, 'type' => $type]);
+        return view('products.index', ['products' => $products, 'genres' => $genres]);
+    }
+
+    public function index_adv(Request $request)
+    {
+        $maxPrice = intval($request->maxPrice);
+        $query = products::query(); // Inicializar la consulta
+
+
+        if ($request->has('genre')) {
+            $query->where('genre_id', '=', $request->genre);
+        }
+
+        if ($maxPrice) {
+            $query->where('price', '<', $maxPrice);
+        }
+
+
+        $products = $query->get();
+        return response()->json($products);
+
+
     }
 
     public function store(Request $request)
@@ -55,8 +75,11 @@ class productsController extends Controller
         $product->artist = $request->artist;
         $product->year = $request->year;
         $product->price = $request->price;
+        $product->compositores = $request->compositores;
+        $product->discografica = $request->discografica;
+        $product->duracion = $request->duracion;
+        $product->tracklist = $request->tracklist;
         $product->genre_id = $request->genre;
-        $product->type_id = $request->type_id;
         $product->image = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->storeAs('/img', $request->file('image')->getClientOriginalName());
@@ -71,13 +94,23 @@ class productsController extends Controller
     {
         $product = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
-            ->join('types', 'type_id', '=', 'types.id')
-            ->select('products.*', 'genres.genre_name', 'types.type')
+            ->select('products.*', 'genres.genre_name')
             ->where('products.id', '=', $id)
             ->get();
         $genres = genres::all();
         $type = type::all();
-        return view('products.show', ['product' => $product, 'genres' => $genres, 'type' => $type]);
+        return view('products.show', ['product' => $product, 'genres' => $genres]);
+    }
+
+    public function index_single($id)
+    {
+        $products = DB::table("products")
+            ->where('products.id', '=', $id)
+            ->join('genres', 'genre_id', '=', 'genres.id')
+            ->select('products.*', 'genres.genre_name')
+            ->get();
+
+        return response()->json($products);
     }
 
     public function update(Request $request, $id)
@@ -87,8 +120,11 @@ class productsController extends Controller
         $product->artist = $request->artist;
         $product->year = $request->year;
         $product->price = $request->price;
+        $product->compositores = $request->compositores;
+        $product->discografica = $request->discografica;
+        $product->duracion = $request->duracion;
+        $product->tracklist = $request->tracklist;
         $product->genre_id = $request->genre;
-        $product->type_id = $request->type_id;
         // $product->image = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->storeAs('/img', $request->file('image')->getClientOriginalName());

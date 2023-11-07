@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\genresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 ///PUBLIC ROUTES
+//PRODUCTS
 Route::get('/index', [productsController::class, 'index']);
+Route::get('/index/{id}', [productsController::class, 'index_single']);
+Route::get('/index_pg', [productsController::class, 'index_paginated']);
+Route::post('/index_adv', [productsController::class, 'index_adv']);
 
+//TICKET
+Route::post('/ticket', [TicketController::class, 'store']);
+Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
+Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
 
-///PRIVATE ROUTES
+///GENRES
+Route::get('/genres', [genresController::class, 'index']);
