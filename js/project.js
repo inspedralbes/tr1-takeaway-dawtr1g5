@@ -14,7 +14,8 @@ createApp({
       },
       filter: {
         advancedFilter: false,
-        maxPrice: 50,
+        minPrice: 0,
+        maxPrice: 100,
         genre: 0,
       },
       portada: {
@@ -248,7 +249,8 @@ createApp({
     },
     clearFilter() {
       this.filter.genre = 0;
-      this.filter.maxPrice = null;
+      this.filter.minPrice = 0;
+      this.filter.maxPrice = 100;
       this.filter.advancedFilter = false;
       this.tienda.productes = [];
       this.mostrarFiltroAvanzado();
@@ -298,6 +300,7 @@ createApp({
       this.filter.advancedFilter = true;
       const data = {
         genre: this.filter.genre,
+        minPrice: this.filter.minPrice,
         maxPrice: this.filter.maxPrice,
       };
       productsAdvanced(data).then(response => {
@@ -319,6 +322,11 @@ createApp({
       }
     },
     'filter.maxPrice': function (newPrice) {
+      if (newPrice != null) {
+        this.fetchWithFilter;
+      }
+    },
+    'filter.minPrice': function (newPrice) {
       if (newPrice != null) {
         this.fetchWithFilter;
       }

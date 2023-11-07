@@ -162,16 +162,34 @@ header {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.filtro input[type="range"] {
+.slider-container {
+  display: flex;
+}
+
+.filtro .maxSlider,
+.minSlider {
+  width: 50%;
   margin-bottom: 10px;
 }
 
-.filtro input[type="range"]::-moz-range-progress {
+input[type="range"] {
+  height: 10px;
+}
+
+.filtro .maxSlider::-moz-range-progress {
   background-color: var(--icon-color);
 }
 
-.filtro input[type="range"]::-moz-range-track {
+.filtro .maxSlider::-moz-range-track {
   background-color: black;
+}
+
+.filtro .minSlider::-moz-range-progress {
+  background-color: black;
+}
+
+.filtro .minSlider::-moz-range-track {
+  background-color: var(--icon-color);
 }
 
 
