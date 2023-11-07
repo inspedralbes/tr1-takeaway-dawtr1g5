@@ -56,6 +56,10 @@ img {
   color: black !important;
 }
 
+.input::placeholder {
+  color: black;
+}
+
 /* LANDING PAGE ENDS */
 
 /* CHECK ORDER STYLE STARTS */

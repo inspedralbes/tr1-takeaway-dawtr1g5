@@ -23,7 +23,7 @@
       <header>
         <div
           class="header"
-          v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')"
+          v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes')"
         >
           <img class="header__logo" src="img/logoPressidis.PNG" alt="" />
           <div class="search-container">
@@ -42,7 +42,7 @@
         </div>
         <div
           class="header-landing"
-          v-else-if="mostrar('portada') || mostrar('checkout') || mostrar('check-order')"
+          v-else-if="mostrar('portada') || mostrar('checkout') || mostrar('check-order') || mostrar('comandes') "
         >
           <img class="landing-logo" src="img/presidis.png" alt="" />
           <button class="button-footer">
@@ -124,6 +124,7 @@
                 </svg>
               </button>
             </form>
+          </input>
           </div>
         </div>
       </div>
