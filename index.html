@@ -18,12 +18,12 @@
     <!--HEADER-->
     <header>
       <div class="header"
-        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes')">
+        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('check-order')">
         <a @click="cambiarDiv('portada')">
           <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         </a>
         <div class="search-container">
-          <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Search...">
+          <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Cerca...">
         </div>
         <div v-if="!mostrar('producte')" class="filter-container">
           <button @click="mostrarFiltroAvanzado">Filtre avançat</button>
@@ -53,8 +53,7 @@
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
       </div>
-      <div class="header-landing"
-        v-else-if="mostrar('portada') || mostrar('checkout') || mostrar('check-order') || mostrar('comandes') ">
+      <div class="header-landing" v-else>
         <a @click="cambiarDiv('portada')">
           <img class="landing-logo" src="img/presidis.png" alt="">
         </a>
@@ -133,6 +132,13 @@
             <img class="add-to-cart-img" src="img/cart.jpg" alt="">
           </button>
         </div>
+      </div>
+      <div class="non-element" v-if="filterProducts.length===0">
+        <p>No hi ha cap producte amb aquestes característiques</p>
+        <svg class="muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
+          <path fill="none" stroke-linecap="round" stroke-width="1"
+            d="M1.959 8.577a3.215 3.215 0 0 1 1.381-1.3C3.94 7 4.626 7 6 7c.512 0 .768 0 1.016-.042a3 3 0 0 0 .712-.214c.23-.101.444-.242.871-.524l.22-.144C11.36 4.399 12.632 3.56 13.7 3.925c.205.07.403.17.58.295c.923.648.993 2.157 1.133 5.174A68.21 68.21 0 0 1 15.5 12c0 .532-.035 1.488-.087 2.605c-.14 3.018-.21 4.526-1.133 5.175a2.313 2.313 0 0 1-.58.295c-1.067.364-2.339-.474-4.882-2.151L8.6 17.78c-.427-.282-.64-.423-.871-.525a3 3 0 0 0-.712-.213C6.768 17 6.512 17 6 17c-1.374 0-2.06 0-2.66-.277a3.215 3.215 0 0 1-1.381-1.3c-.314-.582-.35-1.186-.424-2.395c-.011-.179-.02-.356-.026-.528M22 10l-4 4m0-4l4 4" />
+        </svg>
       </div>
       <button v-if="showLoadButton" @click="fetchNextPage" class="button btn-carrega">Carrega següents</button>
     </div>

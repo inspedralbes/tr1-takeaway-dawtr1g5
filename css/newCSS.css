@@ -220,6 +220,22 @@ input[type="range"] {
 
 /* SHOP STYLE STARTS */
 
+.non-element {
+  /* background-color: red; */
+  margin-top: 50%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.non-element p {
+  font-size: 1.5rem;
+}
+
+.non-element svg {
+  height: 125px;
+  color: gray
+}
+
 .tienda-container,
 .allCart-container {
   margin-bottom: 5rem;
@@ -297,8 +313,7 @@ input[type="range"] {
 }
 
 .add-to-cart-container {
-  display: flex;
-  justify-content: center;
+  margin: auto;
   margin-top: 0;
   margin-bottom: 10px;
   transform: translateY(0);
@@ -307,6 +322,7 @@ input[type="range"] {
   background: none;
   border: none;
   padding: 0;
+  width: fit-content;
 }
 
 .add-to-cart-img {

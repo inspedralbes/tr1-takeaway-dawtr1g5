@@ -61,7 +61,9 @@ createApp({
 
     getGenres().then(data => {
       this.tienda.genres = data;
-    })
+    });
+
+    this.fetchData(1);
   },
   mounted() {
   },
@@ -253,6 +255,7 @@ createApp({
       this.filter.maxPrice = 100;
       this.filter.advancedFilter = false;
       this.tienda.productes = [];
+      this.fetchData(1);
       this.mostrarFiltroAvanzado();
     },
   },
@@ -260,7 +263,7 @@ createApp({
     filterProducts() {
       if (!this.filter.advancedFilter) {
         if (this.navegacion.inputValue == null || this.navegacion.inputValue == '') {
-          this.fetchData(1);
+          // this.fetchData(1);
           return this.tienda.productes;
         } else {
           let filteredProducts = [];
@@ -294,7 +297,7 @@ createApp({
       }
     },
     showLoadButton() {
-      return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '') && this.navegacion.currentPage != this.navegacion.lastPage;
+      return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '') && this.navegacion.currentPage != this.navegacion.lastPage && this.tienda.productes.length != 0;
     },
     fetchWithFilter() {
       this.filter.advancedFilter = true;
