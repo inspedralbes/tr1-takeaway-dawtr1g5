@@ -40,6 +40,10 @@ createApp({
         ticketInput: '',
         ticket: [],
         checkOrder_Activo: false,
+        angulo: 0,
+        duracionTransicion: 500,
+        paso: 5,
+        color: '#ff0800',
       }
     };
   },
@@ -208,11 +212,40 @@ createApp({
           }
         })
         .then(() => {
+          let estat = this.ticket.ticket.estat;
+          if (estat === 'Pendent de preparar') {
+            this.ticket.targetAngulo = 0;
+            this.ticket.color = "#ff0800";
+          } else if (estat === 'En preparació') {
+            this.ticket.targetAngulo = 135;
+            this.ticket.color = "#ffae00";
+          } else if (estat === 'Preparat per recollir') {
+            this.ticket.targetAngulo = 270;
+            this.ticket.color = "#00ff6a";
+          }
+
+          this.transicionAngulo();
           this.navegacion.divActual = "check-order";
         })
         .catch((error) => {
           console.error(error.message);
         });
+    },
+    transicionAngulo() {
+      const totalPasos = Math.ceil(this.ticket.duracionTransicion / this.ticket.paso);
+      const pasoAngulo = (this.ticket.targetAngulo - this.ticket.angulo) / totalPasos;
+
+      let pasoActual = 0;
+
+      const temporizador = setInterval(() => {
+        this.ticket.angulo += pasoAngulo;
+        pasoActual++;
+
+        if (pasoActual >= totalPasos) {
+          clearInterval(temporizador);
+          this.ticket.angulo = this.ticket.targetAngulo; // Asegurarse de que el ángulo final sea exactamente el targetAngulo
+        }
+      }, this.ticket.paso);
     },
     stopBuscarTicket() {
       this.ticket.checkOrder_Activo = false;

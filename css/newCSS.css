@@ -12,6 +12,8 @@ img {
 }
 
 /* LANDING PAGE STARTS */
+
+
 .landing-container {
   width: 100%;
   text-align: center;
@@ -72,11 +74,15 @@ img {
   height: 300px;
 }
 
-.pendent-preparar {
+/* .pendent-preparar {
   color: #ff0800;
+} */
+
+.rotar {
+  transition: all 1s ease;
 }
 
-.preparacio {
+/* .preparacio {
   color: var(--icon-color);
 }
 
@@ -86,7 +92,7 @@ img {
 
 .recollit {
   color: #33ff00;
-}
+} */
 
 /* CHECK ORDER STYLE ENDS */
 

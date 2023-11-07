@@ -322,8 +322,9 @@
           <p class="">El teu id de recollida es:</p>
           <h1 class="checkout-id">{{ticket.ticket.id}}</h1>
 
-          <div v-if="ticket.ticket.estat==='Pendent de preparar'" class="pendent-preparar">
-            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div v-if="ticket.ticket.estat!='Recollit'" class="pendent-preparar">
+            <svg class="rotar" :stroke="ticket.color" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
               <path d="M19 19L17.5 17.5" stroke-width="1" stroke-linecap="round" />
               <path d="M19 5L17.5 6.5" stroke-width="1" stroke-linecap="round" />
               <path d="M5 19L6.5 17.5" stroke-width="1" stroke-linecap="round" />
@@ -331,50 +332,16 @@
               <path d="M2 12H4" stroke-width="1" stroke-linecap="round" />
               <path d="M19.9998 12L21.9998 12" stroke-width="1" stroke-linecap="round" />
               <path d="M12 4.00021L12 2.00021" stroke-width="1" stroke-linecap="round" />
-              <path
-                d="M13.7781 14.364C14.9497 13.1924 14.9497 11.2929 13.7781 10.1214C12.6065 8.94978 10.707 8.94978 9.53545 10.1214C9.0898 10.567 8.77857 11.4921 8.56396 12.4675C8.24305 13.926 8.08259 14.6553 8.66339 15.2361C9.24419 15.8169 9.97346 15.6564 11.432 15.3355C12.4073 15.1209 13.3324 14.8096 13.7781 14.364Z"
-                stroke-width="1" />
-              <path
-                d="M9 21.5422C4.94289 20.2679 2 16.4776 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 16.4776 19.0571 20.2679 15 21.5422"
-                stroke-width="1" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div v-else-if="ticket.ticket.estat==='En preparació'" class="preparacio">
-            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M9 21.5422C4.94289 20.2679 2 16.4776 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 16.4776 19.0571 20.2679 15 21.5422"
-                stroke-width="1" stroke-linecap="round" />
-              <path d="M19 19L17.5 17.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M19 5L17.5 6.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M5 19L6.5 17.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M5 5L6.5 6.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M2 12H4" stroke-width="1" stroke-linecap="round" />
-              <path d="M19.9998 12L21.9998 12" stroke-width="1" stroke-linecap="round" />
-              <path d="M12 4.00021L12 2.00021" stroke-width="1" stroke-linecap="round" />
-              <path
-                d="M15 11.9999C15 13.6567 13.6569 14.9999 12 14.9999C10.3431 14.9999 9 13.6567 9 11.9999C9 11.3696 9.43408 10.4954 9.972 9.65399C10.7764 8.39573 11.1786 7.7666 12 7.7666C12.8214 7.7666 13.2236 8.39573 14.028 9.65399C14.5659 10.4954 15 11.3696 15 11.9999Z"
-                stroke-width="1" />
-            </svg>
-          </div>
-
-          <div v-else-if="ticket.ticket.estat==='Preparat per recollir'" class="preparat">
-            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 19L17.5 17.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M19 5L17.5 6.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M5 19L6.5 17.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M5 5L6.5 6.5" stroke-width="1" stroke-linecap="round" />
-              <path d="M2 12H4" stroke-width="1" stroke-linecap="round" />
-              <path d="M19.9998 12L21.9998 12" stroke-width="1" stroke-linecap="round" />
-              <path d="M12 4.00021L12 2.00021" stroke-width="1" stroke-linecap="round" />
-              <path
-                d="M10.1214 14.364C8.94978 13.1924 8.94978 11.2929 10.1214 10.1214C11.2929 8.94978 13.1924 8.94978 14.364 10.1214C14.8096 10.567 15.1209 11.4921 15.3355 12.4675C15.6564 13.926 15.8169 14.6553 15.2361 15.2361C14.6553 15.8169 13.926 15.6564 12.4675 15.3355C11.4921 15.1209 10.567 14.8096 10.1214 14.364Z"
-                stroke-width="1" />
+              <g :transform="'rotate(' + ticket.angulo + ', 12, 12)'">
+                <path
+                  d="M13.7781 14.364C14.9497 13.1924 14.9497 11.2929 13.7781 10.1214C12.6065 8.94978 10.707 8.94978 9.53545 10.1214C9.0898 10.567 8.77857 11.4921 8.56396 12.4675C8.24305 13.926 8.08259 14.6553 8.66339 15.2361C9.24419 15.8169 9.97346 15.6564 11.432 15.3355C12.4073 15.1209 13.3324 14.8096 13.7781 14.364Z"
+                  stroke-width="1" />
+              </g>
               <path
                 d="M9 21.5422C4.94289 20.2679 2 16.4776 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 16.4776 19.0571 20.2679 15 21.5422"
                 stroke-width="1" stroke-linecap="round" />
             </svg>
           </div>
-
           <div v-else-if="ticket.ticket.estat==='Recollit'" class="recollit">
             <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 14H3" stroke-width="1" stroke-linecap="round" />
