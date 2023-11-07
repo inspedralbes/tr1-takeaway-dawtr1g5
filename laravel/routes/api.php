@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 ///PUBLIC ROUTES
 //PRODUCTS
 Route::get('/index', [productsController::class, 'index']);

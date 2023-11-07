@@ -28,10 +28,13 @@
         <div v-if="!mostrar('producte')" class="filter-container">
           <button @click="mostrarFiltroAvanzado">Filtre avançat</button>
           <div :class="['filtro',{'shown':navegacion.showFiltroAvanzado===true}]">
-            <label for="price">Preu (0€ - 100€)</label>
-            <input for="price" name="price" type="range" v-model.lazy="filter.maxPrice" min="0" max="100">
-            <!-- <input type="number" v-model="filter.maxPrice"> -->
-            <!-- <p>{{this.filter.maxPrice}}</p> -->
+            <label for="price">Preu ({{filter.minPrice}}€ - {{filter.maxPrice}}€)</label>
+            <div class="slider-container">
+              <input class="minSlider" for="price" name="price" type="range" v-model.lazy="filter.minPrice" min="0"
+                max="50">
+              <input class="maxSlider" for="price" name="price" type="range" v-model.lazy="filter.maxPrice" min="51"
+                max="100">
+            </div>
             <select v-model="filter.genre">
               <option value="0" disabled>Selecciona gènere</option>
               <option v-for="actual in tienda.genres" :key="actual.id" :value="actual.id">{{actual.genre_name}}
