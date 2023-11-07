@@ -8,6 +8,7 @@ use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class productsController extends Controller
 {
@@ -59,7 +60,7 @@ class productsController extends Controller
         }
 
         $product->save();
-        return redirect()->route('products')->with(['success', 'Producte registrat correctament!'],['token',$token]);
+        return redirect()->route('products')->with(['success' => 'Producte registrat correctament!', 'token' => $token]);
     }
 
     public function show($id)
