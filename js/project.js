@@ -291,7 +291,7 @@ createApp({
             }
         },
         showLoadButton() {
-            return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '');
+            return !this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === '') && this.navegacion.currentPage != this.navegacion.lastPage;
         },
         fetchWithFilter() {
             this.filter.advancedFilter = true;

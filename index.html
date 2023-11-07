@@ -21,7 +21,27 @@
         <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         <div class="search-container">
           <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Search...">
-          <img class="search-icon" src="img/search.png" alt="Search">
+        </div>
+        <div class="filter-container">
+          <button @click="mostrarFiltroAvanzado">Filtre avançat</button>
+          <div :class="['filtro',{'shown':navegacion.showFiltroAvanzado===true}]">
+            <label for="price">Preu (0€ - 100€)</label>
+            <input for="price" name="price" type="range" v-model="filter.maxPrice" min="0" max="100">
+
+            <!-- <p>{{this.filter.maxPrice}}</p> -->
+            <select v-model="filter.genre">
+              <option value="0" disabled>Selecciona gènere</option>
+              <option v-for="actual in tienda.genres" :key="actual.id" :value="actual.id">{{actual.genre_name}}
+              </option>
+            </select>
+            <button class="clear-filter" @click="clearFilter">Netejar el filtre</button>
+          </div>
+          <div class="fetch-info">
+            <p style="display: inline;">Mostrant: </p>
+            <p style="display: inline;" v-if="!filter.advancedFilter">({{this.tienda.productes.length}} de
+              {{this.tienda.allProductes.length}})</p>
+            <p style="display: inline;" v-else>({{this.tienda.productes.length}})</p>
+          </div>
         </div>
       </div>
       <div v-else-if="mostrar('carro')" class="header-carro">
@@ -74,20 +94,6 @@
 
     <!-- TIENDA -->
     <div v-if="mostrar('tienda')" class="tienda-container">
-      <button @click="mostrarFiltroAvanzado">click</button>
-      <div :class="['filtro',{'shown':navegacion.showFiltroAvanzado===true}]">
-        <!-- <input type="range" v-model="filter.maxPrice" min="0" max="100">
-        <p>{{this.filter.maxPrice}}</p> -->
-        <div class="select">
-          <select v-model="filter.genre">
-            <option value="0" disabled>Selecciona gènere</option>
-            <option v-for="actual in tienda.genres" :key="actual.id" :value="actual.id">{{actual.genre_name}}</option>
-          </select>
-        </div>
-        <button @click="clearFilter">Netejar el filtre</button>
-      </div>
-      <p v-if="!filter.advancedFilter">Productes: {{this.tienda.allProductes.length}}</p>
-      <p v-else>Productes: {{this.tienda.productes.length}}</p>
       <div ref="productsList" class="tienda">
         <div v-for="(actual,index) in filterProducts" :key="index" class="product-container">
           <div class="cd-image-container">

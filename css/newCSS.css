@@ -1,11 +1,14 @@
 :root {
     --main-bg-color: black;
     --icon-color: #ffae00;
-
 }
 
 img {
     display: block;
+}
+
+* {
+    font-variant: small-caps;
 }
 
 /* LANDING PAGE STARTS */
@@ -84,11 +87,13 @@ header {
     top: 0;
     z-index: 100;
     background-color: var(--main-bg-color);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header {
     display: grid;
-    grid-template-areas: 'logo input';
+    grid-template-areas: 'logo input'
+        'adv-filter adv-filter';
     grid-template-columns: .2fr .8fr;
     place-items: center;
 }
@@ -114,16 +119,6 @@ header {
     padding-left: 10px;
 }
 
-
-.search-container img {
-    filter: invert();
-    position: absolute;
-    /* top: 50%; */
-    left: 90%;
-    top: 30%;
-    width: 1.5rem;
-}
-
 .header__price {
     color: white;
     font-size: 2rem;
@@ -134,19 +129,70 @@ header {
     height: 4rem;
 }
 
+.filtro {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease 1s;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: .2rem;
+    padding: 0 10px 0;
+}
+
+.shown {
+    max-height: 150px;
+}
+
+.filtro select {
+    font-variant: small-caps;
+    text-align: center;
+    background-color: white;
+    border: 1px gray solid;
+    height: 3rem;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.filtro input[type="range"] {
+    margin-bottom: 10px;
+}
+
+.filtro input[type="range"]::-moz-range-progress {
+    background-color: var(--icon-color);
+}
+
+.filtro input[type="range"]::-moz-range-track {
+    background-color: black;
+}
+
+
+.fetch-info {
+    font-size: .8rem;
+    padding-top: 1rem;
+    padding-left: .2rem;
+    padding-bottom: .2rem;
+}
+
+.filter-container {
+    grid-area: adv-filter;
+    background-color: white;
+    width: 100%;
+}
+
+.filter-container button {
+    background-color: white;
+    border: none;
+    color: gray;
+}
+
+.filter-container button:hover {
+    color: var(--main-bg-color);
+}
+
 /* HEADER STYLE ENDS */
 
 
 /* SHOP STYLE STARTS */
-.filtro {
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height ease 1s;
-}
-
-.shown {
-    max-height: 100px;
-}
 
 .tienda-container,
 .allCart-container {
@@ -565,7 +611,6 @@ header {
     opacity: 1;
     top: -130%;
 }
-
 
 /* CARRO STYLE ENDS */
 
