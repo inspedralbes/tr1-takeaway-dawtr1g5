@@ -17,17 +17,20 @@
   <div id="app">
     <!--HEADER-->
     <header>
-      <div class="header" v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada')">
-        <img class="header__logo" src="img/logoPressidis.PNG" alt="">
+      <div class="header"
+        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes')">
+        <a @click="cambiarDiv('portada')">
+          <img class="header__logo" src="img/logoPressidis.PNG" alt="">
+        </a>
         <div class="search-container">
           <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Search...">
         </div>
-        <div class="filter-container">
+        <div v-if="!mostrar('producte')" class="filter-container">
           <button @click="mostrarFiltroAvanzado">Filtre avançat</button>
           <div :class="['filtro',{'shown':navegacion.showFiltroAvanzado===true}]">
             <label for="price">Preu (0€ - 100€)</label>
-            <input for="price" name="price" type="range" v-model="filter.maxPrice" min="0" max="100">
-
+            <input for="price" name="price" type="range" v-model.lazy="filter.maxPrice" min="0" max="100">
+            <!-- <input type="number" v-model="filter.maxPrice"> -->
             <!-- <p>{{this.filter.maxPrice}}</p> -->
             <select v-model="filter.genre">
               <option value="0" disabled>Selecciona gènere</option>
@@ -47,8 +50,11 @@
       <div v-else-if="mostrar('carro')" class="header-carro">
         <h1 class="header__price">€ {{calcularPriceTotal()}}</h1>
       </div>
-      <div class="header-landing" v-else-if="mostrar('portada') || mostrar('checkout') || mostrar('check-order')">
-        <img class="landing-logo" src="img/presidis.png" alt="">
+      <div class="header-landing"
+        v-else-if="mostrar('portada') || mostrar('checkout') || mostrar('check-order') || mostrar('comandes') ">
+        <a @click="cambiarDiv('portada')">
+          <img class="landing-logo" src="img/presidis.png" alt="">
+        </a>
         <button class="button-footer">
           <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +80,7 @@
           </div>
         </section>
         <button @click="cambiarDiv('tienda')" class="button is-black">
-          Anar a la tenda
+          Anar a la botiga
         </button>
         <button @click="cambiarDiv('comandes')" class="button is-black">
           Buscar comanda

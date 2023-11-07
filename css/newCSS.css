@@ -150,7 +150,7 @@ header {
 }
 
 .shown {
-  max-height: 150px;
+  max-height: 300px;
 }
 
 .filtro select {
@@ -205,6 +205,7 @@ header {
 .tienda-container,
 .allCart-container {
   margin-bottom: 5rem;
+  text-align: center;
 }
 
 .product-container {
@@ -213,6 +214,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  text-align: left;
 }
 
 .tienda {
@@ -304,9 +306,22 @@ header {
 }
 
 .btn-carrega {
-  width: 100%;
+  width: 80%;
   margin: auto;
   padding: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
+  border: none;
+}
+
+.btn-carrega:hover {
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+
+}
+
+.tienda-container>.btn-carrega {
+  text-align: center;
 }
 
 
@@ -654,7 +669,9 @@ header {
   margin-top: 2rem;
 }
 
+
 .button-container {
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0);
   display: flex;
   background-color: var(--main-bg-color);
   width: 100%;
@@ -662,7 +679,6 @@ header {
   align-items: center;
   justify-content: space-around;
   position: fixed;
-  /* Esto fija el contenedor en la parte superior de la página */
   bottom: 0;
   left: 2;
   margin-bottom: 0;

@@ -14,7 +14,7 @@ createApp({
       },
       filter: {
         advancedFilter: false,
-        maxPrice: null,
+        maxPrice: 50,
         genre: 0,
       },
       portada: {
@@ -318,10 +318,10 @@ createApp({
         this.fetchWithFilter;
       }
     },
-    // 'filter.maxPrice': function (newPrice) {
-    //     if (newPrice != null) {
-    //         this.fetchWithFilter;
-    //     }
-    // }
+    'filter.maxPrice': function (newPrice) {
+      if (newPrice != null) {
+        this.fetchWithFilter;
+      }
+    }
   }
 }).mount('#app');

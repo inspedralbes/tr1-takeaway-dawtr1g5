@@ -45,10 +45,11 @@ class productsController extends Controller
     public function index_adv(Request $request)
     {
         $maxPrice = intval($request->maxPrice);
+        $genre = intval($request->genre);
         $query = products::query(); // Inicializar la consulta
 
 
-        if ($request->has('genre')) {
+        if ($genre != 0) {
             $query->where('genre_id', '=', $request->genre);
         }
 
