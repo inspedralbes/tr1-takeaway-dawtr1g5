@@ -141,6 +141,7 @@ createApp({
         calcularPriceProduct(id) {
             let total = 0;
             total = this.carrito.productesAddToCart[id].price * this.carrito.productesAddToCart[id].count;
+            total = total.toFixed(2);
             return total;
         },
         deleteProduct(array, index) {
