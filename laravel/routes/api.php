@@ -20,7 +20,7 @@ use App\Http\Controllers\genresController;
 
 //PROTECTED ROUTES
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    // Route::get('/genres', [genresController::class, 'index']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
@@ -44,3 +44,5 @@ Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
 Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
 
 //PUBLIC ROUTES 'GENRES'
+
+Route::get('/genres', [genresController::class, 'index']);
