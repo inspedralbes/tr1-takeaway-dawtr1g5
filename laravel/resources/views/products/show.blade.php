@@ -48,9 +48,9 @@
 
 
         <div class="">
-            <label for="productora" class="label">Productora</label>
-            <textarea class="textarea is-primary" name="productora">
-                {{ str_replace(', ', "\n", $product[0]->productora) }}
+            <label for="discografica" class="label">discografica</label>
+            <textarea class="textarea is-primary" name="discografica">
+                {{ str_replace(', ', "\n", $product[0]->discografica) }}
             </textarea>
         </div>
         <div class="">
