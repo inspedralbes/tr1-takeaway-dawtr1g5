@@ -5,7 +5,7 @@ createApp({
   data() {
     return {
       navegacion: {
-        divActual: 'comandes',
+        divActual: 'portada',
         activeModal: false,
         inputValue: null,
         currentPage: 1,
@@ -44,6 +44,7 @@ createApp({
         duracionTransicion: 500,
         paso: 5,
         color: '#ff0800',
+        error: '',
       }
     };
   },
@@ -227,8 +228,16 @@ createApp({
           this.transicionAngulo();
           this.navegacion.divActual = "check-order";
         })
+        .then(() => {
+          this.ticket.ticketInput = '';
+        })
         .catch((error) => {
-          console.error(error.message);
+          this.ticket.ticketInput = '';
+          this.ticket.error = error.message;
+
+          setTimeout(() => {
+            this.ticket.error = ''; // Esto oculta el mensaje de error después de 3 segundos
+          }, 6000);
         });
     },
     transicionAngulo() {

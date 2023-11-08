@@ -31,7 +31,7 @@ export async function getLastTicket() {
 }
 
 export async function getTicket(index) {
-    const response = await fetch(url + 'ticket/' + index);
+    const response = await fetch(`${url}ticket/${index}`);
     const data = await response.json();
     return data;
 }

@@ -81,10 +81,10 @@
             </div>
           </div>
         </section>
-        <button @click="cambiarDiv('tienda')" class="button is-black">
+        <button @click="cambiarDiv('tienda')" class="btn button is-black">
           Anar a la botiga
         </button>
-        <button @click="cambiarDiv('comandes')" class="button is-black">
+        <button @click="cambiarDiv('comandes')" class="btn button is-black">
           Buscar comanda
         </button>
       </div>
@@ -103,21 +103,19 @@
           <script xmlns="" />
         </svg>
         <div class="comandes-form">
-          <form @submit.prevent="buscarTicket">
-            <input class="input" v-model="ticket.ticketInput" type="text"
-              placeholder="Escriu el ID de la teva comanda..." />
-            <button @click="buscarTicket" class="button-footer search-order">
-              <svg width="50x" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                stroke="currentColor">
-                <path d="M18.5 18.5L22 22" stroke-width="1" stroke-linecap="round" />
-                <path
-                  d="M6.75 3.27093C8.14732 2.46262 9.76964 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 9.76964 2.46262 8.14732 3.27093 6.75"
-                  stroke-width="1" stroke-linecap="round" />
-              </svg>
-            </button>
-          </form>
-          </input>
+          <input class="input" v-model="ticket.ticketInput" type="text" placeholder="Escriu el ID de la teva comanda..."
+            required />
+          <button @click="buscarTicket" class="button-footer search-order">
+            <svg width="50x" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor">
+              <path d="M18.5 18.5L22 22" stroke-width="1" stroke-linecap="round" />
+              <path
+                d="M6.75 3.27093C8.14732 2.46262 9.76964 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 9.76964 2.46262 8.14732 3.27093 6.75"
+                stroke-width="1" stroke-linecap="round" />
+            </svg>
+          </button>
         </div>
+        <p class="ticket-error">{{ticket.error}}</p>
       </div>
     </div>
 
@@ -154,7 +152,7 @@
     <!-- PRODUCTE -->
     <div v-if="mostrar('producte')">
       <div class="singleProduct-container">
-        <button class="btn-atras" @click="cambiarDiv('tienda'); divInfoActual = ''">
+        <button style="color:black" class="btn-atras button-footer" @click="cambiarDiv('tienda'); divInfoActual = ''">
           <svg class="flecha-producte" stroke="currentColor" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M16 12H8M8 12L11 9M8 12L11 15" stroke="currentColor" stroke-width="1" stroke-linecap="round"
@@ -207,7 +205,7 @@
                 <a @click="mostrarInfo('tracklist')">Tracklist</a>
               </li>
               <li :class="{ active: tienda.divInfoActual === 'productora' }">
-                <a @click="mostrarInfo('productora')">Productora</a>
+                <a @click="mostrarInfo('productora')">Discogràfica</a>
               </li>
               <li :class="{ active: tienda.divInfoActual === 'compositores' }">
                 <a @click="mostrarInfo('compositores')">Compositores</a>
@@ -228,7 +226,7 @@
 
         <div v-if="tienda.divInfoActual==='productora'">
           <p class="product-productora">
-            {{tienda.singleProduct.productora}}
+            {{tienda.singleProduct.discografica}}
           </p>
         </div>
 
@@ -322,7 +320,7 @@
     <!-- CHECK ORDER -->
     <div>
       <div v-if="mostrar('check-order')" class="check-order">
-        <div class="checkout-container">
+        <div class="check-order-container">
           <p class="checkout-gracies">
             Gràcies per la teva compra,
             <span>{{ticket.ticket.user_name}}</span>
@@ -351,7 +349,7 @@
             </svg>
           </div>
           <div v-else-if="ticket.ticket.estat==='Recollit'" class="recollit">
-            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg stroke="#00ff6a" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 14H3" stroke-width="1" stroke-linecap="round" />
               <path d="M8 18H3" stroke-width="1" stroke-linecap="round" />
               <path d="M17 16.5V12.5V8" stroke-width="1" stroke-linecap="round" />
@@ -362,7 +360,7 @@
             </svg>
           </div>
           <p>{{ticket.ticket.estat}}</p>
-          <button @click="cambiarDiv('portada')" class="button is-black">
+          <button @click="cambiarDiv('portada')" class="btn button is-black">
             Tornar a l'inici
           </button>
         </div>
