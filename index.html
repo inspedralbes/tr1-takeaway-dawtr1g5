@@ -16,7 +16,7 @@
 
   <div id="app">
     <!--HEADER-->
-    <header>
+    <header v-if="!mostrar('loader-ticket')">
       <div class="header"
         v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('check-order')">
         <a @click="cambiarDiv('portada')">
@@ -93,14 +93,16 @@
     <!-- COMANDA -->
     <div class="comandes-page" v-if="mostrar('comandes')">
       <div class="comandes-page-container">
-        <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.5 11L17 11" stroke-width="1" stroke-linecap="round" />
+          <path d="M7 11H7.5" stroke-width="1" stroke-linecap="round" />
+          <path d="M7 7.5H7.5" stroke-width="1" stroke-linecap="round" />
+          <path d="M7 14.5H7.5" stroke-width="1" stroke-linecap="round" />
+          <path d="M17 14.5H16M10.5 14.5H13.5" stroke-width="1" stroke-linecap="round" />
+          <path d="M17 7.5H14M10.5 7.5H11.5" stroke-width="1" stroke-linecap="round" />
           <path
-            d="M21 6V3.50519C21 2.92196 20.3109 2.61251 19.875 2.99999C19.2334 3.57029 18.2666 3.57029 17.625 2.99999C16.9834 2.42969 16.0166 2.42969 15.375 2.99999C14.7334 3.57029 13.7666 3.57029 13.125 2.99999C12.4834 2.42969 11.5166 2.42969 10.875 2.99999C10.2334 3.57029 9.26659 3.57029 8.625 2.99999C7.98341 2.42969 7.01659 2.42969 6.375 2.99999C5.73341 3.57029 4.76659 3.57029 4.125 2.99999C3.68909 2.61251 3 2.92196 3 3.50519V14M21 10V20.495C21 21.0782 20.3109 21.3876 19.875 21.0002C19.2334 20.4299 18.2666 20.4299 17.625 21.0002C16.9834 21.5705 16.0166 21.5705 15.375 21.0002C14.7334 20.4299 13.7666 20.4299 13.125 21.0002C12.4834 21.5705 11.5166 21.5705 10.875 21.0002C10.2334 20.4299 9.26659 20.4299 8.625 21.0002C7.98341 21.5705 7.01659 21.5705 6.375 21.0002C5.73341 20.4299 4.76659 20.4299 4.125 21.0002C3.68909 21.3876 3 21.0782 3 20.495V18"
-            stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-          <path d="M7.5 15.5H11.5M16.5 15.5H14.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-          <path d="M16.5 12H12.5M7.5 12H9.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-          <path d="M7.5 8.5H16.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-          <script xmlns="" />
+            d="M21 7V6.37006C21 5.17705 21 4.58055 20.842 4.09946C20.5425 3.18719 19.8468 2.47096 18.9606 2.16261C18.4933 2 17.9139 2 16.755 2H7.24502C6.08614 2 5.50671 2 5.03939 2.16261C4.15322 2.47096 3.45748 3.18719 3.15795 4.09946C3 4.58055 3 5.17705 3 6.37006V15M21 11V20.3742C21 21.2324 20.015 21.6878 19.3919 21.1176C19.0258 20.7826 18.4742 20.7826 18.1081 21.1176L17.625 21.5597C16.9834 22.1468 16.0166 22.1468 15.375 21.5597C14.7334 20.9726 13.7666 20.9726 13.125 21.5597C12.4834 22.1468 11.5166 22.1468 10.875 21.5597C10.2334 20.9726 9.26659 20.9726 8.625 21.5597C7.98341 22.1468 7.01659 22.1468 6.375 21.5597L5.8919 21.1176C5.52583 20.7826 4.97417 20.7826 4.6081 21.1176C3.985 21.6878 3 21.2324 3 20.3742V19"
+            stroke-width="1" stroke-linecap="round" />
         </svg>
         <div class="comandes-form">
           <input class="input" v-model="ticket.ticketInput" type="text" placeholder="Escriu el ID de la teva comanda..."
@@ -277,38 +279,37 @@
               <input id="user_name" class="input" v-model="usuario.userName" type="text"
                 placeholder="Escriu el teu nom complet..." />
 
-                <div class="field">
-                  <label for="user_email">Email</label>
-                  <div class="control">
-                    <input
-                      id="user_email"
-                      class="input"
-                      v-model="usuario.userEmail"
-                      type="email"
-                      placeholder="exemple@exemple.cat"
-                      required 
-                    />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                    <div class="error-message" id="email-error-message"></div>
-                  </div>
-                  
+              <div class="field">
+                <label for="user_email">Email</label>
+                <div class="control">
+                  <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
+                    placeholder="exemple@exemple.cat" required />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                  <div class="error-message" id="email-error-message"></div>
                 </div>
+
               </div>
-            </section>
-            <footer class="modal-card-foot">
-              <button @click="checkout()" class="button is-black">
-                Confirmar comanda
-              </button>
-              <button @click="activarModal()" class="button">Cancel</button>
-            </footer>
-          </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <button @click="checkout" class="button is-black">
+              Confirmar comanda
+            </button>
+            <button @click="activarModal()" class="button">Cancel</button>
+          </footer>
         </div>
       </div>
+    </div>
+
+    <div class="load" v-if="mostrar('loader-ticket')">
+      <img src="img/giphy.gif" alt="">
+      <p>Carregant...</p>
+    </div>
 
     <!-- CHECKOUT -->
     <div v-if="mostrar('checkout')" class="checkout">
@@ -376,7 +377,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div v-if="navegacion.divActual!='portada'" class="container-footer">
+    <div v-if="navegacion.divActual!='portada' && !mostrar('loader-ticket')" class="container-footer">
       <footer>
         <div class="button-container">
           <button :class="['button-footer',{'clicked': mostrar('portada')}]" @click="cambiarDiv('portada')">
@@ -416,14 +417,16 @@
             </svg>
           </button>
           <button :class="['button-footer',{'clicked': mostrar('comandes')}]" @click="cambiarDiv('comandes')">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 11L17 11" stroke-width="1" stroke-linecap="round" />
+              <path d="M7 11H7.5" stroke-width="1" stroke-linecap="round" />
+              <path d="M7 7.5H7.5" stroke-width="1" stroke-linecap="round" />
+              <path d="M7 14.5H7.5" stroke-width="1" stroke-linecap="round" />
+              <path d="M17 14.5H16M10.5 14.5H13.5" stroke-width="1" stroke-linecap="round" />
+              <path d="M17 7.5H14M10.5 7.5H11.5" stroke-width="1" stroke-linecap="round" />
               <path
-                d="M21 6V3.50519C21 2.92196 20.3109 2.61251 19.875 2.99999C19.2334 3.57029 18.2666 3.57029 17.625 2.99999C16.9834 2.42969 16.0166 2.42969 15.375 2.99999C14.7334 3.57029 13.7666 3.57029 13.125 2.99999C12.4834 2.42969 11.5166 2.42969 10.875 2.99999C10.2334 3.57029 9.26659 3.57029 8.625 2.99999C7.98341 2.42969 7.01659 2.42969 6.375 2.99999C5.73341 3.57029 4.76659 3.57029 4.125 2.99999C3.68909 2.61251 3 2.92196 3 3.50519V14M21 10V20.495C21 21.0782 20.3109 21.3876 19.875 21.0002C19.2334 20.4299 18.2666 20.4299 17.625 21.0002C16.9834 21.5705 16.0166 21.5705 15.375 21.0002C14.7334 20.4299 13.7666 20.4299 13.125 21.0002C12.4834 21.5705 11.5166 21.5705 10.875 21.0002C10.2334 20.4299 9.26659 20.4299 8.625 21.0002C7.98341 21.5705 7.01659 21.5705 6.375 21.0002C5.73341 20.4299 4.76659 20.4299 4.125 21.0002C3.68909 21.3876 3 21.0782 3 20.495V18"
-                stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-              <path d="M7.5 15.5H11.5M16.5 15.5H14.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-              <path d="M16.5 12H12.5M7.5 12H9.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-              <path d="M7.5 8.5H16.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
-              <script xmlns="" />
+                d="M21 7V6.37006C21 5.17705 21 4.58055 20.842 4.09946C20.5425 3.18719 19.8468 2.47096 18.9606 2.16261C18.4933 2 17.9139 2 16.755 2H7.24502C6.08614 2 5.50671 2 5.03939 2.16261C4.15322 2.47096 3.45748 3.18719 3.15795 4.09946C3 4.58055 3 5.17705 3 6.37006V15M21 11V20.3742C21 21.2324 20.015 21.6878 19.3919 21.1176C19.0258 20.7826 18.4742 20.7826 18.1081 21.1176L17.625 21.5597C16.9834 22.1468 16.0166 22.1468 15.375 21.5597C14.7334 20.9726 13.7666 20.9726 13.125 21.5597C12.4834 22.1468 11.5166 22.1468 10.875 21.5597C10.2334 20.9726 9.26659 20.9726 8.625 21.5597C7.98341 22.1468 7.01659 22.1468 6.375 21.5597L5.8919 21.1176C5.52583 20.7826 4.97417 20.7826 4.6081 21.1176C3.985 21.6878 3 21.2324 3 20.3742V19"
+                stroke-width="1" stroke-linecap="round" />
             </svg>
           </button>
           <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')"
@@ -452,4 +455,4 @@
   </div>
 </body>
 
-</html> 
+</html>

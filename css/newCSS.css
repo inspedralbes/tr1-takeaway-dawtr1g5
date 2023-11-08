@@ -77,8 +77,6 @@ img {
   height: 70vh;
 }
 
-
-
 .comandes-page-container {
   text-align: center;
   width: 100%;
@@ -761,6 +759,7 @@ input[type="range"] {
 
 .button-container {
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0);
   display: flex;
   background-color: var(--main-bg-color);
   width: 100%;
@@ -832,3 +831,22 @@ input[type="range"] {
 .btn:hover {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
+
+/* LOADER STYLE STARTS */
+.load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.load img {
+  width: 75%;
+}
+
+.load p {
+  font-size: 2rem;
+}
+
+/* LOADER STYLE ENDS */
