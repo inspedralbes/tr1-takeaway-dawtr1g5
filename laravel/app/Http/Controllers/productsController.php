@@ -66,11 +66,12 @@ class productsController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
             'name' => 'required',
             'artist' => 'required',
         ]);
-
+        $token = $user->currentAccessToken();
         $product = new products;
         $product->name = $request->name;
         $product->artist = $request->artist;
@@ -102,7 +103,6 @@ class productsController extends Controller
             ->where('products.id', '=', $id)
             ->get();
         $genres = genres::all();
-        $type = type::all();
         return view('products.show', ['product' => $product, 'genres' => $genres, 'user' => $user, 'token' => $token]);
     }
 

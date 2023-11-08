@@ -39,7 +39,7 @@ Route::post('/index_adv', [productsController::class, 'index_adv']);
 //TICKET
 Route::post('/ticket', [TicketController::class, 'store']);
 Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
-Route::get('/ticketLast', [TicketController::class, 'getLastTicket']);
+Route::post('/ticketLast', [TicketController::class, 'getLastTicket']);
 
 ///GENRES
 Route::get('/genres', [genresController::class, 'index']);
