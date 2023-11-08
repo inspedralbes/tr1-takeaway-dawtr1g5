@@ -91,9 +91,9 @@ createApp({
   methods: {
     /*
     INFO: es una funcio que serveix per mostrar els productes paginats 
-    PARAMS: page, es la pagina actual, en la que demanem la petició
+    PARAMS: 
+      - page: es la pagina actual, en la que demanem la petició
     */
-
     async fetchData(page) {
       await getProductes(page).then((data) => {
         this.tienda.productes.push(...data.data);
@@ -105,7 +105,6 @@ createApp({
     /*
     INFO: en la pagina es mostren 10 productes, aquesta funcio serveix per quan donas al boto, mostra els 10 seguents.
     */
-
     fetchNextPage() {
       if (this.navegacion.currentPage < this.navegacion.lastPage) {
         const nextPage = this.navegacion.currentPage + 1;
@@ -115,27 +114,27 @@ createApp({
 
     /*
     INFO: Aquesta funcio serveic per mostrar el div.
-    PARAMS: div, es el div que volem mostrar
+    PARAMS: 
+      - div: es el div que volem mostrar
     */
-
     mostrar(div) {
       return this.navegacion.divActual == div;
     },
 
     /*
     INFO: Aquesta funcio serveix per cambiar de Div.
-    PARAMS: div, es el div al que volem cambiar
+    PARAMS: 
+      - div: es el div al que volem cambiar
     */
-
     cambiarDiv(div) {
       this.navegacion.divActual = div;
     },
 
     /*
     INFO: Aquesta funcio serveix per mostrar l'informacio del div
-    PARAMS: div, div que volem mostrar l'informació
+    PARAMS: 
+      - div: div que volem mostrar l'informació
     */
-
     mostrarInfo(div) {
       if (this.tienda.divInfoActual === div) {
         this.tienda.divInfoActual = "";
@@ -146,9 +145,10 @@ createApp({
 
     /* 
     INFO: Aquesta funció troba l'índex d'un element en un array basat en el vostre ID.
-    PARAMS: array, es on hem de buscar. id, el identificador a buscar
+    PARAMS: 
+      - array: es on hem de buscar. 
+      - id: el identificador a buscar
     */
-
     findByIndex(array, id) {
       return array.findIndex(
         (product) => product.id === this.tienda.allProductes[id].id
@@ -157,9 +157,9 @@ createApp({
 
     /*
     INFO: troba la posicio id dintre de la tenda de productes
-    PARAMS: id, identificador a buscar
+    PARAMS: 
+      - id: identificador a buscar
     */
-
     findPositionById(id) {
       for (let i = 0; i < this.tienda.allProductes.length; i++) {
         if (this.tienda.allProductes[i].id === id) {
@@ -171,9 +171,9 @@ createApp({
 
     /*
     INFO: Verifica si un producte ja ha sigut afegit al carro
-    PARAMS: id, identificador del producte a verificar
+    PARAMS: 
+      - id: identificador del producte a verificar
     */
-
     esRepetido(id) {
       return this.carrito.productesAddToCart.some(
         (elemento) => elemento.id === id
@@ -182,9 +182,9 @@ createApp({
 
     /*
     INFO: Afegeix un producte al carro, gestiona quantitat i verifica si esta ya al carro
-    PARAMS: id, es el identificador del producte a afegir al carro
+    PARAMS: 
+      - id: es el identificador del producte a afegir al carro
     */
-
     agregarAlCarro(id) {
       let ogIndex = this.findPositionById(id);
       if (this.tienda.allProductes[ogIndex].count >= 1) {
@@ -207,18 +207,20 @@ createApp({
 
     /*
     INFO: Augmenta la quantitat de un producte a la array
-    PARAMS: array, es el array on conte el producte. index, el index del producte en l'array 
+    PARAMS: 
+      - array, es el array on conte el producte
+      - index, el index del producte en l'array 
     */
-
     addCountProduct(array, index) {
       array[index].count++;
     },
 
     /*
     INFO: Redueix la quantitat d'un producte en l'array, si es menor a 1
-    PARAMS: array, es el array on conte el producte, el index del producte en l'array
+    PARAMS: 
+      - array: es el array on conte el producte
+      - index: index del producte en l'array
     */
-
     substractCountProduct(array, index) {
       if (array[index].count > 1) {
         array[index].count--;
@@ -227,9 +229,9 @@ createApp({
 
     /*
     INFO: Troba productes repetits en el carro amb la mateixa id
-    PARAMS: id, es el identificador de producte a verificar
+    PARAMS: 
+      - id: es el identificador de producte a verificar
     */
-
     repeatedProduct(id) {
       return this.carrito.productesAddToCart.filter(
         (product) => product.id === this.tienda.allProductes[id].id
@@ -239,7 +241,6 @@ createApp({
     /*
     INFO: Calcular el preu total de tots els productes en el carro
     */
-
     calcularPriceTotal() {
       this.carrito.totalPrice = 0;
       for (let i = 0; i < this.carrito.productesAddToCart.length; i++) {
@@ -255,9 +256,9 @@ createApp({
 
     /*
     INFO: Calcula el preu total de un producte basat en el seu identificador
-    PARAMS: id, identificador del producte el qual es calcula el preu
+    PARAMS: 
+      - id: identificador del producte el qual es calcula el preu
     */
-
     calcularPriceProduct(id) {
       let total = 0;
       total =
@@ -269,9 +270,10 @@ createApp({
 
     /*
     INFO: Elimina un producte de l'array
-    PARAMS: array, array que conte el producte a eliminar . index, el index del producte en l'array 
+    PARAMS: 
+      - array: array que conte el producte a eliminar
+      - index: el index del producte en l'array 
     */
-
     deleteProduct(array, index) {
       array.splice(index, 1);
       if (this.carrito.productesAddToCart.length === 0) {
@@ -282,7 +284,6 @@ createApp({
     /*
     INFO: Calcula el nombre total de productes en el carro
     */
-
     calcularTotalCarrito() {
       let total = 0;
       for (let i = 0; i < this.carrito.productesAddToCart.length; i++) {
@@ -294,7 +295,6 @@ createApp({
     /*
     INFO: Realitza una operacio de pagament, introdueixes nom i correu per fer la compra
     */
-
     async checkout() {
       try {
         if (
@@ -335,7 +335,6 @@ createApp({
     /*
     INFO: Activa un modal, o el desactiva
     */
-
     activarModal() {
       if (this.navegacion.activeModal == false) {
         this.navegacion.activeModal = true;
@@ -347,7 +346,6 @@ createApp({
     /*
     INFO: Inicia la busqueda d'un ticket de comanda
     */
-
     startBuscarTicket() {
       this.ticket.checkOrder_Activo = true;
       this.buscarTicket();
@@ -357,7 +355,6 @@ createApp({
     /*
     INFO: BUsca l'informació d'un ticket, i mostra els detalls del ticket
     */
-
     buscarTicket() {
       getTicket(this.ticket.ticketInput)
         .then((data) => {
@@ -391,7 +388,7 @@ createApp({
           this.ticket.error = error.message;
 
           setTimeout(() => {
-            this.ticket.error = ''; // Esto oculta el mensaje de error después de 3 segundos
+            this.ticket.error = '';
           }, 6000);
         });
     },
@@ -399,7 +396,6 @@ createApp({
     /*
     INFO: Fa que en la pagina d'estat de comandes, quan cambia l'estat de la comanda,  l'angle de l'imatge cambia
     */
-
     transicionAngulo() {
       const totalPasos = Math.ceil(
         this.ticket.duracionTransicion / this.ticket.paso
@@ -423,7 +419,6 @@ createApp({
     /*
     INFO: Deteneix la busqueda d'un ticket i neteja l'interval de busqueda
     */
-
     stopBuscarTicket() {
       this.ticket.checkOrder_Activo = false;
       clearInterval(this.fetchInterval);
@@ -431,9 +426,9 @@ createApp({
 
     /*
     INFO:  Quan cliques sobre el boto, podras veure els detalls d'un producte
-    PARAMS: id, es identificador del producte que volem veure
+    PARAMS: 
+      - id: es identificador del producte que volem veure
     */
-
     botonProducte(id) {
       let index = this.findPositionById(id);
       this.tienda.singleProduct = this.tienda.allProductes[index];
@@ -443,9 +438,9 @@ createApp({
 
     /*
     INFO: Divideix una llista de pistes en un format especific, i la formateja
-    PARAMS: tracklist, la llista de pistes que es va a dividir i formatejar
+    PARAMS: 
+      - tracklist: la llista de pistes que es va a dividir i formatejar
     */
-
     splitTracklist(tracklist) {
       return tracklist.split("\r\n").map((track) => {
         const parts = track.split(". ");
@@ -460,9 +455,9 @@ createApp({
 
     /*
     INFO: serviex per que la comanda quan cambia d'estat es mou cap al seguent estat
-    PARAMS: duracion, es la animacio de la comanda
+    PARAMS: 
+      - duracion: es la animacio de la comanda
     */
-
     formatDuration(duracion) {
       const horas = Math.floor(duracion / 60);
       const minutos = duracion % 60;
@@ -481,7 +476,6 @@ createApp({
     /*
     INFO: serveix per mostrar el filtre avançat
     */
-
     mostrarFiltroAvanzado() {
       if (this.navegacion.showFiltroAvanzado) {
         this.navegacion.showFiltroAvanzado = false;
@@ -493,7 +487,6 @@ createApp({
     /*
     INFO: serveix per natejar el filtre avançat
     */
-
     clearFilter() {
       this.filter.genre = 0;
       this.filter.minPrice = 0;
@@ -506,10 +499,8 @@ createApp({
   },
   computed: {
     /*
-
     INFO: serveix per filtrar els productes, utilitza el filtre avaçat.
     */
-
     filterProducts() {
       if (!this.filter.advancedFilter) {
         if (
@@ -562,7 +553,6 @@ createApp({
     /*
     INFO: funcio per determinar si es mostra el boto de "mostrar mes productes"
     */
-
     showLoadButton() {
       return (
         !this.filter.advancedFilter &&
@@ -576,7 +566,6 @@ createApp({
     /*
     INFO: fa fetch depenent dels filtres avançats
     */
-
     fetchWithFilter() {
       this.filter.advancedFilter = true;
       const data = {
