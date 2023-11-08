@@ -271,30 +271,37 @@
               <input id="user_name" class="input" v-model="usuario.userName" type="text"
                 placeholder="Escriu el teu nom complet..." />
 
-              <div class="field">
-                <label for="user_email">Email</label>
-                <div class="control">
-                  <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
-                    placeholder="exemple@exemple.cat" />
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </span>
+                <div class="field">
+                  <label for="user_email">Email</label>
+                  <div class="control">
+                    <input
+                      id="user_email"
+                      class="input"
+                      v-model="usuario.userEmail"
+                      type="email"
+                      placeholder="exemple@exemple.cat"
+                      required 
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                  </div>
+                  <div class="error-message" id="email-error-message"></div>
                 </div>
               </div>
-            </div>
-          </section>
-          <footer class="modal-card-foot">
-            <button @click="checkout()" class="button is-black">
-              Confirmar comanda
-            </button>
-            <button @click="activarModal()" class="button">Cancel</button>
-          </footer>
+            </section>
+            <footer class="modal-card-foot">
+              <button @click="checkout()" class="button is-black">
+                Confirmar comanda
+              </button>
+              <button @click="activarModal()" class="button">Cancel</button>
+            </footer>
+          </div>
         </div>
       </div>
-    </div>
 
     <!-- CHECKOUT -->
     <div v-if="mostrar('checkout')" class="checkout">
