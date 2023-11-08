@@ -71,14 +71,21 @@ img {
 /* PAGINA COMANDES STYLE STARTS */
 .comandes-page-container {
   text-align: center;
+  width: 100%;
 }
 
-.comandes-page-container .comandes-form {
-  width: 100%;
+.comandes-form form {
   display: flex;
   justify-content: center;
-  /* flex-direction: row; */
+  flex-direction: row;
+  width: 100%;
 }
+
+.comandes-form input {
+  width: 80%;
+}
+
+
 
 /* PAGINA COMANDES STYLE ENDS */
 
