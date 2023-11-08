@@ -1,5 +1,6 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket, authenticationRegister, authenticationLogin, authenticationLogout } from './copManager.js';
+import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket} from './copManager.js';
+import { registerUser, loginUser, logoutUser } from './copManager.js';
 
 createApp({
   data() {
@@ -11,6 +12,9 @@ createApp({
         currentPage: 1,
         lastPage: '',
         showFiltroAvanzado: false,
+        activeModalProfileLogin: false,
+        activareModalRegister: false,
+        
       },
       filter: {
         advancedFilter: false,
@@ -34,6 +38,10 @@ createApp({
       usuario: {
         userName: '',
         userEmail: '',
+        password: '', 
+        password_confirmation: '',
+        //loginError: null,
+        messageError: null,
       },
       ticket: {
         ticketInput: '',
@@ -190,6 +198,90 @@ createApp({
         this.navegacion.activeModal = false;
       }
     },
+    async login(){
+      try{
+        const data = {
+
+        }
+      }catch(error) {
+        console.error("Error:", error);
+      }
+    },
+    activareModalLogin() {
+      if (this.navegacion.activeModalProfileLogin == false) {
+        this.navegacion.activeModalProfileLogin = true;
+      } else {
+        this.navegacion.activeModalProfileLogin = false;
+      }
+    },
+    activareModalRegister(){
+      if(this.navegacion.activeModalRegister == false){
+        this.navegacion.activeModalProfileLogin = false;
+        this.navegacion.activeModalRegister = true;
+      }else {
+        this.navegacion.activeModalRegister = false;
+      }
+    },
+    async register() {
+      try {
+        if (this.usuario.password !== this.usuario.password_confirmation) {
+          console.log('La contraseña y la confirmación de contraseña no coinciden.');
+          this.usuario.messageError = 'Credencials incorrectes!';
+          return; 
+        }else {
+          this.usuario.messageError = null;
+          
+        }
+    
+        const data = {
+          name: this.usuario.userName,
+          email: this.usuario.userEmail,
+          password: this.usuario.password,
+          password_confirmation: this.usuario.password_confirmation,
+        };
+    
+        const response = await registerUser(data);
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    },
+    async login() {
+      try {
+        const data = {
+          email: this.usuario.userEmail,
+          password: this.usuario.password,
+
+        };   
+        const response = await loginUser(data);
+        
+        if (response.token && response.user) {
+          this.usuario.messageError = null;
+          localStorage.setItem('token', response.token);
+          console.log('Login success!');
+          this.navegacion.divActual = 'portada';
+
+        } else {
+          this.usuario.messageError = 'Credencials incorrectes!';
+          console.log('Login invalid!');
+        }
+        
+      } catch (error) {
+        console.error("Error:", error);
+        //this.usuario.loginError = 'Se produjo un error al iniciar sesión, por favor, inténtalo de nuevo.';
+        
+      }
+    },
+    async logout() {
+      try {
+        const response = await logoutUser();
+        // Procesa la respuesta, verifica si el cierre de sesión fue exitoso, etc.
+
+      } catch (error) {
+        console.error("Error:", error);
+        
+      }
+    },
     startBuscarTicket() {
       this.ticket.checkOrder_Activo = true;
       this.buscarTicket();
@@ -253,6 +345,7 @@ createApp({
       this.tienda.productes = [];
       this.mostrarFiltroAvanzado();
     },
+    
   },
   computed: {
     filterProducts() {
@@ -304,6 +397,7 @@ createApp({
         this.tienda.productes = response;
       });
     },
+
   },
   watch: {
     'navegacion.divActual': function (newDivActual) {

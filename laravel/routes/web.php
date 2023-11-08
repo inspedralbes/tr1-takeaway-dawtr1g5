@@ -32,7 +32,6 @@ Route::get('/products', [productsController::class, 'index_all'])->name('product
 Route::post('/products', [productsController::class, 'store'])->name('products');
 Route::get('/products/{id}', [productsController::class, 'show'])->name('products-edit');
 Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');
-
 Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
 
 //TICKETS
