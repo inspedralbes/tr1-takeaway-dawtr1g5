@@ -60,8 +60,6 @@ class productsController extends Controller
 
         $products = $query->get();
         return response()->json($products);
-
-
     }
 
     public function store(Request $request)
@@ -99,7 +97,6 @@ class productsController extends Controller
             ->where('products.id', '=', $id)
             ->get();
         $genres = genres::all();
-        $type = type::all();
         return view('products.show', ['product' => $product, 'genres' => $genres]);
     }
 
