@@ -295,41 +295,51 @@ createApp({
     /*
     INFO: Realitza una operacio de pagament, introdueixes nom i correu per fer la compra
     */
-    async checkout() {
-      try {
-        if (
-          this.usuario.userEmail &&
-          document.getElementById("user_email").checkValidity()
-        ) {
-          const data = {
-            precio: this.carrito.totalPrice,
-            compra: this.carrito.productesAddToCart,
-            userName: this.usuario.userName,
-            userEmail: this.usuario.userEmail,
-          };
 
-          const data2 = await storeTicket(data);
+    checkout() {
+      if (
+        this.usuario.userEmail &&
+        document.getElementById("user_email").checkValidity()
+      ) {
+        const data = {
+          compra: this.carrito.productesAddToCart,
+          userName: this.usuario.userName,
+          userEmail: this.usuario.userEmail,
+        };
 
-          document.getElementById("email-error-message").textContent = "";
+        this.activarModal();
+        this.navegacion.divActual = "loader-ticket";
 
-          // console.log(data2);
+        storeTicket(data)
+          .then(() => {
+            this.goToCheckout();
+          })
+          .catch((error) => {
+            console.error("Error al almacenar el ticket:", error);
+          })
+          .finally(() => {
+            this.navegacion.divActual = "checkout";
+          });
+      } else {
+        document.getElementById("email-error-message").textContent =
+          "Correo no válido";
+      }
+    },
 
+    goToCheckout() {
+      getLastTicket()
+        .then((lastTicketData) => {
+          this.ticket.ticket = lastTicketData;
+        })
+        .catch((error) => {
+          console.error("Error al obtener el último ticket:", error);
+        })
+        .finally(() => {
           this.carrito.productesAddToCart = [];
-          this.activarModal();
           this.usuario.userName = "";
           this.usuario.userEmail = "";
-
-          const lastTicketData = await getLastTicket();
-          this.ticket.ticket = lastTicketData;
-
           this.navegacion.divActual = "checkout";
-        } else {
-          document.getElementById("email-error-message").textContent =
-            "Correo no válido";
-        }
-      } catch (error) {
-        console.error("Error: No has introduit ningún correu electrónic");
-      }
+        });
     },
 
     /*

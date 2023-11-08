@@ -95,8 +95,8 @@ class TicketController extends Controller
       $ticket->pdf = $pdfPath;
       $ticket->save();
     } catch (\Exception $e) {
-      \Log::error('Error al almacenar el código QR: ' . $e->getMessage());
-      return response()->json(['error' => 'Error al almacenar el código QR'], 500);
+      \Log::error('Error al almacenar el PDF: ' . $e->getMessage());
+      return response()->json(['error' => 'Error al almacenar el PDF'], 500);
     }
 
     Mail::to($ticket->user_email)->send(new compraMail($ticket, $linea));

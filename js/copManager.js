@@ -42,7 +42,14 @@ INFO: Realiztza una solicitud per demanar l'ultim tiquet de compra en el servido
 */
 
 export async function getLastTicket() {
-  const response = await fetch(url + "ticketLast");
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  };
+  const response = await fetch(url + "ticketLast", options);
   const data = await response.json();
   return data;
 }
