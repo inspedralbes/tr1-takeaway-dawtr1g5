@@ -51,8 +51,9 @@ createApp({
         angulo: 0,
         duracionTransicion: 500,
         paso: 5,
-        color: "#ff0800",
-      },
+        color: '#ff0800',
+        error: '',
+      }
     };
   },
   created() {
@@ -77,7 +78,7 @@ createApp({
 
     this.fetchData(1);
   },
-  mounted() {},
+  mounted() { },
   methods: {
     /*
     INFO: es una funcio que serveix per mostrar els productes paginats 
@@ -373,8 +374,16 @@ createApp({
           this.transicionAngulo();
           this.navegacion.divActual = "check-order";
         })
+        .then(() => {
+          this.ticket.ticketInput = '';
+        })
         .catch((error) => {
-          console.error(error.message);
+          this.ticket.ticketInput = '';
+          this.ticket.error = error.message;
+
+          setTimeout(() => {
+            this.ticket.error = ''; // Esto oculta el mensaje de error después de 3 segundos
+          }, 6000);
         });
     },
 

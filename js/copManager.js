@@ -53,7 +53,7 @@ PARAMS: index, el index del tiquet que volem obtenir
 */
 
 export async function getTicket(index) {
-  const response = await fetch(url + "ticket/" + index);
+  const response = await fetch(`${url}ticket/${index}`);
   const data = await response.json();
   return data;
 }
