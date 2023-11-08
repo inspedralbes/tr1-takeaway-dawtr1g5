@@ -57,6 +57,9 @@ createApp({
     };
   },
   created() {
+    /*
+      INFO: llamada a fetch del array completo de elementos y de elementos random para la landing
+    */
     getLandingProductes().then((data) => {
       this.tienda.allProductes = data;
       const randomIndices = [];
@@ -72,10 +75,16 @@ createApp({
       }
     });
 
+    /*
+      INFO: fetch de los generos para el filtro
+    */
     getGenres().then((data) => {
       this.tienda.genres = data;
     });
 
+    /*
+      INFO: fetch de la primera pagina
+    */
     this.fetchData(1);
   },
   mounted() { },
