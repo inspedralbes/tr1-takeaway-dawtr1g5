@@ -353,7 +353,8 @@
                       class="input"
                       v-model="usuario.userEmail"
                       type="email"
-                      placeholder="exemple@exemple.cat" 
+                      placeholder="exemple@exemple.cat"
+                      required 
                     />
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
@@ -362,6 +363,7 @@
                       <i class="fas fa-exclamation-triangle"></i>
                     </span>
                   </div>
+                  <div class="error-message" id="email-error-message"></div>
                 </div>
               </div>
             </section>

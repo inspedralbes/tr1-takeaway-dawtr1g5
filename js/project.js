@@ -180,28 +180,38 @@ createApp({
     },
     async checkout() {
       try {
-        const data = {
-          precio: this.carrito.totalPrice,
-          compra: this.carrito.productesAddToCart,
-          userName: this.usuario.userName,
-          userEmail: this.usuario.userEmail,
-        };
+        if (
+          this.usuario.userEmail &&
+          document.getElementById("user_email").checkValidity()
+        ) {
+          const data = {
+            precio: this.carrito.totalPrice,
+            compra: this.carrito.productesAddToCart,
+            userName: this.usuario.userName,
+            userEmail: this.usuario.userEmail,
+          };
 
-        const data2 = await storeTicket(data);
+          const data2 = await storeTicket(data);
 
-        // console.log(data2);
+          document.getElementById("email-error-message").textContent = "";
 
-        this.carrito.productesAddToCart = [];
-        this.activarModal();
-        this.usuario.userName = "";
-        this.usuario.userEmail = "";
+          // console.log(data2);
 
-        const lastTicketData = await getLastTicket();
-        this.ticket.ticket = lastTicketData;
+          this.carrito.productesAddToCart = [];
+          this.activarModal();
+          this.usuario.userName = "";
+          this.usuario.userEmail = "";
 
-        this.navegacion.divActual = "checkout";
+          const lastTicketData = await getLastTicket();
+          this.ticket.ticket = lastTicketData;
+
+          this.navegacion.divActual = "checkout";
+        } else {
+          document.getElementById("email-error-message").textContent =
+            "Correo no válido";
+        }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error: No has introduit ningún correu electrónic");
       }
     },
     activarModal() {
