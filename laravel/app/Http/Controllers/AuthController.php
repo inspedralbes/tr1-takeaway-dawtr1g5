@@ -42,15 +42,19 @@ class AuthController extends Controller
         ]);
 
         //check email
-
         $user = User::where('email', $fields['email'])->first();
 
         //check password
-
         if (!$user || !Hash::check($fields['password'], $user->passsword)) {
-            return response([
+            return response()->json([
+                'success' => 'false',
                 'message' => 'Bad creds'
+
             ], 401);
+        } else {
+            return response([
+                'message' => 'login success!'
+            ]);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;

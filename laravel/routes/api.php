@@ -20,7 +20,6 @@ use App\Http\Controllers\genresController;
 
 //PROTECTED ROUTES
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
@@ -30,7 +29,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
 
 //PUBLIC ROUTES 'PRODUCTS'
 Route::get('/index', [productsController::class, 'index']);

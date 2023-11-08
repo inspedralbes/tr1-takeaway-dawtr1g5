@@ -1,5 +1,6 @@
 const url = 'http://localhost:8000/api/';
 // const url = 'http://192.168.0.131:8000/api/';
+import axios from 'axios'
 
 export async function getLandingProductes() {
     const response = await fetch(url + 'index');
@@ -51,4 +52,86 @@ export async function productsAdvanced(data) {
         body: JSON.stringify(data)
     })
         .then(response => response.json())
+}
+
+axios.post(url + '/register', data)
+    .then(
+        res => {
+            console.log(res)
+        }
+    ).catch(
+        err => {
+            console.log(err);
+        }
+    )
+
+
+
+export async function authenticationRegister(data) {
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content Type': 'application/json',
+            },
+
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+
+            console.log('Register complete!:', responseData);
+        } else {
+            console.error('Error en el registre: ', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud: ', error);
+    }
+}
+
+export async function authenticationLogin(data) {
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content Type': 'application/json',
+            },
+
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+
+            const token = responseData.token;
+            localStorage.setItem('token', token);
+
+            console.log('Login success!:', responseData);
+        } else {
+            console.error('Error en el inicio de sessión: ', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud: ', error);
+    }
+}
+
+export async function authenticationLogout() {
+    try {
+        const response = await fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer' + localStorage.getItem('token'),
+            },
+        });
+
+        if (response.ok) {
+            localStorage.removeItem('token');
+            console.log('Loged out!');
+        } else {
+            console.error('Error al cerrar sessión: ', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud: ', error);
+    }
 }

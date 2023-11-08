@@ -18,7 +18,7 @@
     <!--HEADER-->
     <header>
       <div class="header"
-        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes')">
+        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('login')">
         <a @click="cambiarDiv('portada')">
           <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         </a>
@@ -47,6 +47,13 @@
             <p style="display: inline;" v-if="!filter.advancedFilter">({{this.tienda.productes.length}} de
               {{this.tienda.allProductes.length}})</p>
             <p style="display: inline;" v-else>({{this.tienda.productes.length}})</p>
+          </div>
+        </div>
+      </div>
+      <div v-if="mostrar('login')">
+        <div class="container-loginForm">
+          <div class="login">
+
           </div>
         </div>
       </div>
