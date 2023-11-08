@@ -68,31 +68,28 @@ img {
 
 /* LANDING PAGE ENDS */
 
-/* CHECK ORDER STYLE STARTS */
-.check-order svg {
-  /* width: 40px; */
-  height: 300px;
+/* PAGINA COMANDES STYLE STARTS */
+.comandes-page-container {
+  text-align: center;
 }
 
-/* .pendent-preparar {
-  color: #ff0800;
-} */
+.comandes-page-container .comandes-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: row; */
+}
+
+/* PAGINA COMANDES STYLE ENDS */
+
+/* CHECK ORDER STYLE STARTS */
+.check-order svg {
+  height: 300px;
+}
 
 .rotar {
   transition: all 1s ease;
 }
-
-/* .preparacio {
-  color: var(--icon-color);
-}
-
-.preparat {
-  color: #00ff6a;
-}
-
-.recollit {
-  color: #33ff00;
-} */
 
 /* CHECK ORDER STYLE ENDS */
 

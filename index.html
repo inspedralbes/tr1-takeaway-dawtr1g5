@@ -91,10 +91,18 @@
     </div>
 
     <!-- COMANDA -->
-    <div class="landing-page" v-if="mostrar('comandes')">
-      <div class="landing-container">
-        <img src="/img/check.png" alt="check" class="img-check" />
-        <div class="landing-form">
+    <div class="comandes-page" v-if="mostrar('comandes')">
+      <div class="comandes-page-container">
+        <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M21 6V3.50519C21 2.92196 20.3109 2.61251 19.875 2.99999C19.2334 3.57029 18.2666 3.57029 17.625 2.99999C16.9834 2.42969 16.0166 2.42969 15.375 2.99999C14.7334 3.57029 13.7666 3.57029 13.125 2.99999C12.4834 2.42969 11.5166 2.42969 10.875 2.99999C10.2334 3.57029 9.26659 3.57029 8.625 2.99999C7.98341 2.42969 7.01659 2.42969 6.375 2.99999C5.73341 3.57029 4.76659 3.57029 4.125 2.99999C3.68909 2.61251 3 2.92196 3 3.50519V14M21 10V20.495C21 21.0782 20.3109 21.3876 19.875 21.0002C19.2334 20.4299 18.2666 20.4299 17.625 21.0002C16.9834 21.5705 16.0166 21.5705 15.375 21.0002C14.7334 20.4299 13.7666 20.4299 13.125 21.0002C12.4834 21.5705 11.5166 21.5705 10.875 21.0002C10.2334 20.4299 9.26659 20.4299 8.625 21.0002C7.98341 21.5705 7.01659 21.5705 6.375 21.0002C5.73341 20.4299 4.76659 20.4299 4.125 21.0002C3.68909 21.3876 3 21.0782 3 20.495V18"
+            stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <path d="M7.5 15.5H11.5M16.5 15.5H14.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <path d="M16.5 12H12.5M7.5 12H9.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <path d="M7.5 8.5H16.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <script xmlns="" />
+        </svg>
+        <div class="comandes-form">
           <form @submit.prevent="buscarTicket">
             <input class="input" v-model="ticket.ticketInput" type="text"
               placeholder="Escriu el ID de la teva comanda..." />
@@ -149,7 +157,7 @@
         <button class="btn-atras" @click="cambiarDiv('tienda'); divInfoActual = ''">
           <svg class="flecha-producte" stroke="currentColor" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 12H8M8 12L11 9M8 12L11 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"
+            <path d="M16 12H8M8 12L11 9M8 12L11 15" stroke="currentColor" stroke-width="1" stroke-linecap="round"
               stroke-linejoin="round" />
             <path
               d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
@@ -401,7 +409,17 @@
                 stroke-width="1" stroke-linecap="round" />
             </svg>
           </button>
-
+          <button :class="['button-footer',{'clicked': mostrar('comandes')}]" @click="cambiarDiv('comandes')">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M21 6V3.50519C21 2.92196 20.3109 2.61251 19.875 2.99999C19.2334 3.57029 18.2666 3.57029 17.625 2.99999C16.9834 2.42969 16.0166 2.42969 15.375 2.99999C14.7334 3.57029 13.7666 3.57029 13.125 2.99999C12.4834 2.42969 11.5166 2.42969 10.875 2.99999C10.2334 3.57029 9.26659 3.57029 8.625 2.99999C7.98341 2.42969 7.01659 2.42969 6.375 2.99999C5.73341 3.57029 4.76659 3.57029 4.125 2.99999C3.68909 2.61251 3 2.92196 3 3.50519V14M21 10V20.495C21 21.0782 20.3109 21.3876 19.875 21.0002C19.2334 20.4299 18.2666 20.4299 17.625 21.0002C16.9834 21.5705 16.0166 21.5705 15.375 21.0002C14.7334 20.4299 13.7666 20.4299 13.125 21.0002C12.4834 21.5705 11.5166 21.5705 10.875 21.0002C10.2334 20.4299 9.26659 20.4299 8.625 21.0002C7.98341 21.5705 7.01659 21.5705 6.375 21.0002C5.73341 20.4299 4.76659 20.4299 4.125 21.0002C3.68909 21.3876 3 21.0782 3 20.495V18"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              <path d="M7.5 15.5H11.5M16.5 15.5H14.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              <path d="M16.5 12H12.5M7.5 12H9.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              <path d="M7.5 8.5H16.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              <script xmlns="" />
+            </svg>
+          </button>
           <button :class="['button-footer','shop-cart',{'clicked': mostrar('carro')}]" @click="cambiarDiv('carro')"
             :disabled="carrito.productesAddToCart.length===0">
             <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
