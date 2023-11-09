@@ -29,6 +29,7 @@ createApp({
         divInfoActual: "",
         singleProduct: [],
         genres: [],
+        loaderProduct: true,
       },
       carrito: {
         productesAddToCart: [],
@@ -116,10 +117,14 @@ createApp({
     */
     async fetchData(page) {
       await getProductes(page).then((data) => {
+        this.tienda.loaderProduct = true;
         this.tienda.productes.push(...data.data);
         this.navegacion.currentPage = data.current_page;
         this.navegacion.lastPage = data.last_page;
-      });
+      })
+        .finally(() => {
+          this.tienda.loaderProduct = false;
+        });
     },
 
     /*
@@ -680,13 +685,7 @@ createApp({
     INFO: funcio per determinar si es mostra el boto de "mostrar mes productes"
     */
     showLoadButton() {
-      return (
-        !this.filter.advancedFilter &&
-        (this.navegacion.inputValue === null ||
-          this.navegacion.inputValue === "") &&
-        this.navegacion.currentPage != this.navegacion.lastPage &&
-        this.tienda.productes.length != 0
-      );
+      return (!this.filter.advancedFilter && (this.navegacion.inputValue === null || this.navegacion.inputValue === "") && this.navegacion.currentPage != this.navegacion.lastPage && this.tienda.productes.length != 0) && !this.tienda.loaderProduct;
     },
 
     /*

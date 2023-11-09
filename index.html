@@ -438,6 +438,7 @@
         </svg>
       </div>
       <button v-if="showLoadButton" @click="fetchNextPage" class="button btn-carrega">Carrega següents</button>
+      <span v-if="tienda.loaderProduct" class="loader-product"></span>
     </div>
 
     <!-- PRODUCTE -->
@@ -582,7 +583,23 @@
 
     <!-- LOADER -->
     <div class="load" v-if="mostrar('loader-ticket')">
-      <img src="img/giphy.gif" alt="">
+      <!-- <img src="img/giphy.gif" alt=""> -->
+      <div class="container-vinyl">
+        <div class="plate">
+          <div class="black">
+            <div class="border">
+              <div class="white">
+                <div class="center"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player">
+          <div class="rect"></div>
+          <div class="circ"></div>
+        </div>
+      </div>
       <p>Carregant...</p>
     </div>
 

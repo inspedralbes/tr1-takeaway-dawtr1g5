@@ -935,8 +935,107 @@ input[type="range"] {
   height: 100vh;
 }
 
+/* 
 .load img {
   width: 75%;
+} */
+
+.container-vinyl {
+  width: 175px;
+  height: 175px;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 5px 5px 0 0 gray;
+}
+
+.plate {
+  width: fit-content;
+}
+
+.plate .black,
+.plate .white,
+.plate .center,
+.plate .border {
+  border-radius: 100%;
+}
+
+.container-vinyl,
+.plate .black,
+.plate .white,
+.plate .border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plate .black {
+  width: 150px;
+  height: 150px;
+  background-color: black;
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.plate .white {
+  width: 70px;
+  height: 70px;
+  background-color: var(--icon-color);
+}
+
+.plate .center {
+  width: 20px;
+  height: 20px;
+  background-color: gray;
+}
+
+.plate .border {
+  width: 111px;
+  height: 111px;
+  border-top: 3px solid var(--icon-color);
+  border-bottom: 3px solid var(--icon-color);
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  rotate: -45deg;
+}
+
+.player .circ {
+  width: 25px;
+  height: 25px;
+  background-color: var(--icon-color);
+  border-radius: 100%;
+  z-index: 1;
+}
+
+.player .rect {
+  width: 10px;
+  height: 55px;
+  background-color: var(--icon-color);
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
 }
 
 .load p {
@@ -944,3 +1043,41 @@ input[type="range"] {
 }
 
 /* LOADER STYLE ENDS */
+
+/* LOADER PRODUCT STYLE STARTS */
+.loader-product {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid black;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loader-product::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-left: 4px solid #ffae00;
+  border-bottom: 4px solid transparent;
+  animation: rotation 0.5s linear infinite reverse;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* LOADER PRODUCT STYLE ENDS */
