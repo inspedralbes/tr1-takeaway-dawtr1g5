@@ -174,7 +174,7 @@ header {
   background-color: black;
 }
 
-.profile{
+.profile {
   max-height: 0;
   overflow: hidden;
   transition: max-height ease 1s;
@@ -195,7 +195,7 @@ header {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.show{
+.show {
   max-height: 150px;
 }
 
@@ -714,6 +714,7 @@ header {
   border: 0;
   border-radius: 50%;
   width: 50px;
+  padding: 3px;
   height: 50px;
   background-color: transparent;
   display: flex;
@@ -722,10 +723,6 @@ header {
   color: #fff;
   transition: all ease-in-out 0.3s, border 0s;
   cursor: pointer;
-}
-
-.button-footer svg {
-  padding: 3px;
 }
 
 .button-footer.shop-cart {
@@ -739,6 +736,58 @@ header {
 
 .button-footer:disabled {
   color: red;
+}
+
+.svg-profile-container {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.svg-profile-edit {
+  width: 100px;
+  height: 100px;
+  fill: none;
+  stroke-width: 2;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 
+.info-profile-container {
+  top: 60%;
+  left: 50%;
+} */
+
+.user-info {
+  position: fixed;
+  top: 40%;
+  margin-top: 15px;
+  display: table;
+  width: 100%;
+}
+
+.user-info h3,
+.user-info p {
+  display: table-cell;
+  padding: 10px;
+  border: 1px solid #dddddd;
+}
+
+.user-info h3 {
+  font-size: 18px;
+}
+
+.user-info p {
+  color: #888888;
+  font-size: 14px;
 }
 
 .bubble {
