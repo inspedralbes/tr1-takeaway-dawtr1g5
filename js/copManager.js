@@ -1,5 +1,4 @@
 const url = "http://localhost:8000/api/";
-// const url = 'http://192.168.0.131:8000/api/';
 
 /*
 INFO: Realitza una solicitud per obtenir productes per la pagina d'inici

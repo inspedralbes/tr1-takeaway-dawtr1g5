@@ -97,8 +97,6 @@
               stroke-width="1" stroke-linecap="round" />
           </svg>
         </button>
-        <!-- <button v-else @click="goToProfile()" class="button-footer">
-        </button> -->
       </div>
     </header>
 
@@ -366,7 +364,7 @@
             <div class="content-carrousel">
               <figure v-for="(actual, index) in portada.productosRandom" class="shadow" :key="index">
                 <button @click="botonProducte(actual.id)">
-                  <img :src="'./laravel/public/' + actual.image" />
+                  <img :src="'./laravel/public/' + actual.image" alt="" />
                 </button>
               </figure>
             </div>
@@ -468,20 +466,6 @@
         <p class="product-info">
           {{formatDuration(tienda.singleProduct.duracion)}}
         </p>
-        <!-- <div class="valoration-container">
-          <div class="rating">
-            <input value="5" name="rate" id="star5" type="radio">
-            <label title="text" for="star5"></label>
-            <input value="4" name="rate" id="star4" type="radio">
-            <label title="text" for="star4"></label>
-            <input value="3" name="rate" id="star3" type="radio" checked="">
-            <label title="text" for="star3"></label>
-            <input value="2" name="rate" id="star2" type="radio">
-            <label title="text" for="star2"></label>
-            <input value="1" name="rate" id="star1" type="radio">
-            <label title="text" for="star1"></label>
-          </div>
-        </div> -->
         <div class="add-product-cart">
           <button @click="agregarAlCarro(tienda.singleProduct.id)" class="add-to-cart-container">
             <img class="add-to-cart-img" src="img/cart.jpg" alt="" />

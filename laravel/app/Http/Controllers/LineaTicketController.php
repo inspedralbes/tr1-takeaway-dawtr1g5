@@ -8,8 +8,5 @@ use App\Models\ticket;
 
 class LineaTicketController extends Controller
 {
-    //
-    public function index()
-    {
-    }
+
 }

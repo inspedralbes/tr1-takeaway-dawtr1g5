@@ -1,12 +1,11 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
-import { registerUser, loginUser, logoutUser, getMyTickets } from './copManager.js';
+import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket, registerUser, loginUser, logoutUser, getMyTickets } from './copManager.js';
 
 createApp({
   data() {
     return {
       navegacion: {
-        divActual: "profile",
+        divActual: "portada",
         activeModal: false,
         inputValue: null,
         currentPage: 1,
@@ -264,14 +263,10 @@ createApp({
     */
     calcularPriceTotal() {
       this.carrito.totalPrice = 0;
-      for (let i = 0; i < this.carrito.productesAddToCart.length; i++) {
-        this.carrito.totalPrice +=
-          this.carrito.productesAddToCart[i].price *
-          this.carrito.productesAddToCart[i].count;
+      for (const producto of this.carrito.productesAddToCart) {
+        this.carrito.totalPrice += producto.price * producto.count;
       }
-      this.carrito.totalPrice = (
-        Math.round(this.carrito.totalPrice * 100) / 100
-      ).toFixed(2);
+      this.carrito.totalPrice = (Math.round(this.carrito.totalPrice * 100) / 100).toFixed(2);
       return this.carrito.totalPrice;
     },
 
@@ -366,7 +361,7 @@ createApp({
     INFO: Activa un modal, o el desactiva
     */
     activarModal() {
-      if (this.navegacion.activeModal == false) {
+      if (!this.navegacion.activeModal) {
         this.navegacion.activeModal = true;
       } else {
         this.navegacion.activeModal = false;
@@ -412,7 +407,7 @@ createApp({
           password_confirmation: this.usuario.password_confirmation,
         };
 
-        const response = await registerUser(data);
+        await registerUser(data);
 
         if (response.status === 409) {
           this.usuario.messageError = 'El usuario ya está registrado.';
@@ -643,11 +638,7 @@ createApp({
     */
     filterProducts() {
       if (!this.filter.advancedFilter) {
-        if (
-          this.navegacion.inputValue == null ||
-          this.navegacion.inputValue == ""
-        ) {
-          // this.fetchData(1);
+        if (this.navegacion.inputValue == null || this.navegacion.inputValue == "") {
           return this.tienda.productes;
         } else {
           let filteredProducts = [];
@@ -655,8 +646,7 @@ createApp({
           const inputs = this.navegacion.inputValue
             .split(" ")
             .map((input) => input.toLowerCase());
-          for (let i = 0; i < inputs.length; i++) {
-            let currentInput = inputs[i];
+          for (const currentInput of inputs) {
             filteredProducts = filteredProducts.filter(
               (product) =>
                 product.name.toLowerCase().includes(currentInput) ||
@@ -666,10 +656,7 @@ createApp({
           return filteredProducts;
         }
       } else {
-        if (
-          this.navegacion.inputValue == null ||
-          this.navegacion.inputValue == ""
-        ) {
+        if (this.navegacion.inputValue == null || this.navegacion.inputValue == "") {
           return this.tienda.productes;
         } else {
           let filteredProducts = [];
@@ -677,8 +664,7 @@ createApp({
           const inputs = this.navegacion.inputValue
             .split(" ")
             .map((input) => input.toLowerCase());
-          for (let i = 0; i < inputs.length; i++) {
-            let currentInput = inputs[i];
+          for (const currentInput of inputs) {
             filteredProducts = filteredProducts.filter(
               (product) =>
                 product.name.toLowerCase().includes(currentInput) ||
