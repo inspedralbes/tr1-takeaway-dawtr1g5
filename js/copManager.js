@@ -122,3 +122,14 @@ export async function logoutUser() {
   })
     .then(response => response.json());
 }
+
+export async function getMyTickets() {
+  return fetch(`${url}tickets`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    }
+  })
+    .then(response => response.json());
+}

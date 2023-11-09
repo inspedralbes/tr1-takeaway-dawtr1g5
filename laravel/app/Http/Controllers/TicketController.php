@@ -25,6 +25,13 @@ class TicketController extends Controller
     return view('tickets.index', ['tickets' => $ticket]);
   }
 
+  public function indexMyTickets()
+  {
+    $email = auth()->user()->email;
+    $tickets = ticket::where('user_email', $email)->get();
+
+    return response()->json($tickets);
+  }
 
   public function store(Request $request)
   {

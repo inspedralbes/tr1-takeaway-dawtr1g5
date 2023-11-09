@@ -68,50 +68,62 @@ img {
 /* LANDING PAGE ENDS */
 
 /* PROFILE STYLE STARTS */
-.svg-profile-container {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
 }
 
-.svg-profile-edit {
-  width: 100px;
-  height: 100px;
-  fill: none;
-  stroke-width: 2;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.user-info {
-  position: fixed;
-  top: 40%;
-  margin-top: 15px;
-  display: table;
+.profile-container button {
+  margin-top: 10%;
   width: 100%;
 }
 
-.user-info h3,
-.user-info p {
-  display: table-cell;
-  padding: 10px;
-  border: 1px solid #dddddd;
+.profile-container>svg {
+  color: black;
+  width: 150px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  align-items: center;
 }
 
-.user-info h3 {
-  font-size: 18px;
+.info-profile-container {
+  border: 1px solid lightgray;
+  width: 90%;
 }
 
-.user-info p {
-  color: #888888;
-  font-size: 14px;
+.info-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-user svg {
+  color: black;
+  width: 40px;
+}
+
+.lista-tickets {
+  width: 90%;
+}
+
+.lista-tickets h1 {
+  font-size: 2rem;
+}
+
+.myTicket {
+  width: 100%;
+  display: grid;
+  grid-template-columns: .5fr 1.5fr;
+  height: fit-content;
+  margin-bottom: 10px;
+  border-bottom: 2px double lightgray;
+}
+
+.myTicket svg {
+  width: 80px;
 }
 
 /* PROFILE STYLE ENDS */

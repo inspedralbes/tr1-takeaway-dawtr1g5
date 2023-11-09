@@ -18,17 +18,10 @@ use App\Http\Controllers\genresController;
 |
 */
 
-// Route::get('register', [UserController::class, 'register']);
-// Route::get('login', [UserController::class, 'login']);
-
-// Route::group(['middleware' => ["auth:sanctum"]], function() {
-//     Route::get('user-profile', [UserController::class, 'userProfile']);
-//     Route::get('logout', [UserController::class, 'logout']);
-// });
-
 //PROTECTED ROUTES
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/tickets', [TicketController::class, 'indexMyTickets']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -49,6 +42,6 @@ Route::post('/ticket', [TicketController::class, 'store']);
 Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
 Route::post('/ticketLast', [TicketController::class, 'getLastTicket']);
 
-//PUBLIC ROUTES 'GENRES'
 
+//PUBLIC ROUTES 'GENRES'
 Route::get('/genres', [genresController::class, 'index']);

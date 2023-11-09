@@ -1,12 +1,12 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
-import { registerUser, loginUser, logoutUser } from './copManager.js';
+import { registerUser, loginUser, logoutUser, getMyTickets } from './copManager.js';
 
 createApp({
   data() {
     return {
       navegacion: {
-        divActual: "portada",
+        divActual: "profile",
         activeModal: false,
         inputValue: null,
         currentPage: 1,
@@ -42,6 +42,7 @@ createApp({
         messageError: null,
         usuarioAutenticado: false,
         usuarioRegistrado: false,
+        myTickets: [],
       },
       ticket: {
         ticketInput: "",
@@ -85,8 +86,28 @@ createApp({
       INFO: fetch de la primera pagina
     */
     this.fetchData(1);
+
+    /* 
+    Recojo el tocken y compruebo si existe sesion
+    */
+    const token = localStorage.getItem('token');
+    const user_name = localStorage.getItem('user_name');
+    const user_email = localStorage.getItem('user_email');
+
+    if (token) {
+      this.usuario.usuarioRegistrado = true;
+      this.getAllMyTickets();
+    }
+
+    if (user_name) {
+      this.usuario.userName = user_name;
+    }
+
+    if (user_email) {
+      this.usuario.userEmail = user_email;
+    }
+
   },
-  mounted() { },
   methods: {
     /*
     INFO: es una funcio que serveix per mostrar els productes paginats 
@@ -360,21 +381,6 @@ createApp({
           break;
       }
     },
-    // activareModalLogin() {
-    //   if (this.navegacion.activeModalProfileLogin == false) {
-    //     this.navegacion.activeModalProfileLogin = true;
-    //   } else {
-    //     this.navegacion.activeModalProfileLogin = false;
-    //   }
-    // },
-    // activareModalRegister() {
-    //   if (this.navegacion.activeModalRegister == false) {
-    //     this.navegacion.activeModalProfileLogin = false;
-    //     this.navegacion.activeModalRegister = true;
-    //   } else {
-    //     this.navegacion.activeModalRegister = false;
-    //   }
-    // },
     async register() {
       try {
         if (this.usuario.password !== this.usuario.password_confirmation) {
@@ -409,7 +415,6 @@ createApp({
       }
     },
     async login() {
-
       try {
         const data = {
           email: this.usuario.userEmail,
@@ -420,10 +425,14 @@ createApp({
         if (response.token && response.user) {
           this.usuario.messageError = null;
           localStorage.setItem('token', response.token);
+          localStorage.setItem('user_name', response.user.name);
+          localStorage.setItem('user_email', response.user.email);
 
+          this.getAllMyTickets();
+
+          this.usuario.userEmail = response.user.email;
+          this.usuario.userName = response.user.name;
           this.usuario.usuarioRegistrado = true;
-          console.log(this.usuario.usuarioRegistrado);
-
 
           setTimeout(() => {
             this.activaModalLogin(0);
@@ -440,22 +449,33 @@ createApp({
     async logout() {
       try {
         const response = await logoutUser();
-        // Procesa la respuesta, verifica si el cierre de sesión fue exitoso, etc.
-
+        localStorage.clear();
+        this.usuario.usuarioRegistrado = false;
+        this.usuario.myTickets = [];
+        this.usuario.userName = '';
+        this.usuario.userEmail = '';
+        this.navegacion.divActual = 'portada';
       } catch (error) {
         console.error("Error:", error);
-
       }
     },
     goToProfile() {
       this.navegacion.divActual = "profile";
     },
+    getAllMyTickets() {
+      getMyTickets().then((data) => {
+        this.usuario.myTickets = data;
+      });
+    },
+
+    /*
+    INFO: Comença el fetch cada X segons per actualitzar l'estat de la comanda
+    */
     startBuscarTicket() {
       this.ticket.checkOrder_Activo = true;
       this.buscarTicket();
       this.fetchInterval = setInterval(this.buscarTicket, 10000);
     },
-
     /*
     INFO: BUsca l'informació d'un ticket, i mostra els detalls del ticket
     */
@@ -520,7 +540,7 @@ createApp({
 
         if (pasoActual >= totalPasos) {
           clearInterval(temporizador);
-          this.ticket.angulo = this.ticket.targetAngulo; // Asegurarse de que el ángulo final sea exactamente el targetAngulo
+          this.ticket.angulo = this.ticket.targetAngulo;
         }
       }, this.ticket.paso);
     },
