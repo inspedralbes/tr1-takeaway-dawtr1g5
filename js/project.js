@@ -1,3 +1,5 @@
+//works?
+
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import {
   productsAdvanced,
@@ -389,9 +391,6 @@ createApp({
           this.transicionAngulo();
           this.navegacion.divActual = "check-order";
         })
-        .then(() => {
-          this.ticket.ticketInput = '';
-        })
         .catch((error) => {
           this.ticket.ticketInput = '';
           this.ticket.error = error.message;
@@ -402,6 +401,14 @@ createApp({
         });
     },
 
+    /*
+    INFO: Deteneix la busqueda d'un ticket i neteja l'interval de busqueda
+    */
+    stopBuscarTicket() {
+      this.ticket.checkOrder_Activo = false;
+      this.ticket.ticketInput = '';
+      clearInterval(this.fetchInterval);
+    },
     /*
     INFO: Fa que en la pagina d'estat de comandes, quan cambia l'estat de la comanda,  l'angle de l'imatge cambia
     */
@@ -423,14 +430,6 @@ createApp({
           this.ticket.angulo = this.ticket.targetAngulo; // Asegurarse de que el ángulo final sea exactamente el targetAngulo
         }
       }, this.ticket.paso);
-    },
-
-    /*
-    INFO: Deteneix la busqueda d'un ticket i neteja l'interval de busqueda
-    */
-    stopBuscarTicket() {
-      this.ticket.checkOrder_Activo = false;
-      clearInterval(this.fetchInterval);
     },
 
     /*

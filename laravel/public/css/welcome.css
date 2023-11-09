@@ -118,3 +118,14 @@ h1 {
     background-color: #39bda7;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+
+.btn-logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+
+.btn-logout {
+    display: inline-block;
+}

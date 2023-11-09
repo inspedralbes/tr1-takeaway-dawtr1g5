@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\statusMail;
 use Illuminate\Http\Request;
 use App\Models\ticket;
 use App\Models\LineaTicket;
@@ -150,6 +151,8 @@ class TicketController extends Controller
     $ticket->estat = $request->estat;
 
     $ticket->save();
+
+    Mail::to($ticket->user_email)->send(new statusMail($ticket));
 
     return redirect()->route('tickets')->with('success', 'Ticket actualitzat correctament!');
   }

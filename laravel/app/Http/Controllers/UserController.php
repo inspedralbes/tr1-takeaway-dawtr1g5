@@ -53,11 +53,9 @@ class UserController extends Controller
     
     }
     public function logout(Request $request) {
-        auth()->user()->tokens()->delete(); // Revoke user's tokens
-        auth()->logout(); // Log the user out
+        auth()->user()->tokens()->delete();
+        auth()->logout();
     
         return redirect()->route('login')->with('success', 'Sesión cerrada con éxito.');
-    }
-    
-    
+    }    
 }

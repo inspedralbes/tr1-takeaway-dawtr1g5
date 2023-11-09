@@ -7,6 +7,7 @@ use App\Models\products;
 use App\Models\type;
 use App\Models\genres;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class productsController extends Controller
@@ -37,6 +38,7 @@ class productsController extends Controller
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->select('products.*', 'genres.genre_name')
+            ->orderBy('artist', 'asc')
             ->get();
         $genres = genres::all();
 
@@ -48,7 +50,7 @@ class productsController extends Controller
         $minPrice = intval($request->minPrice);
         $maxPrice = intval($request->maxPrice);
         $genre = intval($request->genre);
-        $query = products::query(); // Inicializar la consulta
+        $query = products::query();
 
 
         if ($genre != 0) {

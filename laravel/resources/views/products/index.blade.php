@@ -7,30 +7,25 @@
 </head>
 
 <div class="container">
-    <a href="http://127.0.0.1:8000/">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up-double" width="24"
-            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M13 14l-4 -4l4 -4"></path>
-            <path d="M8 14l-4 -4l4 -4"></path>
-            <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
-        </svg>
-
-    </a>
-
-    <head>
-        <link rel="stylesheet" href="{{ asset('css/products.css')}}">
-    </head>
-
-    <a href="http://127.0.0.1:8000/"> </a>
-
-    <div class="btn-logout">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="button is-link">Cerrar sesión</button>
-        </form>
+    <div class="is-flex">
+        <a href="http://127.0.0.1:8000/welcome">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up-double" width="24"
+                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M13 14l-4 -4l4 -4"></path>
+                <path d="M8 14l-4 -4l4 -4"></path>
+                <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
+            </svg>
+        </a>
+        <div class="btn-logout ml-auto">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="button is-link is-small">Logout</button>
+            </form>
+        </div>
     </div>
+
 
     <h1>Creació d'un producte</h1>
     <form action="{{ route('products') }}" method="POST" enctype="multipart/form-data">
@@ -68,7 +63,7 @@
             <input type="text" name="compositores" class="input" step="0.01" min="0" value="">
         </div>
         <div class="form-group">
-            <label for="productora" class="label">Producció</label>
+            <label for="productora" class="label">Discogràfica</label>
             <input type="text" name="productora" class="input" step="0.01" min="0" value="">
         </div>
         <div class="form-group">
@@ -103,23 +98,26 @@
         <br>
 
         <div class="buttons">
-            <a type="submit" class="create button is-primary">Crear nou producte</a>
+            <button type="submit" class="create button is-primary">Crear nou producte</button>
             {{-- <a type="submit" href="products/llistat" class="button is-link">Llistat productes</a> --}}
         </div>
 
 
     </form>
     <hr>
+
     <div>
-        <hr>
         <h1>Llistat de productes</h1>
         <ul>
             @foreach ($products as $product)
-            <li><a href="{{route('products-edit',['id'=>$product->id])}}">{{$product->artist}} -
-                    {{$product->name}}</a>
+            <li>
+                <a href="{{ route('products-edit', ['id' => $product->id]) }}">
+                    {{ $product->artist }} - {{ $product->name }}
+                </a>
             </li>
             @endforeach
         </ul>
     </div>
+</div>
 
-    @endsection
+@endsection
