@@ -729,17 +729,17 @@ createApp({
     },
     "filter.genre": function (newGenre) {
       if (newGenre != 0) {
-        this.fetchWithFilter;
+        this.fetchWithFilter();
       }
     },
     "filter.maxPrice": function (newPrice) {
       if (newPrice != 100) {
-        this.fetchWithFilter;
+        this.fetchWithFilter();
       }
     },
     "filter.minPrice": function (newPrice) {
       if (newPrice != 0) {
-        this.fetchWithFilter;
+        this.fetchWithFilter();
       }
     },
   },
