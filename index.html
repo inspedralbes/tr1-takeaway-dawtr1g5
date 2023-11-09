@@ -45,7 +45,6 @@
                 <path
                   d="M18.9975 18C19 17.8358 19 17.669 19 17.5C19 15.0147 15.4183 13 11 13C6.58172 13 3 15.0147 3 17.5C3 19.9853 3 22 11 22C13.231 22 14.8398 21.8433 16 21.5634"
                   stroke-width="1" stroke-linecap="round" />
-                <script xmlns="" />
               </svg>
             </button>
           </div>
@@ -82,7 +81,7 @@
         <a @click="cambiarDiv('portada')">
           <img class="landing-logo" src="img/presidis.png" alt="">
         </a>
-        <button v-if="!usuario.usuarioRegistrado" @click="activareModalLogin()" class="button-footer">
+        <button v-if="!usuario.usuarioRegistrado" @click="activaModalLogin(1)" class="button-footer">
           <svg width="50px" height="50px" stroke="currentColor" style="padding: 3px;" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="6" r="4" stroke-width="1" />
@@ -100,136 +99,130 @@
             <path
               d="M18.9975 18C19 17.8358 19 17.669 19 17.5C19 15.0147 15.4183 13 11 13C6.58172 13 3 15.0147 3 17.5C3 19.9853 3 22 11 22C13.231 22 14.8398 21.8433 16 21.5634"
               stroke-width="1" stroke-linecap="round" />
-            <script xmlns="" />
           </svg>
         </button>
-        <div v-if="!usuario.usuarioRegistrado" :class="['modal',{'is-active': navegacion.activeModalProfileLogin}]">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">LOGIN</p>
-              <button @click="activareModalLogin()" class="delete" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-              <div class="confirm_payment">
-                <div class="field">
-                  <label for="user_email">Email</label>
-                  <div class="control">
-                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
-                      placeholder="example@example.com" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                  </div>
+      </div>
+    </header>
+
+    <!-- LOGIN/REGISTER MODAL -->
+    <div class="log-reg-modals">
+      <div v-if="!usuario.usuarioRegistrado" :class="['modal',{'is-active': navegacion.modalProfileLogin.length!=0}]">
+        <div class="modal-background">
+        </div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p v-if="navegacion.modalProfileLogin==='login'" class="modal-card-title">Login</p>
+            <p v-if="navegacion.modalProfileLogin==='register'" class="modal-card-title">Registra't</p>
+            <button @click="activaModalLogin(0)" class="delete" aria-label="close"></button>
+          </header>
+          <section v-if="navegacion.modalProfileLogin==='login'" class="modal-card-body">
+            <div class="confirm_payment">
+              <div class="field">
+                <label for="user_email">Email</label>
+                <div class="control">
+                  <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
+                    placeholder="example@example.com" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
                 </div>
-                <div class="field">
-                  <label for="user_password">Password</label>
-                  <div class="control">
-                    <input id="user_password" class="input" v-model="usuario.password" type="password"
-                      placeholder="Password" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-lock"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                  </div>
-                </div>
-                <span class="tag is-danger is-medium" v-if="usuario.messageError">
-                  {{usuario.messageError}}
-                </span>
               </div>
-            </section>
-            <footer class="modal-card-foot">
+              <div class="field">
+                <label for="user_password">Password</label>
+                <div class="control">
+                  <input id="user_password" class="input" v-model="usuario.password" type="password"
+                    placeholder="Password" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
+              <span class="tag is-danger is-medium" v-if="usuario.messageError">
+                {{usuario.messageError}}
+              </span>
+            </div>
+          </section>
+          <section v-else-if="navegacion.modalProfileLogin==='register'" class="modal-card-body">
+            <div class="confirm_payment">
+              <div class="field">
+                <label for="user_name">Name</label>
+                <div class="control">
+                  <input id="user_name" class="input" v-model="usuario.userName" type="text" placeholder="Your Name" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="user_email">Email</label>
+                <div class="control">
+                  <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
+                    placeholder="example@example.com" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="user_password">Password</label>
+                <div class="control">
+                  <input id="user_password" class="input" v-model="usuario.password" type="password"
+                    placeholder="Password" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="user_password_confirmation">Confirm Password</label>
+                <div class="control">
+                  <input id="user_password_confirmation" class="input" v-model="usuario.password_confirmation"
+                    type="password" placeholder="Confirm Password" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+              </div>
+              <span class="tag is-danger is-medium" v-if="usuario.messageError">
+                {{usuario.messageError}}
+              </span>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <div v-if="navegacion.modalProfileLogin==='login'">
               <button @click="login()" class="button is-primary" type="submit" v-if="!usuario.usuarioRegistrado">
                 Login
               </button>
-              <button @click="activareModalRegister()" class="button is-link" v-if="!usuarioAutenticado">Sign
-                up</button>
-              <button @click="activareModalLogin()" class="button is-centered">Cancel</button>
-
-            </footer>
-          </div>
-        </div>
-        <div :class="['modal',{'is-active': navegacion.activeModalRegister}]">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">SIGN UP</p>
-              <button @click="activareModalRegister()" class="delete" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-              <div class="confirm_payment">
-                <div class="field">
-                  <label for="user_name">Name</label>
-                  <div class="control">
-                    <input id="user_name" class="input" v-model="usuario.userName" type="text"
-                      placeholder="Your Name" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-user"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="user_email">Email</label>
-                  <div class="control">
-                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
-                      placeholder="example@example.com" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="user_password">Password</label>
-                  <div class="control">
-                    <input id="user_password" class="input" v-model="usuario.password" type="password"
-                      placeholder="Password" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-lock"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="user_password_confirmation">Confirm Password</label>
-                  <div class="control">
-                    <input id="user_password_confirmation" class="input" v-model="usuario.password_confirmation"
-                      type="password" placeholder="Confirm Password" />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-lock"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                  </div>
-                </div>
-                <span class="tag is-danger is-medium" v-if="usuario.messageError">
-                  {{usuario.messageError}}
-                </span>
-              </div>
-            </section>
-
-            <footer class="modal-card-foot">
+              <button @click="activaModalLogin(2)" class="button is-link" v-if="!usuarioAutenticado">Registra't</button>
+              <button @click="activaModalLogin(0)" class="button">Tanca</button>
+            </div>
+            <div v-else-if="navegacion.modalProfileLogin==='register'">
               <button @click="register()" class="button is-primary" type="submit">
-                Sign in
+                Registra't
               </button>
-              <button @click="activareModalRegister()" class="button">Cancel</button>
-              <button @click="activeModalProfileLogin()" class="button is-link"
-                v-if="!usuarioAutenticado">LogIn</button>
-            </footer>
-          </div>
+              <button @click="activaModalLogin(1)" class="button is-link" v-if="!usuarioAutenticado">Torna al
+                login</button>
+              <button @click="activaModalLogin(0)" class="button">Tanca</button>
+            </div>
+          </footer>
         </div>
       </div>
-    </header>
+    </div>
 
     <!-- PROFILE -->
     <div v-if="mostrar('profile')" class="profile-container">

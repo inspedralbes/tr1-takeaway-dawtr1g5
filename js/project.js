@@ -12,9 +12,7 @@ createApp({
         currentPage: 1,
         lastPage: "",
         showFiltroAvanzado: false,
-        activeModalProfileLogin: false,
-        activareModalRegister: false,
-
+        modalProfileLogin: "",
       },
       filter: {
         advancedFilter: false,
@@ -316,9 +314,6 @@ createApp({
           })
           .catch((error) => {
             console.error("Error al almacenar el ticket:", error);
-          })
-          .finally(() => {
-            this.navegacion.divActual = "checkout";
           });
       } else {
         document.getElementById("email-error-message").textContent =
@@ -352,29 +347,34 @@ createApp({
         this.navegacion.activeModal = false;
       }
     },
-    activareModalLogin() {
-
-      if (this.navegacion.activeModalProfileLogin == false) {
-        this.navegacion.activeModalProfileLogin = true;
-      } else {
-        this.navegacion.activeModalProfileLogin = false;
+    activaModalLogin(type) {
+      switch (type) {
+        case 0:
+          this.navegacion.modalProfileLogin = "";
+          break;
+        case 1:
+          this.navegacion.modalProfileLogin = "login";
+          break;
+        case 2:
+          this.navegacion.modalProfileLogin = "register";
+          break;
       }
     },
-    activareModalRegister() {
-      if (this.navegacion.activeModalRegister == false) {
-        this.navegacion.activeModalProfileLogin = false;
-        this.navegacion.activeModalRegister = true;
-      } else {
-        this.navegacion.activeModalRegister = false;
-      }
-    },
-    closeModalLog() {
-      this.navegacion.activeModalProfileLogin = false;
-    },
-    closeModalReg() {
-      this.navegacion.activeModalRegister = false;
-
-    },
+    // activareModalLogin() {
+    //   if (this.navegacion.activeModalProfileLogin == false) {
+    //     this.navegacion.activeModalProfileLogin = true;
+    //   } else {
+    //     this.navegacion.activeModalProfileLogin = false;
+    //   }
+    // },
+    // activareModalRegister() {
+    //   if (this.navegacion.activeModalRegister == false) {
+    //     this.navegacion.activeModalProfileLogin = false;
+    //     this.navegacion.activeModalRegister = true;
+    //   } else {
+    //     this.navegacion.activeModalRegister = false;
+    //   }
+    // },
     async register() {
       try {
         if (this.usuario.password !== this.usuario.password_confirmation) {
@@ -396,12 +396,11 @@ createApp({
         if (response.status === 409) {
           this.usuario.messageError = 'El usuario ya está registrado.';
         } else {
-          console.log('Register success!');
 
           this.usuarioAutenticado = true;
 
           setTimeout(() => {
-            this.closeModalReg();
+            this.activaModalLogin(0);
 
           }, 100);
         }
@@ -425,22 +424,17 @@ createApp({
           this.usuario.usuarioRegistrado = true;
           console.log(this.usuario.usuarioRegistrado);
 
-          console.log('Login success!');
-          this.navegacion.divActual = 'portada';
 
           setTimeout(() => {
-            this.closeModalLog();
+            this.activaModalLogin(0);
           }, 100);
 
         } else {
           this.usuario.messageError = 'Credencials incorrectes!';
-          console.log('Login invalid!');
         }
 
       } catch (error) {
         console.error("Error:", error);
-        //this.usuario.loginError = 'Se produjo un error al iniciar sesión, por favor, inténtalo de nuevo.';
-
       }
     },
     async logout() {
