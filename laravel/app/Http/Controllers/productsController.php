@@ -38,6 +38,7 @@ class productsController extends Controller
         $products = DB::table("products")
             ->join('genres', 'genre_id', '=', 'genres.id')
             ->select('products.*', 'genres.genre_name')
+            ->orderBy('artist', 'asc')
             ->get();
         $genres = genres::all();
 
