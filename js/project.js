@@ -40,8 +40,9 @@ createApp({
         userEmail: '',
         password: '',
         password_confirmation: '',
-        //loginError: null,
         messageError: null,
+        usuarioAutenticado: false,
+        usuarioRegistrado: false,
       },
       ticket: {
         ticketInput: '',
@@ -198,15 +199,6 @@ createApp({
         this.navegacion.activeModal = false;
       }
     },
-    async login() {
-      try {
-        const data = {
-
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    },
     activareModalLogin() {
 
       if (this.navegacion.activeModalProfileLogin == false) {
@@ -228,16 +220,15 @@ createApp({
     },
     closeModalReg() {
       this.navegacion.activeModalRegister = false;
+
     },
     async register() {
       try {
         if (this.usuario.password !== this.usuario.password_confirmation) {
           console.log('La contraseña y la confirmación de contraseña no coinciden.');
           this.usuario.messageError = 'Credencials incorrectes!';
-
           return;
         }
-
         this.usuario.messageError = null;
 
         const data = {
@@ -253,38 +244,39 @@ createApp({
           this.usuario.messageError = 'El usuario ya está registrado.';
         } else {
           console.log('Register success!');
+
+          this.usuarioAutenticado = true;
+
           setTimeout(() => {
             this.closeModalReg();
 
           }, 100);
-
         }
-
       } catch (error) {
         console.error("Error:", error);
       }
     },
     async login() {
+
       try {
-        const loged = false;
         const data = {
           email: this.usuario.userEmail,
           password: this.usuario.password,
-
         };
         const response = await loginUser(data);
 
         if (response.token && response.user) {
           this.usuario.messageError = null;
           localStorage.setItem('token', response.token);
-          loged = true;
+
+          this.usuario.usuarioRegistrado = true;
+          console.log(this.usuario.usuarioRegistrado);
+
           console.log('Login success!');
           this.navegacion.divActual = 'portada';
-          console.log(this.navegacion.activeModalProfileLogin);
 
           setTimeout(() => {
             this.closeModalLog();
-
           }, 100);
 
         } else {
@@ -307,6 +299,9 @@ createApp({
         console.error("Error:", error);
 
       }
+    },
+    goToProfile() {
+      this.navegacion.divActual = "profile";
     },
     startBuscarTicket() {
       this.ticket.checkOrder_Activo = true;

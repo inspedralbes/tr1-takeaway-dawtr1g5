@@ -18,7 +18,7 @@
     <!--HEADER-->
     <header>
       <div class="header"
-        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('login')">
+        v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('login') && !mostrar('profile')">
         <a @click="cambiarDiv('portada')">
           <img class="header__logo" src="img/logoPressidis.PNG" alt="">
         </a>
@@ -58,7 +58,7 @@
         <a @click="cambiarDiv('portada')">
           <img class="landing-logo" src="img/presidis.png" alt="">
         </a>
-        <button @click="activareModalLogin()" class="button-footer">
+        <button v-if="!usuario.usuarioRegistrado" @click="activareModalLogin()" class="button-footer">
           <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="6" r="4" stroke-width="1" />
@@ -67,7 +67,16 @@
               stroke-width="1" stroke-linecap="round" />
           </svg>
         </button>
-        <div :class="['modal',{'is-active': navegacion.activeModalProfileLogin}]">
+        <button v-else @click="goToProfile()" class="button-footer">
+          <svg width="50px" height="50px" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="6" r="4" stroke-width="1" />
+            <path
+              d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+              stroke-width="1" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div v-if="!usuario.usuarioRegistrado" :class="['modal',{'is-active': navegacion.activeModalProfileLogin}]">
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
@@ -108,16 +117,16 @@
               </div>
             </section>
             <footer class="modal-card-foot">
-              <button @click="login()" class="button is-primary" type="submit">
+              <button @click="login()" class="button is-primary" type="submit" v-if="!usuario.usuarioRegistrado">
                 Login
               </button>
-              <button @click="activareModalRegister()" class="button is-link">Sign up</button>
+              <button @click="activareModalRegister()" class="button is-link" v-if="!usuarioAutenticado">Sign
+                up</button>
               <button @click="activareModalLogin()" class="button is-centered">Cancel</button>
 
             </footer>
           </div>
         </div>
-
         <div :class="['modal',{'is-active': navegacion.activeModalRegister}]">
           <div class="modal-background"></div>
           <div class="modal-card">
@@ -187,7 +196,8 @@
                 Sign in
               </button>
               <button @click="activareModalRegister()" class="button">Cancel</button>
-              <button @click="activeModalProfileLogin()" class="button is-link">LogIn</button>
+              <button @click="activeModalProfileLogin()" class="button is-link"
+                v-if="!usuarioAutenticado">LogIn</button>
             </footer>
           </div>
         </div>
@@ -195,6 +205,10 @@
       </div>
     </header>
 
+    <!-- PROFILE -->
+    <div v-if="mostrar('profile')">
+      <h1>hola</h1>
+    </div>
     <!-- PORTADA -->
     <div class="landing-page" v-if="mostrar('portada')">
       <div class="landing-container">
