@@ -6,7 +6,7 @@ Teniu la carpeta /doc per deixar-hi tota la documentació que genereu, en format
 
 HEU DE MODIFICAR AQUEST DOCUMENT AMB LA VOSTRA INFORMACIÖ:
 
-- Nom del projecte -> PresSidis
+- Nom del projecte -> PreSidis
 
 - Petita descripció
 
@@ -26,7 +26,7 @@ HEU DE MODIFICAR AQUEST DOCUMENT AMB LA VOSTRA INFORMACIÖ:
 
 - URL del taiga.io -> https://tree.taiga.io/project/rublormar-tr1-botiga_takeaway-g5/timeline
 
-- URL de preproducció -> 
+- URL de preproducció -> tr1.g5.daw.inspedralbes.cat
 - URL de producció (amb un domini registrat) -> presidis.daw.inspedralbes.cat
 
 - Documentació Plugins Visual and Laravel
