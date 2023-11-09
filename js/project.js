@@ -407,7 +407,7 @@ createApp({
           password_confirmation: this.usuario.password_confirmation,
         };
 
-        await registerUser(data);
+        const response = await registerUser(data);
 
         if (response.status === 409) {
           this.usuario.messageError = 'El usuario ya está registrado.';
