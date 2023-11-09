@@ -295,7 +295,6 @@ createApp({
     /*
     INFO: Realitza una operacio de pagament, introdueixes nom i correu per fer la compra
     */
-
     checkout() {
       if (
         this.usuario.userEmail &&
@@ -508,6 +507,7 @@ createApp({
     },
   },
   computed: {
+
     /*
     INFO: serveix per filtrar els productes, utilitza el filtre avaçat.
     */
@@ -613,3 +613,4 @@ createApp({
     },
   },
 }).mount("#app");
+// hola
