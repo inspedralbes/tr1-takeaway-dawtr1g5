@@ -368,7 +368,6 @@ createApp({
     */
 
     buscarTicket() {
-      console.log(this.ticket.ticketInput);
       getTicket(this.ticket.ticketInput)
         .then((data) => {
           if (data.length > 0) {
