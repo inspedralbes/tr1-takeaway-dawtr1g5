@@ -68,6 +68,37 @@ img {
 /* LANDING PAGE ENDS */
 
 /* PROFILE STYLE STARTS */
+.profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 10%;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  margin: 2%;
+  border: solid 0px lightgray;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.9);
+  max-height: 0;
+  overflow: hidden;
+  transition: all ease-in-out .8s;
+}
+
+.p-drop-shown {
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+  border: solid 1px lightgray;
+  max-height: 150px;
+
+}
+
+.profile-dropdown button {
+  width: 80%;
+  margin: 10%;
+}
+
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -202,7 +233,7 @@ img {
 header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1;
   background-color: var(--main-bg-color);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }

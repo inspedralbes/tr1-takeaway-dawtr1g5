@@ -13,6 +13,7 @@ createApp({
         lastPage: "",
         showFiltroAvanzado: false,
         modalProfileLogin: "",
+        loginDropdown: false,
       },
       filter: {
         advancedFilter: false,
@@ -378,6 +379,14 @@ createApp({
           break;
         case 2:
           this.navegacion.modalProfileLogin = "register";
+          break;
+        case 3:
+
+          if (this.navegacion.loginDropdown) {
+            this.navegacion.loginDropdown = false;
+          } else {
+            this.navegacion.loginDropdown = true;
+          }
           break;
       }
     },
