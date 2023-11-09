@@ -138,6 +138,8 @@ img {
 
 .lista-tickets {
   width: 90%;
+  text-align: center;
+  margin-bottom: 10%;
 }
 
 .lista-tickets h1 {
@@ -155,6 +157,11 @@ img {
 
 .myTicket svg {
   width: 80px;
+}
+
+.ticket.non-element {
+  margin-top: 0;
+  align-items: center;
 }
 
 /* PROFILE STYLE ENDS */
@@ -913,7 +920,7 @@ input[type="range"] {
 }
 
 .clicked {
-  border: 2px solid var(--icon-color);
+  /* border: 2px solid var(--icon-color); */
   color: var(--icon-color);
 }
 

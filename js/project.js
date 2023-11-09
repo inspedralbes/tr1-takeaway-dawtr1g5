@@ -6,7 +6,7 @@ createApp({
   data() {
     return {
       navegacion: {
-        divActual: "portada",
+        divActual: "profile",
         activeModal: false,
         inputValue: null,
         currentPage: 1,
@@ -352,9 +352,12 @@ createApp({
           console.error("Error al obtener el último ticket:", error);
         })
         .finally(() => {
+          this.getAllMyTickets();
           this.carrito.productesAddToCart = [];
-          this.usuario.userName = "";
-          this.usuario.userEmail = "";
+          if (!this.usuario.usuarioRegistrado) {
+            this.usuario.userName = "";
+            this.usuario.userEmail = "";
+          }
           this.navegacion.divActual = "checkout";
         });
     },
@@ -373,12 +376,15 @@ createApp({
       switch (type) {
         case 0:
           this.navegacion.modalProfileLogin = "";
+          this.navegacion.loginDropdown = false;
           break;
         case 1:
           this.navegacion.modalProfileLogin = "login";
+          this.navegacion.loginDropdown = false;
           break;
         case 2:
           this.navegacion.modalProfileLogin = "register";
+          this.navegacion.loginDropdown = false;
           break;
         case 3:
 
@@ -463,12 +469,14 @@ createApp({
         this.usuario.myTickets = [];
         this.usuario.userName = '';
         this.usuario.userEmail = '';
+        this.navegacion.loginDropdown = false;
         this.navegacion.divActual = 'portada';
       } catch (error) {
         console.error("Error:", error);
       }
     },
     goToProfile() {
+      this.navegacion.loginDropdown = false;
       this.navegacion.divActual = "profile";
     },
     getAllMyTickets() {
