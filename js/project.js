@@ -294,7 +294,6 @@ createApp({
     /*
     INFO: Realitza una operacio de pagament, introdueixes nom i correu per fer la compra
     */
-
     checkout() {
       if (
         this.usuario.userEmail &&
