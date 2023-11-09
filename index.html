@@ -79,7 +79,8 @@
                 <div class="field">
                   <label for="user_email">Email</label>
                   <div class="control">
-                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email" placeholder="example@example.com" />
+                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
+                      placeholder="example@example.com" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
                     </span>
@@ -91,7 +92,8 @@
                 <div class="field">
                   <label for="user_password">Password</label>
                   <div class="control">
-                    <input id="user_password" class="input" v-model="usuario.password" type="password" placeholder="Password" />
+                    <input id="user_password" class="input" v-model="usuario.password" type="password"
+                      placeholder="Password" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-lock"></i>
                     </span>
@@ -106,11 +108,12 @@
               </div>
             </section>
             <footer class="modal-card-foot">
-              <button @click="login()" class="button is-primary">
+              <button @click="login()" class="button is-primary" type="submit">
                 Login
               </button>
-              <button @click="activareModalLogin()" class="button">Cancel</button>
               <button @click="activareModalRegister()" class="button is-link">Sign up</button>
+              <button @click="activareModalLogin()" class="button is-centered">Cancel</button>
+
             </footer>
           </div>
         </div>
@@ -127,7 +130,8 @@
                 <div class="field">
                   <label for="user_name">Name</label>
                   <div class="control">
-                    <input id="user_name" class="input" v-model="usuario.userName" type="text" placeholder="Your Name" />
+                    <input id="user_name" class="input" v-model="usuario.userName" type="text"
+                      placeholder="Your Name" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-user"></i>
                     </span>
@@ -136,7 +140,8 @@
                 <div class="field">
                   <label for="user_email">Email</label>
                   <div class="control">
-                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email" placeholder="example@example.com" />
+                    <input id="user_email" class="input" v-model="usuario.userEmail" type="email"
+                      placeholder="example@example.com" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
                     </span>
@@ -148,7 +153,8 @@
                 <div class="field">
                   <label for="user_password">Password</label>
                   <div class="control">
-                    <input id="user_password" class="input" v-model="usuario.password" type="password" placeholder="Password" />
+                    <input id="user_password" class="input" v-model="usuario.password" type="password"
+                      placeholder="Password" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-lock"></i>
                     </span>
@@ -160,7 +166,8 @@
                 <div class="field">
                   <label for="user_password_confirmation">Confirm Password</label>
                   <div class="control">
-                    <input id="user_password_confirmation" class="input" v-model="usuario.password_confirmation" type="password" placeholder="Confirm Password" />
+                    <input id="user_password_confirmation" class="input" v-model="usuario.password_confirmation"
+                      type="password" placeholder="Confirm Password" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-lock"></i>
                     </span>
@@ -174,12 +181,13 @@
                 </span>
               </div>
             </section>
-            
+
             <footer class="modal-card-foot">
-              <button @click="register()" class="button is-primary">
+              <button @click="register()" class="button is-primary" type="submit">
                 Sign in
               </button>
               <button @click="activareModalRegister()" class="button">Cancel</button>
+              <button @click="activeModalProfileLogin()" class="button is-link">LogIn</button>
             </footer>
           </div>
         </div>

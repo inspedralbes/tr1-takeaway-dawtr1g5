@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket} from './copManager.js';
+import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket } from './copManager.js';
 import { registerUser, loginUser, logoutUser } from './copManager.js';
 
 createApp({
@@ -14,7 +14,7 @@ createApp({
         showFiltroAvanzado: false,
         activeModalProfileLogin: false,
         activareModalRegister: false,
-        
+
       },
       filter: {
         advancedFilter: false,
@@ -38,7 +38,7 @@ createApp({
       usuario: {
         userName: '',
         userEmail: '',
-        password: '', 
+        password: '',
         password_confirmation: '',
         //loginError: null,
         messageError: null,
@@ -198,49 +198,67 @@ createApp({
         this.navegacion.activeModal = false;
       }
     },
-    async login(){
-      try{
+    async login() {
+      try {
         const data = {
 
         }
-      }catch(error) {
+      } catch (error) {
         console.error("Error:", error);
       }
     },
     activareModalLogin() {
+
       if (this.navegacion.activeModalProfileLogin == false) {
         this.navegacion.activeModalProfileLogin = true;
       } else {
         this.navegacion.activeModalProfileLogin = false;
       }
     },
-    activareModalRegister(){
-      if(this.navegacion.activeModalRegister == false){
+    activareModalRegister() {
+      if (this.navegacion.activeModalRegister == false) {
         this.navegacion.activeModalProfileLogin = false;
         this.navegacion.activeModalRegister = true;
-      }else {
+      } else {
         this.navegacion.activeModalRegister = false;
       }
+    },
+    closeModalLog() {
+      this.navegacion.activeModalProfileLogin = false;
+    },
+    closeModalReg() {
+      this.navegacion.activeModalRegister = false;
     },
     async register() {
       try {
         if (this.usuario.password !== this.usuario.password_confirmation) {
           console.log('La contraseña y la confirmación de contraseña no coinciden.');
           this.usuario.messageError = 'Credencials incorrectes!';
-          return; 
-        }else {
-          this.usuario.messageError = null;
-          
+
+          return;
         }
-    
+
+        this.usuario.messageError = null;
+
         const data = {
           name: this.usuario.userName,
           email: this.usuario.userEmail,
           password: this.usuario.password,
           password_confirmation: this.usuario.password_confirmation,
         };
-    
+
         const response = await registerUser(data);
+
+        if (response.status === 409) {
+          this.usuario.messageError = 'El usuario ya está registrado.';
+        } else {
+          console.log('Register success!');
+          setTimeout(() => {
+            this.closeModalReg();
+
+          }, 100);
+
+        }
 
       } catch (error) {
         console.error("Error:", error);
@@ -248,28 +266,36 @@ createApp({
     },
     async login() {
       try {
+        const loged = false;
         const data = {
           email: this.usuario.userEmail,
           password: this.usuario.password,
 
-        };   
+        };
         const response = await loginUser(data);
-        
+
         if (response.token && response.user) {
           this.usuario.messageError = null;
           localStorage.setItem('token', response.token);
+          loged = true;
           console.log('Login success!');
           this.navegacion.divActual = 'portada';
+          console.log(this.navegacion.activeModalProfileLogin);
+
+          setTimeout(() => {
+            this.closeModalLog();
+
+          }, 100);
 
         } else {
           this.usuario.messageError = 'Credencials incorrectes!';
           console.log('Login invalid!');
         }
-        
+
       } catch (error) {
         console.error("Error:", error);
         //this.usuario.loginError = 'Se produjo un error al iniciar sesión, por favor, inténtalo de nuevo.';
-        
+
       }
     },
     async logout() {
@@ -279,7 +305,7 @@ createApp({
 
       } catch (error) {
         console.error("Error:", error);
-        
+
       }
     },
     startBuscarTicket() {
@@ -345,7 +371,7 @@ createApp({
       this.tienda.productes = [];
       this.mostrarFiltroAvanzado();
     },
-    
+
   },
   computed: {
     filterProducts() {
