@@ -392,9 +392,6 @@ createApp({
           this.transicionAngulo();
           this.navegacion.divActual = "check-order";
         })
-        .then(() => {
-          this.ticket.ticketInput = '';
-        })
         .catch((error) => {
           this.ticket.ticketInput = '';
           this.ticket.error = error.message;
@@ -410,6 +407,7 @@ createApp({
     */
     stopBuscarTicket() {
       this.ticket.checkOrder_Activo = false;
+      this.ticket.ticketInput = '';
       clearInterval(this.fetchInterval);
     },
     /*

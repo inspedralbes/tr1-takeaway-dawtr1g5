@@ -9,8 +9,8 @@
 <div class="container">
     <div class="is-flex">
         <a href="http://127.0.0.1:8000/welcome">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up-double"
-                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up-double" width="24"
+                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M13 14l-4 -4l4 -4"></path>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    
+
     <h1>Creació d'un producte</h1>
     <form action="{{ route('products') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -63,7 +63,7 @@
             <input type="text" name="compositores" class="input" step="0.01" min="0" value="">
         </div>
         <div class="form-group">
-            <label for="productora" class="label">Producció</label>
+            <label for="productora" class="label">Discogràfica</label>
             <input type="text" name="productora" class="input" step="0.01" min="0" value="">
         </div>
         <div class="form-group">
@@ -105,16 +105,16 @@
 
     </form>
     <hr>
-    
+
     <div>
         <h1>Llistat de productes</h1>
         <ul>
             @foreach ($products as $product)
-                <li>
-                    <a href="{{ route('products-edit', ['id' => $product->id]) }}">
-                        {{ $product->artist }} - {{ $product->name }}
-                    </a>
-                </li>
+            <li>
+                <a href="{{ route('products-edit', ['id' => $product->id]) }}">
+                    {{ $product->artist }} - {{ $product->name }}
+                </a>
+            </li>
             @endforeach
         </ul>
     </div>

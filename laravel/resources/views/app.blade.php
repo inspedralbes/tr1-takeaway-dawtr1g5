@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-    <title>Document</title>
+    <title>PreSidis Shop (admin)</title>
 </head>
 
 <body>
