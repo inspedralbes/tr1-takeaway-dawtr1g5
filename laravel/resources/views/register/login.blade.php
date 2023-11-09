@@ -22,7 +22,7 @@
                             @csrf
 
                             <div class="field">
-                                <label for "email" class="label">{{ __('Correo electrónico') }}</label>
+                                <label for="email" class="label">{{ __('Correo electrónico') }}</label>
                                 <div class="control">
                                     <input id="email" type="email" class="input @error('email') is-danger @enderror"
                                         name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
