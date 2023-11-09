@@ -1,10 +1,6 @@
 @extends('app')
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/products.css')}}">
-</head>
-
 <div class="container">
     <a href="{{ route('tickets') }}">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up-double" width="24"

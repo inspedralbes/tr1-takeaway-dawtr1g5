@@ -2,10 +2,6 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-</head>
-
 <section class="section">
     <div class="container">
         @if(session('error'))
@@ -28,7 +24,8 @@
                             <div class="field">
                                 <label for "email" class="label">{{ __('Correo electrónico') }}</label>
                                 <div class="control">
-                                    <input id="email" type="email" class="input @error('email') is-danger @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="input @error('email') is-danger @enderror"
+                                        name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 </div>
                                 @error('email')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -38,7 +35,9 @@
                             <div class="field">
                                 <label for="password" class="label">{{ __('Contraseña') }}</label>
                                 <div class="control">
-                                    <input id="password" type="password" class="input @error('password') is-danger @enderror" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password"
+                                        class="input @error('password') is-danger @enderror" name="password" required
+                                        autocomplete="current-password">
                                 </div>
                                 @error('password')
                                 <p class="help is-danger">{{ $message }}</p>
