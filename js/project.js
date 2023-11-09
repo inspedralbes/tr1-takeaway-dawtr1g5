@@ -513,8 +513,8 @@ createApp({
     },
   },
   computed: {
-    /*
 
+    /*
     INFO: serveix per filtrar els productes, utilitza el filtre avaçat.
     */
 
