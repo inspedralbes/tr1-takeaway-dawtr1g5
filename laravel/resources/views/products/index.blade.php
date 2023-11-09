@@ -2,9 +2,6 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/products.css')}}">
-</head>
 
 <div class="container">
     <div class="is-flex">

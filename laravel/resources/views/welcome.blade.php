@@ -1,12 +1,9 @@
 @extends('app')
 @section('welcome')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css')}}">
-</head>
 
 <body>
-    
+
     <h1>WELCOME</h1>
     <div class="animation"></div>
 
