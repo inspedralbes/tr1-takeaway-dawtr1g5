@@ -62,8 +62,6 @@ class productsController extends Controller
 
         $products = $query->get();
         return response()->json($products);
-
-
     }
 
     public function store(Request $request)

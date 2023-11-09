@@ -20,6 +20,9 @@ export async function getProductes(page) {
   const response = await fetch(`${url}index_pg?page=${page}`);
   const data = await response.json();
   return data;
+  const response = await fetch(`${url}index_pg?page=${page}`);
+  const data = await response.json();
+  return data;
 }
 
 /*
@@ -73,6 +76,9 @@ export async function getGenres() {
   const response = await fetch(`${url}genres`);
   const data = await response.json();
   return data;
+  const response = await fetch(`${url}genres`);
+  const data = await response.json();
+  return data;
 }
 
 /*
@@ -88,4 +94,36 @@ export async function productsAdvanced(data) {
     },
     body: JSON.stringify(data),
   }).then((response) => response.json());
+}
+
+export async function registerUser(data) {
+  return fetch(url + 'register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json());
+}
+
+export async function loginUser(data) {
+  return fetch(url + 'login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json());
+}
+
+export async function logoutUser() {
+  return fetch(url + 'logout', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json());
 }

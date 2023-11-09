@@ -34,15 +34,15 @@ Route::get('/login', function () {
 Route::post('/login', [UserController::class, 'login']);
 
 // Grupo de rutas protegidas por autenticación
-Route::middleware(['auth'])->group(function () {  
+Route::middleware(['auth'])->group(function () {
     Route::get('/welcome', function () {
         return view('welcome');
     })->name('welcome');
     //PRODUCTS
     Route::get('/products/{id}', [productsController::class, 'show'])->name('products-edit');
-    Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');   
+    Route::patch('/products/{id}', [productsController::class, 'update'])->name('products-update');
     Route::delete('/products/{id}', [productsController::class, 'destroy'])->name('products-destroy');
-    
+
     //TICKETS
     Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets-edit');
     Route::patch('/ticket/{id}', [TicketController::class, 'update'])->name('tickets-update');

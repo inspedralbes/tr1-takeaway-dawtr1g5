@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
@@ -25,21 +26,29 @@ use App\Http\Controllers\genresController;
 //     Route::get('logout', [UserController::class, 'logout']);
 // });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//PROTECTED ROUTES
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-///PUBLIC ROUTES
-//PRODUCTS
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+//PUBLIC ROUTES 'PRODUCTS'
 Route::get('/index', [productsController::class, 'index']);
 Route::get('/index/{id}', [productsController::class, 'index_single']);
 Route::get('/index_pg', [productsController::class, 'index_paginated']);
 Route::post('/index_adv', [productsController::class, 'index_adv']);
 
-//TICKET
+//PUBLIC ROUTES 'TICKETS'
 Route::post('/ticket', [TicketController::class, 'store']);
 Route::get('/ticket/{id}', [TicketController::class, 'showOne_Ticket']);
 Route::post('/ticketLast', [TicketController::class, 'getLastTicket']);
 
-///GENRES
+//PUBLIC ROUTES 'GENRES'
+
 Route::get('/genres', [genresController::class, 'index']);
