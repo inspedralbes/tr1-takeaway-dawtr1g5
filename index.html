@@ -19,22 +19,40 @@
     <header v-if="!mostrar('loader-ticket')">
       <div class="header"
         v-if="!mostrar('checkout') && !mostrar('carro') && !mostrar('portada') && !mostrar('comandes') && !mostrar('login') && !mostrar('profile')">
-        <a @click="cambiarDiv('portada')">
-          <img class="header__logo" src="img/logoPressidis.PNG" alt="">
-        </a>
-        <div class="search-container">
-          <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Cerca...">
+        <div class="black-info">
+          <a @click="cambiarDiv('portada')">
+            <img class="header__logo" src="img/logoPressidis.PNG" alt="">
+          </a>
+          <div class="search-container">
+            <input v-model="navegacion.inputValue" type="text" class="search-input" placeholder="Cerca...">
+          </div>
+          <div class="profile-buttons-header">
+            <button v-if="!usuario.usuarioRegistrado" @click="activareModalLogin()" class="button-footer">
+              <svg width="50px" height="50px" stroke="currentColor" style="padding: 3px;" viewBox="0 0 24 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="6" r="4" stroke-width="1" />
+                <path
+                  d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+                  stroke-width="1" stroke-linecap="round" />
+              </svg>
+            </button>
+            <button v-else @click="goToProfile()" class="button-footer">
+              <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="6" r="4" stroke-width="1" />
+                <path d="M17 10.3C17.5207 10.7686 17.8126 11.0314 18.3333 11.5L21 8.5" stroke-width="1"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M18.9975 18C19 17.8358 19 17.669 19 17.5C19 15.0147 15.4183 13 11 13C6.58172 13 3 15.0147 3 17.5C3 19.9853 3 22 11 22C13.231 22 14.8398 21.8433 16 21.5634"
+                  stroke-width="1" stroke-linecap="round" />
+                <script xmlns="" />
+              </svg>
+            </button>
+          </div>
         </div>
         <div v-if="!mostrar('producte')" class="filter-container">
           <button @click="mostrarFiltroAvanzado">Filtre avançat</button>
           <div :class="['filtro',{'shown':navegacion.showFiltroAvanzado===true}]">
-            <label for="price">Preu ({{filter.minPrice}}€ - {{filter.maxPrice}}€)</label>
-            <div class="slider-container">
-              <input class="minSlider" for="price" name="price" type="range" v-model.lazy="filter.minPrice" min="0"
-                max="50">
-              <input class="maxSlider" for="price" name="price" type="range" v-model.lazy="filter.maxPrice" min="51"
-                max="100">
-            </div>
             <label for="price">Preu ({{filter.minPrice}}€ - {{filter.maxPrice}}€)</label>
             <div class="slider-container">
               <input class="minSlider" for="price" name="price" type="range" v-model.lazy="filter.minPrice" min="0"
@@ -74,13 +92,15 @@
           </svg>
         </button>
         <button v-else @click="goToProfile()" class="button-footer">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-check" width="50px"
-            height="50px" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-            <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
-            <path d="M15 19l2 2l4 -4"></path>
+          <svg stroke="currentColor" width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="6" r="4" stroke-width="1" />
+            <path d="M17 10.3C17.5207 10.7686 17.8126 11.0314 18.3333 11.5L21 8.5" stroke-width="1"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M18.9975 18C19 17.8358 19 17.669 19 17.5C19 15.0147 15.4183 13 11 13C6.58172 13 3 15.0147 3 17.5C3 19.9853 3 22 11 22C13.231 22 14.8398 21.8433 16 21.5634"
+              stroke-width="1" stroke-linecap="round" />
+            <script xmlns="" />
           </svg>
         </button>
         <div v-if="!usuario.usuarioRegistrado" :class="['modal',{'is-active': navegacion.activeModalProfileLogin}]">
@@ -208,7 +228,6 @@
             </footer>
           </div>
         </div>
-
       </div>
     </header>
 
