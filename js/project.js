@@ -6,7 +6,7 @@ createApp({
   data() {
     return {
       navegacion: {
-        divActual: "profile",
+        divActual: "portada",
         activeModal: false,
         inputValue: null,
         currentPage: 1,
