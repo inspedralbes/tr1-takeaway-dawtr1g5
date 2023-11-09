@@ -20,9 +20,6 @@ export async function getProductes(page) {
   const response = await fetch(`${url}index_pg?page=${page}`);
   const data = await response.json();
   return data;
-  const response = await fetch(`${url}index_pg?page=${page}`);
-  const data = await response.json();
-  return data;
 }
 
 /*
@@ -76,9 +73,7 @@ export async function getGenres() {
   const response = await fetch(`${url}genres`);
   const data = await response.json();
   return data;
-  const response = await fetch(`${url}genres`);
-  const data = await response.json();
-  return data;
+
 }
 
 /*
