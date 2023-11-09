@@ -367,9 +367,7 @@ createApp({
     */
 
     buscarTicket() {
-      let ticketID = [...this.ticket.inputValue];
-      console.log(ticketID);
-      getTicket(ticketID)
+      getTicket(this.ticket.ticketInput)
         .then((data) => {
           if (data.length > 0) {
             this.ticket.ticket = data[0];
