@@ -367,7 +367,9 @@ createApp({
     */
 
     buscarTicket() {
-      getTicket(this.ticket.ticketInput)
+      let ticketID = [...this.ticket.inputValue];
+      console.log(ticketID);
+      getTicket(ticketID)
         .then((data) => {
           if (data.length > 0) {
             this.ticket.ticket = data[0];
@@ -405,6 +407,13 @@ createApp({
     },
 
     /*
+    INFO: Deteneix la busqueda d'un ticket i neteja l'interval de busqueda
+    */
+    stopBuscarTicket() {
+      this.ticket.checkOrder_Activo = false;
+      clearInterval(this.fetchInterval);
+    },
+    /*
     INFO: Fa que en la pagina d'estat de comandes, quan cambia l'estat de la comanda,  l'angle de l'imatge cambia
     */
 
@@ -426,15 +435,6 @@ createApp({
           this.ticket.angulo = this.ticket.targetAngulo; // Asegurarse de que el ángulo final sea exactamente el targetAngulo
         }
       }, this.ticket.paso);
-    },
-
-    /*
-    INFO: Deteneix la busqueda d'un ticket i neteja l'interval de busqueda
-    */
-
-    stopBuscarTicket() {
-      this.ticket.checkOrder_Activo = false;
-      clearInterval(this.fetchInterval);
     },
 
     /*
