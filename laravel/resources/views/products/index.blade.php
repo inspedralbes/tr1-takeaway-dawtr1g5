@@ -1,5 +1,9 @@
 @extends('app')
 
+<head>
+    <link rel="stylesheet" href="{{ asset('css/products.css')}}">
+    <title>PreSidis Shop (admin)</title>
+</head>
 @section('content')
 
 
@@ -105,10 +109,10 @@
 
     <div>
         <h1>Llistat de productes</h1>
-        <ul>
+        <ul class="ul-llista">
             @foreach ($products as $product)
-            <li>
-                <a href="{{ route('products-edit', ['id' => $product->id]) }}">
+            <li class="li-product">
+                <a class="a-products" href="{{ route('products-edit', ['id' => $product->id]) }}">
                     {{ $product->artist }} - {{ $product->name }}
                 </a>
             </li>

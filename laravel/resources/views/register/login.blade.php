@@ -1,5 +1,10 @@
 @extends('app')
 
+<head>
+    <link rel="stylesheet" href="{{ asset('css/login.css')}}">
+    <title>PreSidis Shop (admin)</title>
+</head>
+
 @section('content')
 
 <section class="section">

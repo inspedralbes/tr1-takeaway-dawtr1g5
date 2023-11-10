@@ -1,10 +1,16 @@
 @extends('app')
-@section('welcome')
 
+<head>
+
+    <link rel="stylesheet" href="{{ asset('css/welcome.css')}}">
+    <title>PreSidis Shop (admin)</title>
+</head>
+
+@section('welcome')
 
 <body>
 
-    <h1>WELCOME</h1>
+    <h1 class="welcome">WELCOME</h1>
     <div class="animation"></div>
 
     <div class="buttons-container">

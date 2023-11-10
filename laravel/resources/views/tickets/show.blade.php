@@ -1,5 +1,13 @@
 @extends('app')
+
+<head>
+
+    <link rel="stylesheet" href="{{ asset('css/products.css')}}">
+    <title>PreSidis Shop (admin)</title>
+</head>
+
 @section('content')
+
 
 <div class="container">
     <a href="{{ route('tickets') }}">

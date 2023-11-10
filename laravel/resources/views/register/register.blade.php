@@ -1,7 +1,13 @@
 @extends('app')
 
+<head>
+    <link rel="stylesheet" href="{{ asset('css/login.css')}}">
+    <title>PreSidis Shop (admin)</title>
+</head>
 
 @section('content')
+
+
 <div class="container-register">
     <div class="columns is-centered">
         <div class="column is-8">
