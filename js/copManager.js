@@ -90,6 +90,11 @@ export async function productsAdvanced(data) {
   }).then((response) => response.json());
 }
 
+/*
+INFO: Realiza una peticion HTTP POST para registrar un usuario
+PARAMS:
+  - data: Información del usuario que se guardará en BD
+*/
 export async function registerUser(data) {
   return fetch(url + 'register', {
     method: 'POST',
@@ -101,6 +106,11 @@ export async function registerUser(data) {
     .then(response => response.json());
 }
 
+/*
+INFO: Realiza una peticion HTTP POST para loggear un usuario
+PARAMS:
+  - data: Información del usuario que se comprobará en BD
+*/
 export async function loginUser(data) {
   return fetch(url + 'login', {
     method: 'POST',
@@ -112,6 +122,9 @@ export async function loginUser(data) {
     .then(response => response.json());
 }
 
+/*
+INFO: Realiza una peticion HTTP POST para hacer logout
+*/
 export async function logoutUser() {
   return fetch(url + 'logout', {
     method: 'POST',
@@ -122,6 +135,9 @@ export async function logoutUser() {
     .then(response => response.json());
 }
 
+/*
+INFO: Fetch para recoger todos los tickets segun el token
+*/
 export async function getMyTickets() {
   return fetch(`${url}tickets`, {
     method: 'POST',

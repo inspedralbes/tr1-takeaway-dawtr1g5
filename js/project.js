@@ -2,6 +2,7 @@ import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import { productsAdvanced, getGenres, getProductes, getLandingProductes, storeTicket, getLastTicket, getTicket, registerUser, loginUser, logoutUser, getMyTickets } from './copManager.js';
 
 createApp({
+
   data() {
     return {
       navegacion: {
@@ -343,6 +344,9 @@ createApp({
       }
     },
 
+    /*
+    INFO: Fetch del último ticket registrado (normalmente el tuyo) y pantalla de carga
+    */
     goToCheckout() {
       getLastTicket()
         .then((lastTicketData) => {
@@ -372,6 +376,11 @@ createApp({
         this.navegacion.activeModal = false;
       }
     },
+    /*
+    INFO: Funcion que activa/desactiva el modal y el dropdown para el login/register/user
+    PARAMS:
+      - Type: valor entre 0-3 que determina el uso del switch
+    */
     activaModalLogin(type) {
       switch (type) {
         case 0:
@@ -396,6 +405,10 @@ createApp({
           break;
       }
     },
+
+    /*
+    INFO: Función que llama a la petición fetch de registro de laravel
+    */
     async register() {
       try {
         if (this.usuario.password !== this.usuario.password_confirmation) {
@@ -429,6 +442,10 @@ createApp({
         console.error("Error:", error);
       }
     },
+
+    /*
+    INFO: Función que llama a la petición fetch de login de laravel
+    */
     async login() {
       try {
         const data = {
@@ -461,6 +478,10 @@ createApp({
         console.error("Error:", error);
       }
     },
+
+    /*
+    INFO: Función que llama a la petición fetch de login de laravel
+    */
     async logout() {
       try {
         const response = await logoutUser();
@@ -475,10 +496,18 @@ createApp({
         console.error("Error:", error);
       }
     },
+
+    /*
+    INFO: Función que lleva al perfil del usuario
+    */
     goToProfile() {
       this.navegacion.loginDropdown = false;
       this.navegacion.divActual = "profile";
     },
+
+    /*
+    INFO: Función que llama a todos los tickets del usuario loggeado
+    */
     getAllMyTickets() {
       getMyTickets().then((data) => {
         this.usuario.myTickets = data;
@@ -729,4 +758,3 @@ createApp({
     },
   },
 }).mount("#app");
-// hola
