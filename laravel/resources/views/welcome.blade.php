@@ -10,7 +10,7 @@
 
 <body>
 
-    <h1 class="welcome">WELCOME</h1>
+    <h1 class="welcome">ADMIN PANEL</h1>
     <div class="animation"></div>
 
     <div class="buttons-container">
